@@ -787,13 +787,13 @@ const VERSION='v7'; // keep in step with CACHE in sw.js, so feedback can be matc
 // Multiple-choice answers only pre-fill when the text matches an option exactly, so keep `kinds` and `ratings` in step with the form.
 const FEEDBACK={
   url:'https://docs.google.com/forms/d/e/1FAIpQLScChVmj9adbEMRE38-j33-ClMzKqIWaRGHfAeZqpMcBuHX5jw/viewform',
-  fields:{kind:'',rating:'',context:'',question:''},
+  fields:{kind:'entry.1637253801',rating:'entry.285582079',context:'entry.1423090638',question:'entry.379699903'},
   kinds:{game:'Feedback on a game',report:'Report a question',general:'General feedback'},
   ratings:{up:'Went well',down:'Not great'}
 };
 // GoatCounter site code: the "sabispin" in sabispin.goatcounter.com. Blank means no analytics.
 // It counts visits and a few named events (below). No cookies, no team names, no question text.
-const GOATCOUNTER='';
+const GOATCOUNTER='sabispin';
 if(GOATCOUNTER&&!AUD){ // the audience window is the same visit, so it isn't counted
   const s=document.createElement('script'); s.async=true; s.src='https://gc.zgo.at/count.js';
   s.dataset.goatcounter='https://'+GOATCOUNTER+'.goatcounter.com/count'; document.head.append(s);
