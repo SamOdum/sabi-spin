@@ -14,25 +14,16 @@
 <title>Sabi Spin</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap">
 <style>
-*{box-sizing:border-box}
-body{margin:0}
-[hidden]{display:none!important}
-html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-/* Layout: one-screen classroom app. Setup card first, then a play screen with the wheel as the hero and the question card below it; on wide screens (projector) wheel and card sit side by side. */
+/* Layout: one-screen classroom app. Setup card first, then a play screen with the wheel as the hero and the question card beside or below it, then a results screen.
+   ?view=audience opens a projector-only copy that mirrors the teacher's window. */
 :root{
-  --bg:#F2F5EF;
-  --surface:#FFFFFF;
-  --surface-2:#E6ECE3;
-  --fg:#15241B;
-  --muted:#5E6F63;
-  --line:#CBD6C9;
-  --accent:#E8642B;      /* sunset orange: spin + primary actions */
-  --accent-ink:#FFFFFF;
-  --green:#1E6B4A;       /* deep green: science, correct */
-  --gold:#F2B134;        /* savanna gold: Africa, highlights */
-  --ink-on-gold:#2B1D05;
+  --bg:#F2F5EF; --surface:#FFFFFF; --surface-2:#E6ECE3; --fg:#15241B; --muted:#5E6F63; --line:#CBD6C9;
+  --accent:#E8642B; --accent-ink:#FFFFFF;   /* sunset orange: spin + primary actions */
+  --green:#1E6B4A;                          /* deep green: science, correct */
+  --gold:#F2B134; --ink-on-gold:#2B1D05;    /* savanna gold: Africa, highlights */
   --wheel-a:#E8642B; --wheel-b:#F2B134; --wheel-c:#1E6B4A; --wheel-d:#2C6FB2;
-  --wheel-used:#C9D1C7; --wheel-text:#FFFFFF; --wheel-used-text:#7A857B;
+  --wheel-a-ink:#1A0D05; --wheel-b-ink:#2B1D05; --wheel-c-ink:#FFFFFF; --wheel-d-ink:#FFFFFF;
+  --wheel-used:#C9D1C7; --wheel-used-text:#7A857B;
   --danger:#C73B2E;
   --display:'Fredoka','Nunito','Segoe UI',system-ui,sans-serif;
   --body:'Nunito','Segoe UI',system-ui,sans-serif;
@@ -43,7 +34,8 @@ html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset
     --bg:#0F1A14; --surface:#18261E; --surface-2:#22332A; --fg:#EEF3EC; --muted:#A7B5AA; --line:#33463B;
     --accent:#F2793F; --accent-ink:#1A0D05; --green:#4FB386; --gold:#F5BE4A; --ink-on-gold:#2B1D05;
     --wheel-a:#F2793F; --wheel-b:#F5BE4A; --wheel-c:#3E9A70; --wheel-d:#5B8FD6;
-    --wheel-used:#2E3D34; --wheel-text:#0F1A14; --wheel-used-text:#6E7F74; --danger:#E25C4F;
+    --wheel-a-ink:#0F1A14; --wheel-b-ink:#0F1A14; --wheel-c-ink:#0F1A14; --wheel-d-ink:#0F1A14;
+    --wheel-used:#2E3D34; --wheel-used-text:#6E7F74; --danger:#E25C4F;
     --shadow:0 10px 30px rgba(0,0,0,.4); color-scheme:dark;
   }
 }
@@ -51,18 +43,24 @@ html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset
   --bg:#0F1A14; --surface:#18261E; --surface-2:#22332A; --fg:#EEF3EC; --muted:#A7B5AA; --line:#33463B;
   --accent:#F2793F; --accent-ink:#1A0D05; --green:#4FB386; --gold:#F5BE4A; --ink-on-gold:#2B1D05;
   --wheel-a:#F2793F; --wheel-b:#F5BE4A; --wheel-c:#3E9A70; --wheel-d:#5B8FD6;
-  --wheel-used:#2E3D34; --wheel-text:#0F1A14; --wheel-used-text:#6E7F74; --danger:#E25C4F;
+  --wheel-a-ink:#0F1A14; --wheel-b-ink:#0F1A14; --wheel-c-ink:#0F1A14; --wheel-d-ink:#0F1A14;
+  --wheel-used:#2E3D34; --wheel-used-text:#6E7F74; --danger:#E25C4F;
   --shadow:0 10px 30px rgba(0,0,0,.4); color-scheme:dark;
 }
-html,body{height:100%}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.45;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
-  padding-block:12px;box-sizing:border-box}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px}
 button{font:inherit;cursor:pointer;border:0;border-radius:14px;color:inherit;background:none}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+button:disabled{cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance}
+code{font-size:.9em;background:var(--surface-2);padding:1px 5px;border-radius:5px}
+kbd{font-family:var(--body);font-weight:800;font-size:.85em;background:var(--surface-2);border:1px solid var(--line);border-bottom-width:3px;border-radius:7px;padding:1px 7px;white-space:nowrap}
 .eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 #app{max-width:1100px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
 
 /* ---------- Setup ---------- */
@@ -70,41 +68,59 @@ h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance}
 .brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .brand h1{font-size:2.4rem;color:var(--accent)}
 .brand p{margin:0;color:var(--muted)}
-.field{display:flex;flex-direction:column;gap:10px}
+.field{display:flex;flex-direction:column;gap:10px;min-width:0}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.card{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:14px 14px;text-align:left;display:flex;flex-direction:column;gap:2px;transition:transform .12s}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:14px;text-align:left;display:flex;flex-direction:column;gap:2px;transition:transform .12s}
 .card:hover{transform:translateY(-2px)}
 .card .big{font-family:var(--display);font-size:1.3rem;font-weight:600}
 .card .sub{color:var(--muted);font-size:.9rem}
 .card[aria-pressed="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+#topicGroups{display:flex;flex-direction:column;gap:10px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:700;display:flex;align-items:center;gap:6px}
-.chip[aria-pressed="true"]{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 22%,var(--surface))}
+.chip.mix{border-style:dashed}
+.chip:disabled{opacity:.45}
+.chip[aria-pressed="true"]{border-color:var(--gold);border-style:solid;background:color-mix(in srgb,var(--gold) 22%,var(--surface))}
 .chip[data-group="Science"][aria-pressed="true"]{border-color:var(--green);background:color-mix(in srgb,var(--green) 16%,var(--surface))}
 .chip .count{color:var(--muted);font-weight:700;font-size:.85em}
 .group-label{font-family:var(--display);font-weight:600;font-size:1.05rem;margin-top:4px}
-.seg{display:inline-flex;background:var(--surface-2);border-radius:12px;padding:4px;gap:4px;flex-wrap:wrap}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:12px;padding:4px;gap:4px;flex-wrap:wrap;align-self:flex-start}
 .seg button{padding:7px 14px;border-radius:9px;font-weight:800}
 .seg button[aria-pressed="true"]{background:var(--surface);box-shadow:var(--shadow)}
 .row{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:flex-start}
+.hint{color:var(--muted);font-size:.85rem;margin:0;max-width:34ch}
 .teamnames{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
 .teamnames input{font:inherit;font-weight:700;padding:9px 12px;border-radius:10px;border:2px solid var(--line);background:var(--surface);color:var(--fg);width:100%}
 .primary{background:var(--accent);color:var(--accent-ink);font-family:var(--display);font-weight:600;font-size:1.35rem;padding:16px 28px;border-radius:18px;box-shadow:var(--shadow)}
-.primary:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.primary:disabled{opacity:.45;box-shadow:none}
 .ghost{border:2px solid var(--line);padding:9px 14px;font-weight:800;background:var(--surface)}
-.footer-note{color:var(--muted);font-size:.9rem}
+.ghost:disabled{opacity:.45}
+.ghost.small{padding:5px 10px;font-size:.9rem;border-radius:10px}
+.footer-note{color:var(--muted);font-size:.9rem;margin:0}
+.mine{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:12px 16px}
+.mine summary{cursor:pointer;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.mine summary .group-label{margin:0}
+.mine-body{display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.mine textarea{font:inherit;font-size:.95rem;width:100%;padding:10px 12px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--fg);resize:vertical}
+.mine ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.mine li{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg);border-radius:10px;padding:6px 6px 6px 12px;font-weight:700}
+.mine li .sub{color:var(--muted);font-weight:500;font-size:.9rem}
+.msg{margin:0;font-weight:700}
+.msg.bad{color:var(--danger)}
 
 /* ---------- Play ---------- */
 #play{display:flex;flex-direction:column;gap:14px;flex:1;min-height:0}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .topbar .where{display:flex;flex-direction:column;gap:2px;min-width:0}
 .topbar .where strong{font-family:var(--display);font-size:1.3rem;font-weight:600}
-.topbar .tools{display:flex;gap:8px}
-.icon{width:42px;height:42px;border-radius:12px;background:var(--surface);border:2px solid var(--line);display:grid;place-items:center;font-size:1.1rem}
-.scores{display:flex;gap:8px;flex-wrap:wrap}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.icon{width:42px;height:42px;border-radius:12px;background:var(--surface);border:2px solid var(--line);display:grid;place-items:center;font-size:1.1rem;flex:none}
+.icon.on{border-color:var(--green);background:color-mix(in srgb,var(--green) 18%,var(--surface))}
+.scores{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .score{display:flex;align-items:center;gap:10px;background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:6px 12px;font-weight:800}
 .score .n{font-family:var(--display);font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums;min-width:1.2em;text-align:right}
 .score.active{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 22%,var(--surface))}
+.adj{width:30px;height:30px;border-radius:9px;background:var(--surface-2);font-weight:800;font-size:1.1rem;line-height:1}
 .stage{display:grid;gap:18px;flex:1;min-height:0;align-content:start}
 @media (min-width:860px){.stage{grid-template-columns:minmax(300px,440px) 1fr;align-items:center}}
 .wheelwrap{display:flex;flex-direction:column;align-items:center;gap:12px}
@@ -113,35 +129,109 @@ h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance}
 .wheelbox canvas{width:100%;height:100%;display:block;border-radius:50%;box-shadow:var(--shadow)}
 .pointer{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-top:34px solid var(--fg);filter:drop-shadow(0 3px 2px rgba(0,0,0,.25));z-index:2}
 .hub{position:absolute;inset:0;margin:auto;width:22%;height:22%;border-radius:50%;background:var(--surface);border:4px solid var(--fg);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:clamp(1rem,4vw,1.5rem);z-index:2}
-.left{color:var(--muted);font-weight:700;font-size:.95rem}
-.qcard{background:var(--surface);border-radius:22px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0;min-height:220px;border:2px solid var(--line)}
-#qbody{display:flex;flex-direction:column;gap:18px}
-#qbody[hidden]{display:none}
-.qcard .num{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.qtext{margin:4px 0 0}
-.qcard .num .badge{background:var(--gold);color:var(--ink-on-gold);font-family:var(--display);font-weight:700;padding:4px 12px;border-radius:999px}
-.qtext{font-family:var(--display);font-weight:600;font-size:clamp(1.35rem,2.6vw,2rem);line-height:1.25}
+.legend{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.left{color:var(--muted);font-weight:700;font-size:.95rem;text-align:center}
+.qcard{background:var(--surface);border-radius:22px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;min-width:0;min-height:220px;border:2px solid var(--line)}
+#qbody{display:flex;flex-direction:column;gap:16px}
+.num{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.numr{display:flex;gap:8px;align-items:center}
+.badge{background:var(--gold);color:var(--ink-on-gold);font-family:var(--display);font-weight:700;padding:4px 12px;border-radius:999px}
+.tag{background:var(--surface-2);border-radius:999px;padding:4px 10px;font-weight:800;font-size:.9rem}
+.tag.mod{background:color-mix(in srgb,var(--accent) 18%,var(--surface));color:var(--fg);border:2px solid var(--accent)}
+.banner{background:color-mix(in srgb,var(--accent) 14%,var(--surface));border:2px solid var(--accent);border-radius:14px;padding:10px 14px;font-weight:800}
+.qtext{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(1.35rem,2.6vw,2rem);line-height:1.25}
+.choices{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.choices li{display:flex;gap:10px;align-items:center;background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:10px 14px;font-weight:700;font-size:1.1rem}
+.choices li b{font-family:var(--display);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--surface-2);flex:none}
+.choices li.right{border-color:var(--green);background:color-mix(in srgb,var(--green) 16%,var(--surface))}
+.choices li.right b{background:var(--green);color:#fff}
+.choices li.dim{opacity:.5}
 .timer{height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden}
 .timer i{display:block;height:100%;width:100%;background:var(--green);border-radius:999px;transition:width .25s linear,background .3s}
 .timer i.low{background:var(--danger)}
 .tclock{font-variant-numeric:tabular-nums;font-weight:800;color:var(--muted)}
-.answer{border-top:2px dashed var(--line);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.answer{border-top:2px dashed var(--line);padding-top:16px;display:flex;flex-direction:column;gap:6px}
+.answer.peek{border:2px dashed var(--muted);border-radius:14px;padding:12px 14px;background:var(--bg)}
 .answer .a{font-family:var(--display);font-weight:600;font-size:clamp(1.25rem,2.4vw,1.8rem);color:var(--green)}
-.answer .w{color:var(--muted);margin-top:2px}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.answer .w{color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.actions:empty{display:none}
 .actions .primary{font-size:1.15rem;padding:13px 22px}
 .btn-good{background:var(--green);color:#fff;font-weight:800;padding:13px 20px;font-size:1.1rem}
 .btn-bad{background:var(--surface-2);color:var(--fg);font-weight:800;padding:13px 20px;font-size:1.1rem;border:2px solid var(--line)}
-.placeholder{color:var(--muted);font-family:var(--display);font-weight:500;font-size:1.3rem;margin:auto 0;text-align:center}
-.done{background:color-mix(in srgb,var(--gold) 20%,var(--surface));border:2px solid var(--gold);border-radius:16px;padding:14px 16px}
+.placeholder{color:var(--muted);font-family:var(--display);font-weight:500;font-size:1.3rem;margin:auto 0;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.placeholder .note{color:var(--accent);font-weight:600}
+.done{background:color-mix(in srgb,var(--gold) 20%,var(--surface));border:2px solid var(--gold);border-radius:16px;padding:14px 16px;color:var(--fg);font-family:var(--body);font-size:1rem;text-align:left;align-self:stretch}
+.done strong{font-family:var(--display);font-size:1.3rem;font-weight:600;display:block}
+.done p{margin:6px 0 0}
+.kbdhint{color:var(--muted);font-size:.85rem;text-align:center;margin:0}
+@media (hover:none){.kbdhint{display:none}}
 @keyframes pop{0%{transform:scale(.96);opacity:0}100%{transform:scale(1);opacity:1}}
 .qcard.pop{animation:pop .25s ease-out}
-@media (prefers-reduced-motion:reduce){.qcard.pop{animation:none}.card:hover{transform:none}}
+
+/* ---------- Results ---------- */
+#end{display:flex;flex-direction:column;gap:20px;padding-block:8px 24px}
+#end h2{font-size:2.2rem;color:var(--accent)}
+.podium{display:flex;flex-direction:column;gap:8px;max-width:640px}
+.prow{display:grid;grid-template-columns:2.2em minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:10px 14px}
+.prow.first{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 20%,var(--surface))}
+.prow .medal{font-size:1.5rem;text-align:center;font-family:var(--display);font-weight:700}
+.prow .nm{font-family:var(--display);font-weight:600;font-size:1.25rem;display:flex;flex-direction:column;gap:6px;min-width:0}
+.prow .bar{height:8px;border-radius:999px;background:var(--accent)}
+.prow .pts{font-family:var(--display);font-weight:700;font-size:1.8rem;font-variant-numeric:tabular-nums}
+.recap{margin:0;padding-left:1.6em;display:flex;flex-direction:column;gap:10px}
+.recap li{padding-left:4px}
+.recap .rq{font-weight:700}
+.recap .ra{color:var(--muted)}
+.recap .ra strong{color:var(--green)}
+.recap .rr{font-weight:800;font-size:.95rem}
+.recap .rr.good{color:var(--green)}
+.recap .rr.bad{color:var(--danger)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50;width:100vw;height:100vh}
+
+/* ---------- Audience screen ---------- */
+#wait{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center}
+#wait h1{font-size:clamp(2.5rem,7vw,5rem);color:var(--accent)}
+#wait p{color:var(--muted);font-size:1.2rem;margin:0;max-width:40ch}
+#audFs{position:fixed;right:14px;bottom:14px;opacity:.35;z-index:5}
+#audFs:hover{opacity:1}
+body.audience .ctl{display:none!important}
+body:not(.audience) .audonly{display:none!important}
+body.audience #app{max-width:1500px}
+body.audience .qtext{font-size:clamp(1.8rem,3.4vw,3rem)}
+body.audience .answer .a{font-size:clamp(1.6rem,3vw,2.6rem)}
+body.audience .answer .w{font-size:1.3rem}
+body.audience .choices li{font-size:1.5rem}
+@media (min-width:860px){body.audience .stage{grid-template-columns:minmax(300px,560px) 1fr}body.audience .wheelbox{width:min(100%,560px)}}
+
+/* ---------- Help ---------- */
+dialog{border:2px solid var(--line);border-radius:20px;background:var(--surface);color:var(--fg);padding:22px;max-width:min(560px,calc(100vw - 32px));box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog h2{margin-bottom:12px}
+dialog table{border-collapse:collapse;width:100%}
+dialog td{padding:6px 4px;vertical-align:top;border-bottom:1px solid var(--line)}
+dialog td:first-child{white-space:nowrap;padding-right:14px}
+dialog .footer-note{margin-top:12px}
+
+@media (prefers-reduced-motion:reduce){.qcard.pop{animation:none}.card:hover{transform:none}.timer i{transition:none}}
+@media print{
+  body{background:#fff;color:#000;padding:0}
+  #setup,#play,#wait,.ctl,.audonly,#confetti,dialog{display:none!important}
+  #end{display:flex!important}
+  .prow,.prow.first{background:#fff;border-color:#999}
+}
 </style>
 </head>
 <body>
 
 <div id="app">
+  <section id="wait" hidden>
+    <h1>Sabi Spin</h1>
+    <p id="waitMsg">Audience screen. Waiting for the teacher's window. Start a game there and it will appear here.</p>
+    <p>Press <kbd>F</kbd> or double-click for fullscreen.</p>
+  </section>
+
   <section id="setup">
     <div class="brand">
       <h1>Sabi Spin</h1>
@@ -155,31 +245,64 @@ h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance}
 
     <div class="field">
       <span class="eyebrow">Topic</span>
-      <div class="group-label">Science</div>
-      <div class="chips" id="sciChips"></div>
-      <div class="group-label">Africa</div>
-      <div class="chips" id="afrChips"></div>
+      <div id="topicGroups"></div>
     </div>
+
+    <details class="mine" id="mine">
+      <summary><span class="group-label">My questions</span><span class="footer-note" id="mineSum"></span></summary>
+      <div class="mine-body">
+        <p class="footer-note">Add your own topics. Paste rows from a spreadsheet (header row first) or choose a CSV, tab-separated or JSON file. Columns: <code>topic</code>, <code>age</code>, <code>question</code>, <code>answer</code>, <code>why</code>, and optionally <code>wrong1</code>–<code>wrong3</code> for answer choices and <code>icon</code>. Age is <code>j</code>, <code>m</code>, <code>s</code> or <code>all</code>. For other languages add columns such as <code>question_yo</code>, <code>answer_yo</code>, <code>why_yo</code>.</p>
+        <label class="sr" for="paste">Paste questions</label>
+        <textarea id="paste" rows="5" placeholder="topic,age,question,answer,why,wrong1,wrong2,wrong3"></textarea>
+        <div class="row" style="gap:8px">
+          <button type="button" class="ghost" id="pasteBtn">Add pasted questions</button>
+          <button type="button" class="ghost" id="fileBtn">Choose a file…</button>
+          <input type="file" id="fileIn" accept=".csv,.tsv,.txt,.json,text/csv,application/json" hidden>
+          <button type="button" class="ghost" id="tplBtn">Download template</button>
+          <button type="button" class="ghost" id="expBtn">Export my questions</button>
+        </div>
+        <p class="msg" id="mineMsg" role="status"></p>
+        <ul id="mineList"></ul>
+      </div>
+    </details>
 
     <div class="row">
       <div class="field">
         <span class="eyebrow">Teams</span>
-        <div class="seg" id="teamSeg">
-          <button type="button" data-n="0" aria-pressed="true">No scoring</button>
-          <button type="button" data-n="2">2</button>
-          <button type="button" data-n="3">3</button>
-          <button type="button" data-n="4">4</button>
-        </div>
+        <div class="seg" id="teamSeg"></div>
         <div class="teamnames" id="teamNames" hidden></div>
       </div>
       <div class="field">
         <span class="eyebrow">Answer timer</span>
-        <div class="seg" id="timerSeg">
-          <button type="button" data-s="0">Off</button>
-          <button type="button" data-s="20">20 s</button>
-          <button type="button" data-s="30" aria-pressed="true">30 s</button>
-          <button type="button" data-s="45">45 s</button>
-        </div>
+        <div class="seg" id="timerSeg"></div>
+      </div>
+    </div>
+
+    <div class="row" id="teamOpts">
+      <div class="field">
+        <span class="eyebrow">Steals</span>
+        <div class="seg" id="stealSeg"></div>
+        <p class="hint">If a team gets it wrong, the other teams can steal the point before the answer is shown.</p>
+      </div>
+      <div class="field">
+        <span class="eyebrow">Wheel specials</span>
+        <div class="seg" id="specSeg"></div>
+        <p class="hint">Some segments become ×2 Double points, ↻ Bonus spin or ALL Anyone can answer.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <span class="eyebrow">Answer choices</span>
+        <div class="seg" id="choiceSeg"></div>
+      </div>
+      <div class="field" id="speakField">
+        <span class="eyebrow">Read questions aloud</span>
+        <div class="seg" id="speakSeg"></div>
+      </div>
+      <div class="field" id="langField" hidden>
+        <span class="eyebrow">Language</span>
+        <div class="seg" id="langSeg"></div>
       </div>
     </div>
 
@@ -197,10 +320,14 @@ h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance}
         <span class="eyebrow" id="ageLabel"></span>
         <strong id="topicLabel"></strong>
       </div>
-      <div class="tools">
-        <button type="button" class="icon" id="muteBtn" title="Sound on or off" aria-label="Toggle sound">🔊</button>
-        <button type="button" class="icon" id="fsBtn" title="Fullscreen for the projector" aria-label="Fullscreen">⛶</button>
+      <div class="tools ctl">
+        <button type="button" class="ghost" id="undoBtn" title="Undo the last score (U)" hidden>↶ Undo</button>
+        <button type="button" class="icon" id="audBtn" title="Open an audience screen for the projector" aria-label="Open audience screen">🖥️</button>
+        <button type="button" class="icon" id="muteBtn" title="Sound on or off (M)" aria-label="Toggle sound">🔊</button>
+        <button type="button" class="icon" id="fsBtn" title="Fullscreen (F)" aria-label="Fullscreen">⛶</button>
+        <button type="button" class="icon" id="helpBtn" title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts">?</button>
         <button type="button" class="ghost" id="changeBtn">Change topic</button>
+        <button type="button" class="ghost" id="finishBtn">Finish</button>
       </div>
     </div>
     <div class="scores" id="scores" hidden></div>
@@ -209,502 +336,798 @@ h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance}
       <div class="wheelwrap">
         <div class="wheelbox">
           <div class="pointer"></div>
-          <canvas id="wheel"></canvas>
+          <canvas id="wheel" role="img" aria-label="Question wheel"></canvas>
           <div class="hub" id="hub">?</div>
         </div>
-        <button type="button" class="primary" id="spinBtn">Spin the wheel</button>
+        <button type="button" class="primary ctl" id="spinBtn">Spin the wheel</button>
+        <div class="legend" id="legend"></div>
         <span class="left" id="leftNote"></span>
       </div>
 
       <div class="qcard" id="qcard">
-        <p class="placeholder" id="placeholder">Spin the wheel to get your first question.</p>
+        <div class="placeholder" id="placeholder"></div>
         <div id="qbody" hidden>
           <div class="num">
-            <span class="badge" id="qnum">Question 1</span>
-            <span class="tclock" id="tclock"></span>
+            <div class="tags">
+              <span class="badge" id="qnum">Question 1</span>
+              <span class="tag" id="qtopic" hidden></span>
+              <span class="tag mod" id="qmod" hidden></span>
+            </div>
+            <div class="numr">
+              <span class="tclock" id="tclock"></span>
+              <button type="button" class="icon ctl" id="sayBtn" title="Read aloud (R)" aria-label="Read the question aloud">🗣️</button>
+            </div>
           </div>
           <div class="timer" id="timerBar" hidden><i id="timerFill"></i></div>
+          <div class="banner" id="banner" hidden></div>
           <p class="qtext" id="qtext"></p>
+          <ol class="choices" id="choices" hidden></ol>
           <div class="answer" id="answerBox" hidden>
-            <span class="eyebrow">Answer</span>
+            <span class="eyebrow" id="answerLabel">Answer</span>
             <div class="a" id="atext"></div>
             <div class="w" id="wtext"></div>
           </div>
-          <div class="actions" id="actions"></div>
         </div>
+        <div class="actions ctl" id="actions"></div>
       </div>
+    </div>
+    <p class="kbdhint ctl">Keyboard or presentation clicker: <kbd>Space</kbd> / <kbd>→</kbd> next step, <kbd>←</kbd> wrong. Press <kbd>?</kbd> for all shortcuts.</p>
+  </section>
+
+  <section id="end" hidden>
+    <div>
+      <span class="eyebrow" id="endEyebrow">Results</span>
+      <h2 id="endTitle">Final scores</h2>
+    </div>
+    <div class="podium" id="podium"></div>
+    <div class="row ctl" style="align-items:center">
+      <button type="button" class="primary" id="moreBtn">Play another topic</button>
+      <button type="button" class="ghost" id="copyBtn">Copy recap</button>
+      <button type="button" class="ghost" id="printBtn">Print recap</button>
+      <button type="button" class="ghost" id="new2Btn">New session</button>
+    </div>
+    <div class="field">
+      <span class="eyebrow" id="recapHead">Questions played</span>
+      <ol class="recap" id="recap"></ol>
     </div>
   </section>
 </div>
 
+<button type="button" class="icon audonly" id="audFs" aria-label="Fullscreen">⛶</button>
+<div class="sr" id="announce" aria-live="polite"></div>
+
+<dialog id="help">
+  <h2>Keyboard shortcuts</h2>
+  <table>
+    <tr><td><kbd>Space</kbd> <kbd>Enter</kbd> <kbd>→</kbd> <kbd>PgDn</kbd></td><td>Next step: spin, reveal, correct, next round</td></tr>
+    <tr><td><kbd>←</kbd> <kbd>PgUp</kbd></td><td>Wrong / not this time (opens a steal if steals are on)</td></tr>
+    <tr><td><kbd>Y</kbd> / <kbd>N</kbd></td><td>Correct / wrong</td></tr>
+    <tr><td><kbd>1</kbd>–<kbd>4</kbd></td><td>That team got it (steals and "Anyone can answer")</td></tr>
+    <tr><td><kbd>U</kbd></td><td>Undo the last score</td></tr>
+    <tr><td><kbd>R</kbd></td><td>Read the question aloud</td></tr>
+    <tr><td><kbd>M</kbd></td><td>Sound on or off</td></tr>
+    <tr><td><kbd>F</kbd></td><td>Fullscreen</td></tr>
+    <tr><td><kbd>?</kbd></td><td>This list</td></tr>
+  </table>
+  <p class="footer-note">Presentation clickers send <kbd>PgDn</kbd>/<kbd>PgUp</kbd> or the arrow keys, so the forward button moves the game on and the back button marks an answer wrong.</p>
+  <p class="footer-note">Projector tip: press 🖥️ to open an audience screen, drag it onto the projector and make it fullscreen. The class sees the wheel and questions; only your window shows the answer before you reveal it.</p>
+  <form method="dialog" style="margin-top:14px"><button class="primary" style="font-size:1.1rem;padding:10px 22px">Got it</button></form>
+</dialog>
+
+<script src="questions.js"></script>
 <script>
 (function(){
-const AGES=[
-  {key:'j',name:'Juniors',sub:'ages 6–9'},
-  {key:'m',name:'Middle',sub:'ages 10–13'},
-  {key:'s',name:'Seniors',sub:'ages 14–17'}
-];
-const TOPICS=[
-  {key:'bio',group:'Science',name:'Living Things',icon:'🌱'},
-  {key:'earth',group:'Science',name:'Earth & Space',icon:'🪐'},
-  {key:'matter',group:'Science',name:'Matter & Energy',icon:'⚡'},
-  {key:'body',group:'Science',name:'Human Body',icon:'🫀'},
-  {key:'geo',group:'Africa',name:'Geography of Africa',icon:'🗺️'},
-  {key:'hist',group:'Africa',name:'African History',icon:'🏛️'},
-  {key:'people',group:'Africa',name:'African Scientists & Inventors',icon:'🔬'},
-  {key:'wild',group:'Africa',name:'African Nature & Wildlife',icon:'🦁'}
-];
-
-// q = question, a = answer, w = one line that teaches
-const BANK={
-bio:{
-j:[
- {q:'What do plants need from the sun to make their food?',a:'Sunlight',w:'Plants mix sunlight, water and air to make sugar. That is called photosynthesis.'},
- {q:'Is a spider an insect?',a:'No',w:'Insects have 6 legs. Spiders have 8 legs and belong to a group called arachnids.'},
- {q:'Which animal starts life as a tadpole?',a:'A frog',w:'Frogs change shape as they grow. That change is called metamorphosis.'},
- {q:'What do we call animals that only eat plants?',a:'Herbivores',w:'Elephants, giraffes and cows are herbivores. Meat-eaters are carnivores.'},
- {q:'Which part of a plant drinks water from the soil?',a:'The roots',w:'Roots also hold the plant firmly in the ground.'},
- {q:'Do fish breathe with lungs or with gills?',a:'Gills',w:'Gills take oxygen out of the water as it flows past them.'},
- {q:'What is a baby butterfly called?',a:'A caterpillar',w:'It hatches from an egg, eats leaves, wraps itself in a chrysalis and comes out as a butterfly.'},
- {q:'Which one is a mammal: a shark, a dolphin or a crocodile?',a:'A dolphin',w:'Mammals breathe air and feed their babies milk. Dolphins do both.'}
-],
-m:[
- {q:'What is the name of the process plants use to make food from sunlight?',a:'Photosynthesis',w:'Chlorophyll in the leaves captures light and turns carbon dioxide and water into glucose.'},
- {q:'Which gas do plants release during photosynthesis?',a:'Oxygen',w:'Almost all the oxygen we breathe was made by plants and algae.'},
- {q:'What is the basic building block of all living things?',a:'The cell',w:'Some living things are a single cell. A human has around 30 trillion.'},
- {q:'What do we call an animal with no backbone?',a:'An invertebrate',w:'Insects, worms, snails and octopuses are invertebrates. They are over 95% of all animal species.'},
- {q:'Which part of the cell is called its "powerhouse"?',a:'The mitochondria',w:'They release energy from food in a process called respiration.'},
- {q:'True or false: bats are blind.',a:'False',w:'Bats can see. They also find insects in the dark using echoes, called echolocation.'},
- {q:'What word describes animals that are active at night?',a:'Nocturnal',w:'Owls, bats and bush babies are nocturnal.'},
- {q:'What molecule inside cells carries the instructions a living thing inherits?',a:'DNA',w:'DNA is a code copied into every new cell. Sections of it are called genes.'}
-],
-s:[
- {q:'Which molecule stores and carries energy inside cells? Give its three-letter name.',a:'ATP (adenosine triphosphate)',w:'Breaking a phosphate bond off ATP releases the energy a cell uses to work.'},
- {q:'In which part of a plant cell does photosynthesis happen?',a:'The chloroplast',w:'Chloroplasts contain chlorophyll, the green pigment that absorbs light.'},
- {q:'What is a sudden change in the DNA sequence called?',a:'A mutation',w:'Most mutations do nothing, some are harmful, and a few give an advantage. They are the raw material of evolution.'},
- {q:'Who published the theory of evolution by natural selection in 1859?',a:'Charles Darwin',w:'Alfred Russel Wallace reached the same idea independently and they announced it together in 1858.'},
- {q:'Name the four bases in DNA.',a:'Adenine, thymine, guanine and cytosine',w:'A always pairs with T and G with C. That pairing is how DNA copies itself.'},
- {q:'What is the process in which one cell divides into two identical cells?',a:'Mitosis',w:'Mitosis is for growth and repair. Meiosis makes sex cells with half the chromosomes.'},
- {q:'Are bacteria prokaryotes or eukaryotes?',a:'Prokaryotes',w:'Prokaryotic cells have no nucleus. Their DNA floats freely inside the cell.'},
- {q:'What are enzymes?',a:'Proteins that speed up chemical reactions',w:'Amylase in your saliva starts breaking down starch before you even swallow.'}
-]},
-earth:{
-j:[
- {q:'What is the closest star to Earth?',a:'The Sun',w:'The Sun is a star like the ones you see at night, just much closer to us.'},
- {q:'How many planets are in our solar system?',a:'Eight',w:'Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune.'},
- {q:'What is the big rock that goes around the Earth and shines at night?',a:'The Moon',w:'The Moon makes no light of its own. It reflects sunlight.'},
- {q:'What causes day and night?',a:'The Earth spinning',w:'The Earth turns all the way round once every 24 hours.'},
- {q:'Which planet is called the Red Planet?',a:'Mars',w:'Mars looks red because its dust is full of rusty iron.'},
- {q:'What is the biggest ocean in the world?',a:'The Pacific Ocean',w:'It is bigger than all the land on Earth put together.'},
- {q:'What do we call a mountain that can blow out hot melted rock?',a:'A volcano',w:'Melted rock that comes out of a volcano is called lava.'},
- {q:'What falls from a cloud when the tiny water drops get too heavy?',a:'Rain',w:'Clouds are made of millions of tiny water drops floating in the air.'}
-],
-m:[
- {q:'What is the largest planet in our solar system?',a:'Jupiter',w:'More than 1,300 Earths could fit inside Jupiter.'},
- {q:'What is the blanket of gases around the Earth called?',a:'The atmosphere',w:'It gives us air to breathe and protects us from most meteors and harmful rays.'},
- {q:'How long does the Earth take to go once around the Sun?',a:'One year (about 365¼ days)',w:'That extra quarter day is why we add a leap day every four years.'},
- {q:'What are the three main types of rock?',a:'Igneous, sedimentary and metamorphic',w:'Igneous rock cools from lava, sedimentary rock forms in layers, metamorphic rock is changed by heat and pressure.'},
- {q:'What is hot melted rock called while it is still underground?',a:'Magma',w:'Once it reaches the surface it is called lava.'},
- {q:'What causes the tides in the sea?',a:'The pull of the Moon\'s gravity',w:'The Sun helps too, which is why tides are strongest at full moon and new moon.'},
- {q:'Which planet is famous for its bright rings?',a:'Saturn',w:'The rings are made mostly of ice chunks, some as small as dust and some as big as houses.'},
- {q:'What is the imaginary line around the middle of the Earth called?',a:'The Equator',w:'It crosses Africa through Gabon, Congo, DR Congo, Uganda, Kenya and Somalia.'}
-],
-s:[
- {q:'What is the Earth\'s innermost layer, and what is it mainly made of?',a:'The inner core, made of solid iron and nickel',w:'It is about as hot as the surface of the Sun, but stays solid because of the enormous pressure.'},
- {q:'What theory explains how the continents slowly move?',a:'Plate tectonics',w:'The East African Rift is a plate boundary. Africa is slowly splitting apart there.'},
- {q:'About how long does light from the Sun take to reach Earth?',a:'About 8 minutes',w:'So if the Sun went out, we would not know for 8 minutes.'},
- {q:'Which gas makes up about 78% of the air?',a:'Nitrogen',w:'Oxygen is only about 21%. Carbon dioxide is less than 0.05%.'},
- {q:'What is the name of the galaxy we live in?',a:'The Milky Way',w:'It holds a few hundred billion stars. The Sun is one of them.'},
- {q:'What causes the seasons?',a:'The tilt of the Earth\'s axis (about 23.5°)',w:'It is not the distance from the Sun. Earth is actually closest to the Sun in January.'},
- {q:'Which former planet was reclassified as a dwarf planet in 2006?',a:'Pluto',w:'It was demoted because it has not cleared other objects from its orbit.'},
- {q:'What does the Richter scale measure?',a:'The magnitude of an earthquake',w:'Each step up the scale is about 32 times more energy released. Scientists now mostly use the moment magnitude scale.'}
-]},
-matter:{
-j:[
- {q:'What are the three forms water can take?',a:'Ice, liquid water and steam (water vapour)',w:'Solid, liquid and gas. Cold turns it to ice, heat turns it to steam.'},
- {q:'What happens to ice when it gets warm?',a:'It melts into water',w:'Melting happens at 0 °C.'},
- {q:'Which is heavier: a kilogram of stones or a kilogram of feathers?',a:'They weigh the same',w:'A kilogram is a kilogram. The feathers just take up more space.'},
- {q:'What do we call a push or a pull?',a:'A force',w:'Kicking a ball is a push. Opening a drawer is a pull.'},
- {q:'What force pulls things down to the ground?',a:'Gravity',w:'Gravity is also what keeps the Moon going round the Earth.'},
- {q:'Does a magnet stick to wood?',a:'No',w:'Magnets attract iron, steel and nickel, not wood, plastic or paper.'},
- {q:'What do we call it when heat turns a liquid into a gas?',a:'Evaporation (or boiling)',w:'Puddles disappear on a sunny day because the water evaporates.'},
- {q:'Name something besides the Moon that gives us light at night.',a:'Stars, a lamp, a torch, a fire, fireflies...',w:'Anything that gives off its own light is called a light source.'}
-],
-m:[
- {q:'What is the smallest piece of an element called?',a:'An atom',w:'Atoms are so small that a single drop of water has more than a billion trillion of them.'},
- {q:'At what temperature does water boil at sea level?',a:'100 °C',w:'On a high mountain water boils at a lower temperature because the air pressure is lower.'},
- {q:'What is the chemical formula for water?',a:'H₂O',w:'Each water molecule has two hydrogen atoms and one oxygen atom.'},
- {q:'Which gas does a fire need to keep burning?',a:'Oxygen',w:'That is why you can put out a small fire by covering it.'},
- {q:'What is the unit used to measure force?',a:'The newton (N)',w:'Named after Isaac Newton. An apple weighs about one newton.'},
- {q:'Does sound travel faster in air or in water?',a:'In water',w:'About four times faster. Whales can hear each other across huge distances.'},
- {q:'What kind of energy is stored in a stretched rubber band?',a:'Elastic potential energy',w:'Let go and it turns into movement, which is kinetic energy.'},
- {q:'What do we call a material that lets electricity flow through it easily?',a:'A conductor',w:'Copper is a good conductor. Rubber and plastic are insulators.'}
-],
-s:[
- {q:'What is the atomic number of carbon?',a:'6',w:'Six protons in the nucleus. Carbon is the backbone of every living thing.'},
- {q:'State Newton\'s third law of motion.',a:'For every action there is an equal and opposite reaction',w:'A rocket goes up because it pushes hot gas down.'},
- {q:'What is the approximate speed of light?',a:'About 300,000 kilometres per second',w:'Nothing with mass can reach it. Light from the nearest star after the Sun takes over 4 years to arrive.'},
- {q:'What is the pH of pure water?',a:'7 (neutral)',w:'Below 7 is acidic, like lemon juice. Above 7 is alkaline, like soap.'},
- {q:'What do we call a chemical reaction that releases heat?',a:'Exothermic',w:'Burning is exothermic. A reaction that absorbs heat is endothermic.'},
- {q:'Which particle in an atom has no electric charge?',a:'The neutron',w:'Protons are positive, electrons are negative, neutrons are neutral.'},
- {q:'What formula links voltage, current and resistance?',a:'V = I × R (Ohm\'s law)',w:'Double the voltage across a wire and the current doubles too.'},
- {q:'What is the most abundant element in the universe?',a:'Hydrogen',w:'About three quarters of all ordinary matter. Stars burn hydrogen into helium.'}
-]},
-body:{
-j:[
- {q:'Does a baby have more bones or fewer bones than an adult?',a:'More',w:'Babies have about 300. Some join together as you grow, leaving 206.'},
- {q:'What pumps blood around your body?',a:'The heart',w:'It beats about 100,000 times every day.'},
- {q:'Which organs do we use to breathe?',a:'The lungs',w:'Air goes in, oxygen passes into your blood, and you breathe out carbon dioxide.'},
- {q:'How many teeth does an adult usually have?',a:'32',w:'Children have 20 milk teeth that fall out to make room.'},
- {q:'Which part of your body does your thinking?',a:'The brain',w:'Your brain is protected by a hard bone called the skull.'},
- {q:'What is the biggest organ of your body?',a:'The skin',w:'An adult\'s skin would cover about two square metres if laid flat.'},
- {q:'What does the skull protect?',a:'The brain',w:'The skull is made of several bones joined tightly together.'},
- {q:'Why should you wash your hands before eating?',a:'To remove germs',w:'Germs are too small to see, but soap and water wash them away.'}
-],
-m:[
- {q:'How many chambers does the human heart have?',a:'Four',w:'Two atria at the top receive blood, two ventricles at the bottom pump it out.'},
- {q:'What is the longest bone in the human body?',a:'The femur (thigh bone)',w:'It is about a quarter of your height.'},
- {q:'What carries oxygen around in your blood?',a:'Red blood cells',w:'They contain haemoglobin, an iron-rich protein that grabs oxygen in the lungs.'},
- {q:'In which organ is most food absorbed into the blood?',a:'The small intestine',w:'It is about 6 metres long, folded up inside you.'},
- {q:'What is a normal human body temperature?',a:'About 37 °C',w:'A fever is the body heating up to fight infection.'},
- {q:'Which organ breaks down toxins and poisons in the blood?',a:'The liver',w:'The kidneys then filter waste out into urine.'},
- {q:'What are the tiniest blood vessels called?',a:'Capillaries',w:'They are so thin that red blood cells pass through in single file.'},
- {q:'Which vitamin does your skin make when sunlight hits it?',a:'Vitamin D',w:'You need it for strong bones. It is also found in fish and eggs.'}
-],
-s:[
- {q:'What pigment gives skin its colour?',a:'Melanin',w:'It also protects skin from UV light. Darker skin has more melanin, not more melanin cells.'},
- {q:'Which part of the brain controls balance and coordination?',a:'The cerebellum',w:'It sits at the back, under the large cerebrum.'},
- {q:'Which blood type is the universal donor?',a:'O negative',w:'It has no A, B or Rh markers, so almost anyone can receive it.'},
- {q:'Which hormone lowers blood sugar?',a:'Insulin',w:'It is made in the pancreas. Diabetes is when the body makes too little or cannot use it.'},
- {q:'How many pairs of chromosomes do humans have?',a:'23 pairs (46 in total)',w:'One of each pair comes from each parent.'},
- {q:'What is the job of white blood cells?',a:'To fight infection',w:'Some engulf germs, others make antibodies that mark germs for destruction.'},
- {q:'What is the tube that carries food from the mouth to the stomach?',a:'The oesophagus',w:'Muscles squeeze food along it in waves, so you can swallow even upside down.'},
- {q:'What is the tiny filtering unit inside the kidney called?',a:'The nephron',w:'Each kidney has about a million of them, filtering your blood around 40 times a day.'}
-]},
-geo:{
-j:[
- {q:'How many countries are there in Africa?',a:'54',w:'That is more countries than any other continent.'},
- {q:'What is the longest river in Africa?',a:'The Nile',w:'It flows north for about 6,650 km and empties into the Mediterranean Sea in Egypt.'},
- {q:'What is the biggest desert in Africa?',a:'The Sahara',w:'It is almost as big as the whole of Europe, and it used to be green with lakes.'},
- {q:'Which is the largest country in Africa by land?',a:'Algeria',w:'Most of Algeria is covered by the Sahara desert.'},
- {q:'Which African country has the most people?',a:'Nigeria',w:'More than 220 million people, with over 500 languages spoken.'},
- {q:'What is the tallest mountain in Africa?',a:'Mount Kilimanjaro',w:'It is in Tanzania, near the Equator, yet it has snow on top.'},
- {q:'Which ocean is on the east side of Africa?',a:'The Indian Ocean',w:'The Atlantic Ocean is on the west side.'},
- {q:'Nairobi is the capital of which country?',a:'Kenya',w:'Nairobi has a national park with lions right next to the city.'}
-],
-m:[
- {q:'What is the largest lake in Africa?',a:'Lake Victoria',w:'It is shared by Uganda, Kenya and Tanzania, and is the source of the White Nile.'},
- {q:'Which island country off the east coast of Africa is famous for lemurs?',a:'Madagascar',w:'Most of its animals and plants live nowhere else on Earth.'},
- {q:'Which waterfall on the Zambezi River is called "the smoke that thunders"?',a:'Victoria Falls (Mosi-oa-Tunya)',w:'Its spray can be seen from 50 km away. It sits between Zambia and Zimbabwe.'},
- {q:'Which country is completely surrounded by South Africa?',a:'Lesotho',w:'It is also the only country entirely above 1,000 metres in height.'},
- {q:'What is the capital city of Nigeria?',a:'Abuja',w:'Lagos was the capital until 1991, when it moved to Abuja in the centre of the country.'},
- {q:'Which narrow strait separates Africa from Europe?',a:'The Strait of Gibraltar',w:'At its narrowest, Morocco and Spain are only 14 km apart.'},
- {q:'Which is the most populated city in Africa?',a:'Lagos (with Cairo very close)',w:'Both have well over 20 million people in their wider areas.'},
- {q:'Which country shares its name with a great West African river, but is not Nigeria?',a:'Niger',w:'The Niger River flows through Guinea, Mali, Niger, Benin and Nigeria.'}
-],
-s:[
- {q:'Which two rivers join at Khartoum to form the Nile?',a:'The White Nile and the Blue Nile',w:'The Blue Nile from Ethiopia carries most of the water during the flood season.'},
- {q:'What is the name of the giant crack splitting East Africa?',a:'The East African Rift (Great Rift Valley)',w:'In a few million years the Horn of Africa may become a separate island.'},
- {q:'Which is the only African country with both a Mediterranean and an Atlantic coast?',a:'Morocco',w:'Its port of Tangier sits right where the two meet.'},
- {q:'What is the smallest country on mainland Africa?',a:'The Gambia',w:'It is a thin strip along the Gambia River, surrounded by Senegal.'},
- {q:'Which canal connects the Mediterranean Sea to the Red Sea?',a:'The Suez Canal',w:'Opened in Egypt in 1869, it saves ships a trip around the whole of Africa.'},
- {q:'Which African country has three capital cities?',a:'South Africa',w:'Pretoria (government), Cape Town (parliament) and Bloemfontein (courts).'},
- {q:'Which is the deepest lake in Africa?',a:'Lake Tanganyika',w:'About 1,470 m deep, the second deepest in the world after Lake Baikal.'},
- {q:'What is the band of dry grassland just south of the Sahara called?',a:'The Sahel',w:'It stretches from Senegal to Sudan and is where the desert meets the savanna.'}
-]},
-hist:{
-j:[
- {q:'In which African country were the great pyramids built?',a:'Egypt',w:'The Great Pyramid of Giza was the tallest building in the world for almost 4,000 years.'},
- {q:'What is the picture-writing of ancient Egypt called?',a:'Hieroglyphs',w:'It used over 700 pictures. Each could stand for a sound, a word or an idea.'},
- {q:'Which South African leader spent 27 years in prison and then became president?',a:'Nelson Mandela',w:'He became president in 1994 in the first election where everyone could vote.'},
- {q:'Which West African empire had the famous city of Timbuktu, full of books?',a:'The Mali Empire',w:'Scholars came from far away to study there over 600 years ago.'},
- {q:'On which continent did the very first humans live?',a:'Africa',w:'Everyone on Earth has ancestors who walked out of Africa.'},
- {q:'Who was the famous queen of Egypt who ruled around 2,000 years ago?',a:'Cleopatra',w:'She spoke many languages and was the last ruler of ancient Egypt.'},
- {q:'Which country has ancient churches carved straight into the rock at Lalibela?',a:'Ethiopia',w:'Eleven churches were cut downwards into solid rock about 800 years ago.'},
- {q:'What were the walls of Great Zimbabwe built from?',a:'Stone',w:'The stones were fitted so carefully that no mortar was needed. The country is named after it.'}
-],
-m:[
- {q:'Which ancient kingdom in today\'s Sudan built more pyramids than Egypt?',a:'The Kingdom of Kush (Nubia)',w:'Around 200 pyramids stand at Meroë. Its kings even ruled Egypt for a while.'},
- {q:'Which emperor of Mali is called the richest person in history?',a:'Mansa Musa',w:'On his 1324 pilgrimage to Mecca he gave away so much gold that prices in Cairo fell.'},
- {q:'Which African country was never colonised by a European power?',a:'Ethiopia',w:'Liberia also stayed independent. Ethiopia defeated an Italian invasion in 1896.'},
- {q:'Which was the first country in sub-Saharan Africa to win independence, in 1957?',a:'Ghana',w:'Its first leader was Kwame Nkrumah.'},
- {q:'Which year is called the "Year of Africa", when 17 countries became independent?',a:'1960',w:'Nigeria became independent on 1 October 1960.'},
- {q:'What are the famous metal artworks from the Kingdom of Benin, in today\'s Nigeria, called?',a:'The Benin Bronzes',w:'Thousands were taken by British soldiers in 1897. Many are now being returned.'},
- {q:'Which king built the Zulu nation into a powerful army in the early 1800s?',a:'Shaka Zulu',w:'He invented new fighting tactics and a short stabbing spear.'},
- {q:'Which queen of the Ashanti led a war against the British in 1900?',a:'Yaa Asantewaa',w:'She led the fight to protect the Golden Stool, the symbol of the Ashanti nation.'}
-],
-s:[
- {q:'At which conference in 1884–85 did European powers carve up Africa?',a:'The Berlin Conference',w:'No African was invited. Many of today\'s borders were drawn there.'},
- {q:'Who was the first Prime Minister of independent Nigeria?',a:'Abubakar Tafawa Balewa',w:'He led from 1960 until 1966.'},
- {q:'Which general from Carthage crossed the Alps with elephants to attack Rome?',a:'Hannibal',w:'Carthage was in today\'s Tunisia and was Rome\'s greatest rival.'},
- {q:'Which university in Fez, Morocco, is considered the world\'s oldest still operating?',a:'Al-Qarawiyyin',w:'It was founded in 859 by a woman, Fatima al-Fihri.'},
- {q:'What was the system of racial segregation in South Africa that ended in 1994?',a:'Apartheid',w:'The word is Afrikaans for "apartness". It lasted from 1948 to 1994.'},
- {q:'Which 1896 battle kept Ethiopia independent?',a:'The Battle of Adwa',w:'Emperor Menelik II\'s army defeated Italy, a rare African victory over a colonial power.'},
- {q:'Who was Nigeria\'s first President?',a:'Nnamdi Azikiwe',w:'He took office in 1963 when Nigeria became a republic.'},
- {q:'Which organisation founded in Addis Ababa in 1963 became the African Union in 2002?',a:'The Organisation of African Unity (OAU)',w:'Its headquarters are still in Addis Ababa, Ethiopia.'}
-]},
-people:{
-j:[
- {q:'Ancient Egyptians made paper from a plant. What was the plant called?',a:'Papyrus',w:'The English word "paper" comes from papyrus.'},
- {q:'What did William Kamkwamba from Malawi build from scrap to make electricity for his village?',a:'A windmill',w:'He was 14 and learned how from a library book.'},
- {q:'In which ancient African land was the 365-day calendar invented?',a:'Egypt',w:'They counted the days between floods of the Nile.'},
- {q:'What did ancient Egyptians use to tell the time with the Sun?',a:'A sundial (shadow clock)',w:'The shadow moves as the Sun moves across the sky.'},
- {q:'Wangari Maathai from Kenya won the Nobel Peace Prize for planting what?',a:'Trees',w:'Her movement planted over 30 million trees.'},
- {q:'Which country has the "Cradle of Humankind", where very old human fossils are found?',a:'South Africa',w:'Famous fossils were also found in Ethiopia, Kenya and Tanzania.'},
- {q:'What are the oldest tools ever found, made in Kenya over 3 million years ago?',a:'Stone tools',w:'They were used for cutting and crushing long before writing existed.'},
- {q:'Richard Turere from Kenya invented "Lion Lights" at age 13. What did they do?',a:'Scared lions away from the cattle',w:'Flashing lights make lions think a person is walking around.'}
-],
-m:[
- {q:'Which Nigerian computer scientist won the Gordon Bell Prize in 1989 for supercomputer calculations?',a:'Philip Emeagwali',w:'He used over 65,000 processors working together, an early form of today\'s cloud computing.'},
- {q:'Which Kenyan woman won the Nobel Peace Prize in 2004 for her environmental work?',a:'Wangari Maathai',w:'She was the first African woman to win a Nobel Prize.'},
- {q:'In 2014, Nigerian doctor Ameyo Adadevoh helped stop which disease from spreading in Lagos?',a:'Ebola',w:'She refused to release an infected patient. Nigeria was declared Ebola-free within months.'},
- {q:'Which Ghanaian engineer is known for his work on fibre-optic cables?',a:'Thomas Mensah',w:'Fibre optics carry the internet as pulses of light through glass.'},
- {q:'Dr Oviemo Ovadje from Nigeria invented a device used during surgery. What does it do?',a:'Collects and returns the patient\'s own blood',w:'It saves lives where donated blood is scarce.'},
- {q:'Arthur Zang from Cameroon invented the Cardiopad. What does it do?',a:'Records heart tests (ECGs) and sends them to doctors far away',w:'It lets village clinics check hearts without a cardiologist on site.'},
- {q:'What did William Kamkwamba\'s windmill in Malawi generate?',a:'Electricity',w:'He later built a second one to pump water for the farm.'},
- {q:'What did the ancient Egyptians make from the papyrus plant?',a:'Paper',w:'Strips of the plant were pressed together and dried in the sun.'}
-],
-s:[
- {q:'Who was Imhotep?',a:'An ancient Egyptian architect and physician who designed the first pyramid',w:'He built the Step Pyramid around 2650 BCE and is one of the earliest named engineers in history.'},
- {q:'Which Egyptian chemist won the 1999 Nobel Prize in Chemistry?',a:'Ahmed Zewail',w:'He used ultra-fast lasers to watch chemical reactions happen in femtoseconds.'},
- {q:'Which South African surgeon performed the first human heart transplant, in 1967?',a:'Christiaan Barnard',w:'It happened at Groote Schuur Hospital in Cape Town.'},
- {q:'The Ishango bone from DR Congo is about 20,000 years old. What was it probably used for?',a:'Counting (mathematics)',w:'Its scratched tally marks are among the oldest known mathematical objects.'},
- {q:'South African chemist Tebello Nyokong uses light-activated chemicals to treat what?',a:'Cancer',w:'This is called photodynamic therapy. The drug only works where light shines on it.'},
- {q:'Who became the first African citizen to travel into space, in 2002?',a:'Mark Shuttleworth',w:'He flew to the International Space Station on a Russian Soyuz rocket.'},
- {q:'Which Malian city was a medieval centre of astronomy and mathematics?',a:'Timbuktu',w:'Hundreds of thousands of manuscripts from its scholars still survive.'},
- {q:'Kenyan teenager Richard Turere invented "Lion Lights" to protect cattle. What did they use?',a:'Flashing LED lights',w:'Lions avoid the moving lights. It cut lion killings and protected the lions too.'}
-]},
-wild:{
-j:[
- {q:'What is the largest animal that lives on land?',a:'The African elephant',w:'A big male can weigh as much as four cars.'},
- {q:'What is the tallest animal in the world?',a:'The giraffe',w:'It has the same number of neck bones as you: seven, just much longer.'},
- {q:'What is the fastest animal on land?',a:'The cheetah',w:'It can run about 100 km per hour, but only for a few seconds.'},
- {q:'Which big African bird cannot fly but runs very fast?',a:'The ostrich',w:'Its eggs are the biggest of any bird, about the size of 24 chicken eggs.'},
- {q:'What is a group of lions called?',a:'A pride',w:'The lionesses do most of the hunting.'},
- {q:'Which striped animal lives on the African grasslands?',a:'The zebra',w:'Every zebra has a different stripe pattern, like a fingerprint.'},
- {q:'What is the wide open grassland of Africa with only a few trees called?',a:'The savanna',w:'The Serengeti and the Maasai Mara are savannas.'},
- {q:'Which big river animal with huge teeth is one of the most dangerous in Africa?',a:'The hippopotamus',w:'Hippos kill more people each year than lions do.'}
-],
-m:[
- {q:'Which animals make up the "Big Five"?',a:'Lion, leopard, elephant, rhinoceros and buffalo',w:'Hunters chose them as the hardest to hunt on foot. Today they are a safari checklist.'},
- {q:'What is the largest ape in the world, found in Central Africa?',a:'The gorilla',w:'Gorillas are mostly vegetarian and live in family groups led by a silverback.'},
- {q:'What is the huge yearly animal journey between Tanzania and Kenya called?',a:'The Great Migration',w:'Over a million wildebeest and zebras follow the rains between the Serengeti and the Maasai Mara.'},
- {q:'Which African tree stores water in its fat trunk and is called the "tree of life"?',a:'The baobab',w:'Some are over 1,000 years old. The fruit is rich in vitamin C.'},
- {q:'Which animal from Madagascar has a long black-and-white striped tail?',a:'The ring-tailed lemur',w:'Lemurs are found only on Madagascar.'},
- {q:'Which African animals are the closest living relatives of humans?',a:'Chimpanzees and bonobos',w:'We share about 98–99% of our DNA with them.'},
- {q:'What is the heaviest flying bird, found on African savannas?',a:'The kori bustard',w:'Males can weigh around 18 kg and still fly.'},
- {q:'What is the name of Africa\'s largest rainforest?',a:'The Congo rainforest',w:'It is the second largest in the world after the Amazon and is home to forest elephants and okapis.'}
-],
-s:[
- {q:'Which African snake is the fastest in the world?',a:'The black mamba',w:'It can move at around 20 km per hour and its venom can kill in hours.'},
- {q:'Why do flamingos turn pink?',a:'Because of pigments in the algae and shrimp they eat',w:'Flamingos fed a different diet gradually turn pale.'},
- {q:'Which endangered ape found only in DR Congo is known for peaceful, female-led groups?',a:'The bonobo',w:'Bonobos live south of the Congo River, chimpanzees north of it.'},
- {q:'The Okavango River never reaches the sea. Where does its water go?',a:'It spreads into the Kalahari in Botswana and evaporates or soaks away',w:'This creates the Okavango Delta, an oasis full of wildlife in the middle of a desert.'},
- {q:'What is the largest frog in the world, found in Cameroon and Equatorial Guinea?',a:'The goliath frog',w:'It can weigh over 3 kg and jump 3 metres.'},
- {q:'Which rhino subspecies has only two known individuals left, both in Kenya?',a:'The northern white rhinoceros',w:'Both are female. Scientists are trying to save it using stored eggs and sperm.'},
- {q:'Which African fish survives the dry season by burrowing into mud and breathing air?',a:'The lungfish',w:'It can stay in a cocoon of dried mud for months, even years.'},
- {q:'What is the dry, dusty wind that blows from the Sahara over West Africa in winter?',a:'The Harmattan',w:'It can carry Saharan dust all the way across the Atlantic to the Amazon.'}
-]}
+'use strict';
+const AUD=new URLSearchParams(location.search).get('view')==='audience';
+const DATA=window.SABI_DATA||{ages:[],topics:[],bank:{}};
+const AGES=DATA.ages;
+const MAX_SEG=8;
+const MODS={
+  double:{short:'×2',long:'×2 Double points'},
+  bonus:{short:'↻',long:'↻ Bonus spin if correct'},
+  open:{short:'ALL',long:'ALL Anyone can answer'}
 };
+const LANG_NAMES={en:'English',pcm:'Naijá',yo:'Yorùbá',ha:'Hausa',ig:'Igbo',sw:'Kiswahili',fr:'Français',ar:'العربية',am:'አማርኛ',zu:'isiZulu',xh:'isiXhosa',tw:'Twi',so:'Soomaali'};
+const LANG_TAGS={en:'en-GB',pcm:'en-NG',yo:'yo-NG',ha:'ha-NG',ig:'ig-NG',sw:'sw-KE',fr:'fr-FR',ar:'ar',am:'am-ET',zu:'zu-ZA',xh:'xh-ZA',tw:'ak-GH',so:'so-SO'};
+const NEXT=[' ','Enter','PageDown','ArrowRight','ArrowDown'], PREV=['PageUp','ArrowLeft','ArrowUp'];
+
+// ---------- helpers ----------
+const $=id=>document.getElementById(id);
+function h(tag,props,...kids){
+  const e=document.createElement(tag);
+  if(props) for(const k in props){ const v=props[k]; if(v==null||v===false) continue;
+    if(k==='class') e.className=v; else if(k==='text') e.textContent=v;
+    else if(k.slice(0,2)==='on') e.addEventListener(k.slice(2),v); else e.setAttribute(k,v===true?'':v); }
+  kids.flat(Infinity).forEach(c=>{ if(c==null||c===false) return; e.append(c.nodeType?c:String(c)); });
+  return e;
+}
+const store={
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+const clone=o=>JSON.parse(JSON.stringify(o));
+const plural=(n,w)=>n+' '+w+(n===1?'':'s');
+function announce(t){ const a=$('announce'); a.textContent=''; setTimeout(()=>a.textContent=t,30); }
+
+// ---------- question bank (built-in + teacher's own) ----------
+let custom=store.get('sabi-custom',null);
+if(!custom||!Array.isArray(custom.topics)||typeof custom.bank!=='object') custom={topics:[],bank:{}};
+let TOPICS=[], BANK={};
+function rebuildBank(){ TOPICS=DATA.topics.concat(custom.topics); BANK=Object.assign({},DATA.bank,custom.bank); }
+rebuildBank();
+const topicBy=k=>TOPICS.find(t=>t.key===k);
+const groups=()=>[...new Set(TOPICS.map(t=>t.group))];
+// Question text can be a plain string or {en:'…', yo:'…'} for several languages.
+function tx(v){ if(v==null) return ''; if(typeof v==='string') return v; return v[S.lang]||v.en||Object.values(v)[0]||''; }
+function txc(c){ if(!c) return null; if(Array.isArray(c)) return c; return c[S.lang]||c.en||Object.values(c)[0]||null; }
+function langs(){
+  const L=new Set(['en']);
+  for(const t in BANK) for(const a in BANK[t]) (BANK[t][a]||[]).forEach(it=>{ if(it&&it.q&&typeof it.q==='object') Object.keys(it.q).forEach(k=>L.add(k)); });
+  return [...L];
+}
 
 // ---------- state ----------
-const SEG=8;
-let age=null, topic=null, teamsN=0, timerS=30, teams=[], turn=0, muted=false;
-let used={}; // key "topic:age" -> array of used indexes
-let current=null, rot=0, spinning=false, revealed=false, timerId=null, timeLeft=0;
+// Everything the screen shows lives in S, so it can be saved (survives a refresh) and mirrored to the audience screen.
+const DEF={
+  screen:'setup', age:null, sel:null, teamsN:0, names:['Team A','Team B','Team C','Team D'], timerS:30,
+  steals:false, specials:false, choices:'off', speak:false, lang:'en',
+  teams:[], turn:0, rot:0, round:[], roundKey:'', roundNo:0, qNo:0,
+  cur:null, curQ:null, curMod:null, phase:'idle', stealFrom:null, log:[], undo:null, timer:null, note:null,
+  selLabel:'', ageLabel:''
+};
+let S=Object.assign(clone(DEF), AUD?{}:store.get('sabi-state',{}));
+let used=store.get('sabi-used',{}); if(!used||typeof used!=='object'||Array.isArray(used)) used={};
+let muted=!!store.get('sabi-muted',0);
+let spinning=false, editScores=false, timerId=null;
+function restore(){ // tidy a saved game after a refresh (runs from build(), once the helpers below exist)
+  if(AUD) return;
+  S.timer=null;
+  if(S.phase==='spinning') S.phase='idle';
+  if(!Array.isArray(S.names)) S.names=DEF.names.slice();
+  while(S.names.length<4) S.names.push('Team '+'ABCD'[S.names.length]);
+  if(!Array.isArray(S.log)) S.log=[];
+  if(!Array.isArray(S.round)) S.round=[];
+  if(S.screen!=='setup'&&!(S.age&&selTopics().length)) S.screen='setup';
+}
+function save(){ store.set('sabi-state',Object.assign({},S,{timer:null})); }
+function commit(){ if(AUD) return; save(); render(); post(); }
 
-try{ const u=JSON.parse(localStorage.getItem('sabi-used')||'{}'); if(u&&typeof u==='object') used=u; }catch(e){}
-try{ muted=localStorage.getItem('sabi-muted')==='1'; }catch(e){}
-function saveUsed(){ try{localStorage.setItem('sabi-used',JSON.stringify(used));}catch(e){} }
-const poolKey=()=>topic+':'+age;
-const pool=()=>BANK[topic][age];
-const usedList=()=>used[poolKey()]||[];
-const remaining=()=>pool().length-usedList().length;
-
-const $=id=>document.getElementById(id);
+// ---------- audience screen link ----------
+const ch=('BroadcastChannel' in window)?new BroadcastChannel('sabi-spin'):null;
+let audSeen=0;
+const audOn=()=>Date.now()-audSeen<6000;
+function post(m){ if(ch&&!AUD) try{ ch.postMessage(m||{type:'state',S}); }catch(e){} }
+if(ch) ch.onmessage=e=>{
+  const m=e.data||{};
+  if(AUD){
+    if(m.type==='state'){ S=m.S; render(); }
+    else if(m.type==='rot'){ S.rot=m.rot; drawWheel(); }
+    else if(m.type==='timer'){ S.timer=m.timer; renderTimer(); }
+    else if(m.type==='confetti') confetti();
+  } else {
+    if(m.type==='hello'||m.type==='ping'){ const was=audOn(); audSeen=Date.now(); if(m.type==='hello') post(); if(!was) render(); }
+    else if(m.type==='bye'){ audSeen=0; render(); }
+  }
+};
+if(AUD&&ch){ const say=t=>ch.postMessage({type:t}); say('hello'); setInterval(()=>say('ping'),2000); addEventListener('pagehide',()=>say('bye')); }
+if(!AUD) setInterval(()=>{ if(audSeen&&!audOn()){ audSeen=0; render(); } },2000);
+if(AUD&&!ch) $('waitMsg').textContent='This browser cannot link two windows. Use the main window on the projector instead.';
 
 // ---------- sound ----------
 let actx=null;
-function ac(){ if(muted) return null; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); return actx; }catch(e){return null;} }
-function tone(f,dur,type,vol,when){ const c=ac(); if(!c) return; const o=c.createOscillator(), g=c.createGain(); o.type=type||'sine'; o.frequency.value=f; g.gain.setValueAtTime(vol||.15,c.currentTime+(when||0)); g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+(when||0)+dur); o.connect(g).connect(c.destination); o.start(c.currentTime+(when||0)); o.stop(c.currentTime+(when||0)+dur+.02); }
+function ac(){ if(muted||AUD) return null; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); return actx; }catch(e){ return null; } }
+function tone(f,dur,type,vol,when){ const c=ac(); if(!c) return; const t=c.currentTime+(when||0); const o=c.createOscillator(), g=c.createGain(); o.type=type||'sine'; o.frequency.value=f; g.gain.setValueAtTime(vol||.15,t); g.gain.exponentialRampToValueAtTime(.0001,t+dur); o.connect(g).connect(c.destination); o.start(t); o.stop(t+dur+.02); }
 const sfx={
   tick(){ tone(1400,.03,'square',.05); },
   land(){ tone(520,.25,'triangle',.2); tone(780,.35,'triangle',.2,.12); },
   reveal(){ tone(660,.15,'sine',.2); tone(880,.3,'sine',.2,.12); },
   good(){ [523,659,784,1047].forEach((f,i)=>tone(f,.25,'triangle',.18,i*.09)); },
   bad(){ tone(220,.3,'sawtooth',.12); tone(180,.4,'sawtooth',.12,.15); },
-  buzz(){ tone(140,.6,'sawtooth',.2); }
+  buzz(){ tone(140,.6,'sawtooth',.2); },
+  fanfare(){ [523,659,784,659,784,1047].forEach((f,i)=>tone(f,.3,'triangle',.18,i*.13)); }
 };
+function toggleMute(){ muted=!muted; store.set('sabi-muted',muted?1:0); if(muted&&canSpeak) speechSynthesis.cancel(); render(); }
+
+// ---------- read aloud ----------
+const canSpeak=!AUD&&'speechSynthesis' in window;
+function say(t){
+  if(!canSpeak||!t) return;
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t); const tag=LANG_TAGS[S.lang]||S.lang; u.lang=tag; u.rate=.92;
+    const vs=speechSynthesis.getVoices();
+    const v=vs.find(v=>v.lang===tag)||vs.find(v=>v.lang&&v.lang.slice(0,2)===tag.slice(0,2));
+    if(v) u.voice=v;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function readQ(){
+  const q=S.curQ; if(!q||!['ask','steal','revealed'].includes(S.phase)) return;
+  let t=q.q; if(q.choices) t+=' … '+q.choices.map((c,i)=>'ABCD'[i]+': '+c).join('. ');
+  if(S.phase==='revealed') t+=' … The answer is: '+q.a+'. '+q.w;
+  say(t);
+}
+
+// ---------- selection helpers ----------
+const pool=(t,age=S.age)=>(BANK[t]&&BANK[t][age])||[];
+const usedOf=(t,age=S.age)=>used[t+':'+age]||[];
+function unusedIdx(t,age=S.age){ const u=usedOf(t,age); return pool(t,age).map((_,i)=>i).filter(i=>!u.includes(i)); }
+function selTopics(sel=S.sel,age=S.age){
+  if(!sel||!age) return [];
+  if(sel.slice(0,4)==='mix:'){ const g=sel.slice(4); return TOPICS.filter(t=>(g==='all'||t.group===g)&&pool(t.key,age).length).map(t=>t.key); }
+  return pool(sel,age).length?[sel]:[];
+}
+function selCounts(sel=S.sel,age=S.age){ let total=0,left=0; selTopics(sel,age).forEach(t=>{ total+=pool(t,age).length; left+=unusedIdx(t,age).length; }); return {total,left}; }
+function selName(sel){ if(!sel) return ''; if(sel.slice(0,4)==='mix:'){ const g=sel.slice(4); return g==='all'?'🎲 Everything':'🎲 All '+g; } const t=topicBy(sel); return t?t.icon+' '+t.name:''; }
+const roundLeft=()=>S.round.filter(s=>!s.used).length;
+const roundKey=()=>[S.age,S.sel,S.specials&&S.teams.length>1?1:0].join('|');
+const pts=()=>S.curMod==='double'?2:1;
+const inQuestion=()=>['ask','steal','revealed'].includes(S.phase);
 
 // ---------- setup screen ----------
+const SEGS=[
+  ['teamSeg','teamsN',[[0,'No scoring'],[2,'2'],[3,'3'],[4,'4']]],
+  ['timerSeg','timerS',[[0,'Off'],[20,'20 s'],[30,'30 s'],[45,'45 s']]],
+  ['stealSeg','steals',[[false,'Off'],[true,'On']]],
+  ['specSeg','specials',[[false,'Off'],[true,'On']]],
+  ['choiceSeg','choices',[['off','Off'],['j','Juniors only'],['all','Everyone']]],
+  ['speakSeg','speak',[[false,'Off'],[true,'On']]]
+];
 function build(){
-  const ac=$('ageCards');
-  AGES.forEach(a=>{ const b=document.createElement('button'); b.type='button'; b.className='card'; b.setAttribute('aria-pressed','false'); b.innerHTML='<span class="big">'+a.name+'</span><span class="sub">'+a.sub+'</span>'; b.onclick=()=>{age=a.key; refreshSetup();}; b.dataset.key=a.key; ac.appendChild(b); });
-  TOPICS.forEach(t=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.dataset.group=t.group; b.dataset.key=t.key; b.setAttribute('aria-pressed','false'); b.innerHTML='<span>'+t.icon+'</span><span>'+t.name+'</span><span class="count"></span>'; b.onclick=()=>{topic=t.key; refreshSetup();}; (t.group==='Science'?$('sciChips'):$('afrChips')).appendChild(b); });
-  $('teamSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{teamsN=+b.dataset.n; refreshSetup();});
-  $('timerSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{timerS=+b.dataset.s; refreshSetup();});
+  if(AUD){ document.body.classList.add('audience'); document.title='Sabi Spin · Audience'; }
+  restore();
+  $('ageCards').append(...AGES.map(a=>h('button',{type:'button',class:'card','data-key':a.key,'aria-pressed':'false',onclick:()=>{ S.age=a.key; commit(); }},
+    h('span',{class:'big',text:a.name}), h('span',{class:'sub',text:a.sub}))));
+  buildTopics();
+  SEGS.forEach(([id,key,opts])=>$(id).append(...opts.map(([v,l])=>h('button',{type:'button','aria-pressed':'false',onclick:()=>{ S[key]=v; commit(); }},l))));
+  $('speakField').hidden=!canSpeak;
   $('startBtn').onclick=start;
-  $('resetBtn').onclick=()=>{ used={}; saveUsed(); refreshSetup(); $('resetBtn').textContent='Questions reset ✓'; setTimeout(()=>$('resetBtn').textContent='Reset used questions',1500); };
-  $('newBtn').onclick=newSession;
-  $('changeBtn').onclick=()=>{ stopTimer(); $('play').hidden=true; $('setup').hidden=false; refreshSetup(); };
-  $('spinBtn').onclick=spin;
-  $('muteBtn').onclick=()=>{ muted=!muted; try{localStorage.setItem('sabi-muted',muted?'1':'0');}catch(e){} $('muteBtn').textContent=muted?'🔇':'🔊'; };
-  $('muteBtn').textContent=muted?'🔇':'🔊';
-  $('fsBtn').onclick=()=>{ const el=document.documentElement; try{ if(document.fullscreenElement){document.exitFullscreen();} else if(el.requestFullscreen){ el.requestFullscreen().catch(()=>{}); } }catch(e){} };
-  let total=0; TOPICS.forEach(t=>AGES.forEach(a=>total+=BANK[t.key][a.key].length));
-  $('bankNote').textContent=total+' questions in the bank: 8 per topic per age group. Used questions stay out until you reset them.';
-  refreshSetup();
+  $('resetBtn').onclick=resetUsed;
+  $('newBtn').onclick=newSession; $('new2Btn').onclick=newSession;
+  $('changeBtn').onclick=changeTopic;
+  $('finishBtn').onclick=finish;
+  $('spinBtn').onclick=()=>{ const a=spinAction(); if(a.enabled) a.fn(); };
+  $('undoBtn').onclick=undo;
+  $('muteBtn').onclick=toggleMute;
+  $('fsBtn').onclick=toggleFs; $('audFs').onclick=toggleFs;
+  $('helpBtn').onclick=openHelp;
+  $('sayBtn').onclick=readQ;
+  $('audBtn').onclick=()=>{ const w=window.open(location.pathname+'?view=audience','sabi-audience','popup,width=1280,height=800'); if(!w) alert('Your browser blocked the new window. Allow pop-ups for this page, or open '+location.pathname+'?view=audience yourself.'); };
+  $('moreBtn').onclick=()=>{ S.screen='setup'; commit(); };
+  $('copyBtn').onclick=copyRecap;
+  $('printBtn').onclick=()=>window.print();
+  $('pasteBtn').onclick=()=>{ if(importText($('paste').value)) $('paste').value=''; };
+  $('fileBtn').onclick=()=>$('fileIn').click();
+  $('fileIn').onchange=e=>{ const f=e.target.files[0]; if(!f) return; f.text().then(importText); e.target.value=''; };
+  $('tplBtn').onclick=()=>download('sabi-spin-template.csv',TEMPLATE);
+  $('expBtn').onclick=exportCustom;
+  if(AUD) document.addEventListener('dblclick',toggleFs);
+  // Mouse clicks shouldn't leave a button focused, or Space would press it again instead of moving the game on.
+  document.addEventListener('click',e=>{ const b=e.target.closest&&e.target.closest('button'); if(b&&e.detail>0) b.blur(); });
+  document.addEventListener('keydown',onKey);
+  document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') wake(); });
   window.addEventListener('resize',()=>drawWheel());
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>drawWheel());
+  render(); wake();
+}
+function buildTopics(){
+  const chip=(key,icon,name,group)=>h('button',{type:'button',class:'chip'+(key.slice(0,4)==='mix:'?' mix':''),'data-key':key,'data-group':group,'aria-pressed':'false',onclick:()=>{ S.sel=key; commit(); }},
+    h('span',{text:icon}), h('span',{text:name}), h('span',{class:'count'}));
+  const box=$('topicGroups'); box.replaceChildren();
+  const gs=groups();
+  gs.forEach(g=>{ const ts=TOPICS.filter(t=>t.group===g);
+    box.append(h('div',{class:'group-label',text:g}), h('div',{class:'chips'}, ts.map(t=>chip(t.key,t.icon,t.name,g)), ts.length>1?chip('mix:'+g,'🎲','All '+g,g):null)); });
+  if(gs.length>1) box.append(h('div',{class:'group-label',text:'Mix'}), h('div',{class:'chips'}, chip('mix:all','🎲','Everything','Mix')));
 }
 function refreshSetup(){
-  $('ageCards').querySelectorAll('.card').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.key===age)));
-  document.querySelectorAll('.chip').forEach(b=>{
-    b.setAttribute('aria-pressed',String(b.dataset.key===topic));
-    const c=b.querySelector('.count');
-    if(age){ const u=(used[b.dataset.key+':'+age]||[]).length; const n=BANK[b.dataset.key][age].length; c.textContent=(n-u)+'/'+n; } else c.textContent='';
+  $('ageCards').querySelectorAll('.card').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.key===S.age)));
+  $('topicGroups').querySelectorAll('.chip').forEach(b=>{
+    const k=b.dataset.key; b.setAttribute('aria-pressed',String(k===S.sel));
+    const c=selCounts(k,S.age); b.querySelector('.count').textContent=S.age?c.left+'/'+c.total:'';
+    b.disabled=!!S.age&&c.total===0;
   });
-  $('teamSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.n===teamsN)));
-  $('timerSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.s===timerS)));
-  const tn=$('teamNames'); tn.hidden=teamsN===0;
-  if(teamsN){ const names=[...tn.querySelectorAll('input')].map(i=>i.value); tn.innerHTML=''; for(let i=0;i<teamsN;i++){ const inp=document.createElement('input'); inp.id='team'+i; inp.value=names[i]||'Team '+String.fromCharCode(65+i); inp.setAttribute('aria-label','Team '+(i+1)+' name'); tn.appendChild(inp);} }
-  $('startBtn').disabled=!(age&&topic);
-}
-
-// ---------- play ----------
-function start(){
-  const prevKey=teams.map(t=>t.name).join('|');
-  const names=[...$('teamNames').querySelectorAll('input')].map(i=>i.value.trim()||'Team');
-  if(names.join('|')!==prevKey){ teams=names.map(n=>({name:n,score:0})); turn=0; }
-  $('setup').hidden=true; $('play').hidden=false;
-  $('ageLabel').textContent=AGES.find(a=>a.key===age).name+' · '+AGES.find(a=>a.key===age).sub;
-  const t=TOPICS.find(t=>t.key===topic); $('topicLabel').textContent=t.icon+' '+t.name;
-  renderScores(); resetCard(); drawWheel(); updateLeft();
-  try{ if(navigator.wakeLock) navigator.wakeLock.request('screen').catch(()=>{}); }catch(e){}
-}
-function renderScores(){
-  const s=$('scores'); s.hidden=teams.length===0; s.innerHTML='';
-  teams.forEach((t,i)=>{ const d=document.createElement('div'); d.className='score'+(i===turn?' active':''); d.innerHTML='<span>'+esc(t.name)+'</span><span class="n">'+t.score+'</span>'; s.appendChild(d); });
-}
-function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-function updateLeft(){
-  const r=remaining();
-  $('leftNote').textContent=r===0?'All 8 questions used for this topic':r+' of '+pool().length+' questions left';
-  $('spinBtn').disabled=r===0||spinning;
-  if(r===0&&!current){
-    const ph=$('placeholder'); ph.innerHTML='';
-    const d=document.createElement('div'); d.className='done';
-    d.innerHTML='<p style="margin:0 0 12px">Every question in this topic has been answered.'+(teams.length?' Final score: '+teams.map(t=>esc(t.name)+' '+t.score).join(' · ')+'.':'')+'</p>';
-    const row=document.createElement('div'); row.className='actions'; row.style.marginTop='0';
-    const c=document.createElement('button'); c.type='button'; c.className='primary'; c.textContent='Pick another topic'; c.onclick=()=>$('changeBtn').click();
-    const n=document.createElement('button'); n.type='button'; n.className='ghost'; n.textContent='New session'; n.onclick=newSession;
-    row.appendChild(c); row.appendChild(n); d.appendChild(row); ph.appendChild(d);
-    ph.hidden=false; $('qbody').hidden=true;
+  SEGS.forEach(([id,key,opts])=>$(id).querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',String(S[key]===opts[i][0]))));
+  // team names: rebuild only when the count changes, so typing isn't interrupted
+  const tn=$('teamNames'); tn.hidden=S.teamsN===0;
+  if(tn.children.length!==S.teamsN){
+    tn.replaceChildren(...Array.from({length:S.teamsN},(_,i)=>h('input',{id:'team'+i,value:S.names[i],maxlength:'24','aria-label':'Team '+(i+1)+' name',
+      oninput:e=>{ S.names[i]=e.target.value; save(); }})));
   }
+  $('teamOpts').hidden=S.teamsN===0;
+  const L=langs(); if(!L.includes(S.lang)) S.lang='en';
+  $('langField').hidden=L.length<2;
+  if($('langSeg').children.length!==L.length) $('langSeg').replaceChildren(...L.map(l=>h('button',{type:'button','data-l':l,onclick:()=>{ S.lang=l; commit(); }},LANG_NAMES[l]||l)));
+  $('langSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.l===S.lang)));
+  const c=selCounts();
+  $('startBtn').disabled=!(S.age&&S.sel&&c.total);
+  $('startBtn').textContent=(S.teams.length||S.log.length)&&S.teams.map(t=>t.name).join('|')===teamNames().join('|')?'Continue playing':'Start playing';
+  let total=0; TOPICS.forEach(t=>AGES.forEach(a=>total+=pool(t.key,a.key).length));
+  $('bankNote').textContent=total+' questions in the bank across '+plural(TOPICS.length,'topic')+'. Each wheel holds up to 8; used questions stay out until you reset them.';
+  $('mineSum').textContent=custom.topics.length?plural(custom.topics.length,'topic'):'Add your own';
+  $('mineList').replaceChildren(...custom.topics.map(t=>h('li',{},
+    h('span',{}, t.icon+' '+t.name+' ', h('span',{class:'sub',text:AGES.map(a=>a.name+' '+pool(t.key,a.key).length).join(' · ')})),
+    h('button',{type:'button',class:'ghost small',onclick:()=>removeTopic(t.key),'aria-label':'Remove '+t.name},'Remove'))));
+}
+function teamNames(){ return S.teamsN?S.names.slice(0,S.teamsN).map((n,i)=>(n||'').trim()||'Team '+'ABCD'[i]):[]; }
+
+// ---------- game flow ----------
+function start(){
+  const names=teamNames();
+  if(names.join('|')!==S.teams.map(t=>t.name).join('|')){ S.teams=names.map(n=>({name:n,score:0})); S.turn=0; S.log=[]; S.qNo=0; S.undo=null; }
+  S.turn=S.teams.length?S.turn%S.teams.length:0;
+  const a=AGES.find(a=>a.key===S.age); S.ageLabel=a?a.name+' · '+a.sub:''; S.selLabel=selName(S.sel);
+  if(S.roundKey!==roundKey()||!roundLeft()) buildRound();
+  S.cur=null; S.curQ=null; S.curMod=null; S.stealFrom=null; S.note=null;
+  S.phase=roundLeft()?'idle':'done';
+  S.screen='play'; commit(); wake();
+}
+function buildRound(){
+  // Draw up to 8 unused questions, spread across topics when mixing.
+  const by={}; selTopics().forEach(t=>by[t]=shuffle(unusedIdx(t)));
+  const keys=shuffle(Object.keys(by)), pick=[];
+  while(pick.length<MAX_SEG&&keys.some(k=>by[k].length))
+    for(const k of keys){ if(pick.length>=MAX_SEG) break; if(by[k].length) pick.push({t:k,i:by[k].pop(),mod:null,used:false}); }
+  shuffle(pick);
+  if(S.specials&&S.teams.length>1&&pick.length>=4){
+    const ids=shuffle(pick.map((_,i)=>i));
+    ['double','bonus','open'].slice(0,pick.length>=6?3:2).forEach((m,j)=>pick[ids[j]].mod=m);
+  }
+  S.round=pick; S.roundKey=roundKey(); S.roundNo=(S.roundNo||0)+1; S.undo=null;
+}
+function nextRound(){
+  if(spinning) return; stopTimer();
+  S.cur=null; S.curQ=null; S.curMod=null; S.stealFrom=null; S.note=null;
+  if(!selCounts().left){ S.phase='done'; commit(); return; }
+  buildRound(); S.phase='idle'; commit();
+}
+function canSpin(){ return !AUD&&!spinning&&S.screen==='play'&&roundLeft()>0&&(S.phase==='idle'||(S.phase==='revealed'&&!S.teams.length)); }
+function spinAction(){
+  const noTeamEnd=S.phase==='revealed'&&!S.teams.length&&!roundLeft();
+  if(S.phase==='roundDone'||(noTeamEnd&&selCounts().left)) return {label:'Next round',fn:nextRound,enabled:!spinning};
+  if(S.phase==='done'||noTeamEnd) return {label:'See results',fn:finish,enabled:true};
+  return {label:spinning?'Spinning…':'Spin the wheel',fn:spin,enabled:canSpin()};
+}
+function spin(){
+  if(!canSpin()) return;
+  ac(); stopTimer(); if(canSpeak) speechSynthesis.cancel();
+  const avail=S.round.map((s,i)=>s.used?-1:i).filter(i=>i>=0);
+  const target=avail[Math.floor(Math.random()*avail.length)];
+  const n=S.round.length, step=Math.PI*2/n, jitter=(Math.random()-.5)*step*.6;
+  const TAU=Math.PI*2, norm=a=>((a%TAU)+TAU)%TAU;
+  // segment `target` centre must end under the pointer (top, -π/2)
+  const desired=-Math.PI/2-(target+.5)*step+jitter;
+  const startRot=S.rot, total=(5+Math.floor(Math.random()*3))*TAU+norm(desired-startRot);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const dur=reduce?900:3600+Math.random()*600, t0=performance.now();
+  spinning=true; S.phase='spinning'; S.cur=null; S.curQ=null; S.curMod=null; S.stealFrom=null; S.undo=null; S.timer=null; S.note=null;
+  commit();
+  let lastSeg=Math.floor(norm(S.rot)/step);
+  (function frame(now){
+    const p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,3);
+    S.rot=startRot+total*e; drawWheel(); post({type:'rot',rot:S.rot});
+    const seg=Math.floor(norm(S.rot)/step); if(seg!==lastSeg){ sfx.tick(); lastSeg=seg; }
+    if(p<1) requestAnimationFrame(frame); else land(target);
+  })(t0);
+}
+function land(k){
+  spinning=false; sfx.land();
+  const s=S.round[k]; s.used=true; S.rot%=Math.PI*2;
+  const key=s.t+':'+S.age; used[key]=(used[key]||[]).filter(x=>x!==s.i).concat(s.i); store.set('sabi-used',used);
+  S.qNo++; S.cur=k; S.curMod=s.mod; S.curQ=makeQ(s); S.phase='ask'; S.stealFrom=null; S.undo=null;
+  startTimer(); commit();
+  announce('Question '+S.curQ.num+'. '+S.curQ.q);
+  if(S.speak) readQ();
+}
+function makeQ(s){
+  const it=pool(s.t)[s.i]||{}, t=topicBy(s.t)||{name:'',icon:''};
+  const a=tx(it.a), c=txc(it.c);
+  const useC=c&&c.length&&(S.choices==='all'||(S.choices==='j'&&S.age==='j'));
+  return {t:s.t,tName:t.name,tIcon:t.icon,num:S.qNo,q:tx(it.q),a,w:tx(it.w),choices:useC?shuffle([a].concat(c)):null};
+}
+function reveal(){
+  if(!['ask','steal'].includes(S.phase)) return;
+  ac(); stopTimer(); sfx.reveal(); S.phase='revealed';
+  if(!S.teams.length) S.log.push(logItem(null,null,'none',0));
+  commit();
+  announce('Answer: '+S.curQ.a);
+  if(S.speak) say('The answer is: '+S.curQ.a+'. '+S.curQ.w);
+}
+function openSteal(){
+  if(S.phase!=='ask'||S.teams.length<2) return;
+  ac(); sfx.bad(); S.stealFrom=S.turn; S.phase='steal';
+  startTimer(S.timerS?Math.max(10,Math.round(S.timerS/2)):0); commit();
+  announce('Steal! Any other team can answer.');
+}
+function logItem(team,by,res,p){ const q=S.curQ; return {num:q.num,tName:q.tName,tIcon:q.tIcon,q:q.q,a:q.a,team,by,res,pts:p}; }
+function award(by,res){
+  if(S.phase!=='revealed'||!S.teams.length) return;
+  ac();
+  S.undo=clone({teams:S.teams,turn:S.turn,cur:S.cur,curQ:S.curQ,curMod:S.curMod,stealFrom:S.stealFrom,logLen:S.log.length});
+  const p=pts(), open=S.curMod==='open';
+  if(by!=null) S.teams[by].score+=p;
+  S.log.push(logItem(open?null:S.turn,by,res,by!=null?p:0));
+  if(by!=null) sfx.good(); else sfx.bad();
+  const again=res==='correct'&&S.curMod==='bonus';
+  S.note=again?S.teams[S.turn].name+' earned a bonus spin!':null;
+  if(!again) S.turn=(S.turn+1)%S.teams.length;
+  S.cur=null; S.curQ=null; S.curMod=null; S.stealFrom=null;
+  S.phase=roundLeft()?'idle':(selCounts().left?'roundDone':'done');
+  commit();
+}
+const canUndo=()=>!!S.undo&&!spinning&&['idle','roundDone','done'].includes(S.phase);
+function undo(){
+  if(!canUndo()) return; const u=S.undo;
+  Object.assign(S,{teams:u.teams,turn:u.turn,cur:u.cur,curQ:u.curQ,curMod:u.curMod,stealFrom:u.stealFrom,phase:'revealed',undo:null,note:null});
+  S.log.length=u.logLen; commit();
+}
+function adjust(i,d){ S.teams[i].score=Math.max(0,S.teams[i].score+d); S.undo=null; commit(); }
+function changeTopic(){
+  if(spinning) return; stopTimer();
+  if(inQuestion()){ S.cur=null; S.curQ=null; S.curMod=null; S.stealFrom=null; S.phase='idle'; }
+  S.screen='setup'; editScores=false; commit();
+}
+function finish(){
+  if(spinning) return; stopTimer(); editScores=false;
+  if(inQuestion()){ S.cur=null; S.curQ=null; S.curMod=null; S.stealFrom=null; S.phase='idle'; }
+  S.screen='end'; commit();
+  if(S.teams.length&&S.teams.some(t=>t.score>0)){ sfx.fanfare(); confetti(); post({type:'confetti'}); }
+}
+function resetUsed(){
+  used={}; store.set('sabi-used',used); S.round=[]; S.roundKey=''; commit();
+  $('resetBtn').textContent='Questions reset ✓'; setTimeout(()=>$('resetBtn').textContent='Reset used questions',1500);
 }
 function newSession(){
-  stopTimer(); used={}; saveUsed(); teams=[]; turn=0; current=null; age=null; topic=null; teamsN=0;
-  $('play').hidden=true; $('setup').hidden=false; refreshSetup();
+  if((S.log.length||S.teams.some(t=>t.score))&&!confirm('Start a new session? This clears the scores and the recap, and marks every question as unused.')) return;
+  stopTimer(); used={}; store.set('sabi-used',used); editScores=false;
+  const keep={timerS:S.timerS,steals:S.steals,specials:S.specials,choices:S.choices,speak:S.speak,lang:S.lang,names:S.names,rot:S.rot};
+  S=Object.assign(clone(DEF),keep); commit();
 }
-function resetCard(){
-  current=null; revealed=false; stopTimer();
-  $('placeholder').textContent=teams.length?esc(teams[turn].name)+', spin the wheel!':'Spin the wheel to get your first question.';
-  $('placeholder').hidden=false; $('qbody').hidden=true; $('answerBox').hidden=true; $('actions').innerHTML=''; $('hub').textContent='?';
+
+// ---------- rendering ----------
+function render(){
+  const sc=S.screen||'setup';
+  $('setup').hidden=AUD||sc!=='setup';
+  $('wait').hidden=!(AUD&&sc==='setup');
+  $('play').hidden=sc!=='play';
+  $('end').hidden=sc!=='end';
+  if(sc==='setup'&&!AUD) refreshSetup();
+  if(sc==='play') renderPlay();
+  if(sc==='end') renderEnd();
+}
+function renderPlay(){
+  $('ageLabel').textContent=S.ageLabel; $('topicLabel').textContent=S.selLabel;
+  renderScores(); drawWheel(); renderCard(); renderTimer();
+  const legend=[...new Set(S.round.filter(s=>s.mod&&!s.used).map(s=>s.mod))];
+  $('legend').replaceChildren(...legend.map(m=>h('span',{class:'tag mod',text:MODS[m].long})));
+  const rl=roundLeft(), more=(S.round.length?selCounts().left:0)-rl;
+  $('leftNote').textContent=S.round.length?(rl?rl+' of '+S.round.length+' left on this wheel':'This wheel is finished')+(more>0?' · '+more+' more after this':''):'';
+  if(!AUD){
+    const sa=spinAction(); $('spinBtn').textContent=sa.label; $('spinBtn').disabled=!sa.enabled;
+    $('undoBtn').hidden=!canUndo();
+    $('changeBtn').disabled=spinning; $('finishBtn').disabled=spinning;
+    $('muteBtn').textContent=muted?'🔇':'🔊';
+    const on=audOn(); $('audBtn').classList.toggle('on',on); $('audBtn').title=on?'Audience screen connected':'Open an audience screen for the projector';
+    $('sayBtn').hidden=!canSpeak;
+  }
+}
+function renderScores(){
+  const s=$('scores'); s.hidden=!S.teams.length;
+  s.replaceChildren(...S.teams.map((t,i)=>h('div',{class:'score'+(i===S.turn&&S.phase!=='done'?' active':'')},
+    h('span',{text:t.name}),
+    editScores&&!AUD?h('button',{type:'button',class:'adj',onclick:()=>adjust(i,-1),'aria-label':'One point less for '+t.name},'−'):null,
+    h('span',{class:'n',text:t.score}),
+    editScores&&!AUD?h('button',{type:'button',class:'adj',onclick:()=>adjust(i,1),'aria-label':'One point more for '+t.name},'+'):null)),
+    AUD?null:h('button',{type:'button',class:'ghost small',onclick:()=>{ editScores=!editScores; render(); }},editScores?'Done':'✎ Adjust'));
+}
+function renderCard(){
+  const q=S.curQ, showQ=!!q&&inQuestion(), T=S.teams;
+  $('qbody').hidden=!showQ; $('placeholder').hidden=showQ;
+  const card=$('qcard');
+  if(showQ&&card.dataset.q!==String(q.num)){ card.dataset.q=String(q.num); card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop'); }
+  if(!showQ){
+    const who=T.length?T[S.turn].name:null; let kids;
+    if(S.phase==='spinning') kids=['Spinning…'];
+    else if(S.phase==='roundDone'){ const left=selCounts().left; kids=[h('div',{class:'done'},h('strong',{text:'Round '+S.roundNo+' complete!'}),h('p',{text:plural(left,'more question')+' waiting. Spin up a fresh wheel when you are ready.'}))]; }
+    else if(S.phase==='done') kids=[h('div',{class:'done'},h('strong',{text:'Every question here has been played.'}),
+      h('p',{text:T.length?'Score: '+T.map(t=>t.name+' '+t.score).join(' · ')+'. Finish to see the results, or pick another topic.':'Pick another topic, or finish to see the recap.'}))];
+    else kids=[S.note?h('span',{class:'note',text:S.note}):null, who?who+', spin the wheel!':(S.qNo?'Spin for the next question.':'Spin the wheel to get your first question.')];
+    $('placeholder').replaceChildren(...kids.filter(k=>k!=null));
+  } else {
+    $('qnum').textContent='Question '+q.num;
+    const mixed=(S.sel||'').slice(0,4)==='mix:';
+    $('qtopic').hidden=!mixed; $('qtopic').textContent=q.tIcon+' '+q.tName;
+    $('qmod').hidden=!S.curMod; $('qmod').textContent=S.curMod?MODS[S.curMod].long:'';
+    let banner='';
+    if(S.phase==='steal') banner='Steal! '+T[S.stealFrom].name+' missed it. Any other team can answer.';
+    else if(S.phase==='revealed'&&S.stealFrom!=null) banner=T[S.stealFrom].name+' missed it. Did another team steal it?';
+    else if(S.curMod==='open'&&S.phase==='ask') banner='Anyone can answer! First team with a hand up.';
+    $('banner').hidden=!banner; $('banner').textContent=banner;
+    $('qtext').textContent=q.q;
+    const rev=S.phase==='revealed', peek=!AUD&&!rev&&audOn();
+    $('choices').hidden=!q.choices;
+    $('choices').replaceChildren(...(q.choices||[]).map((c,i)=>h('li',{class:rev||peek?(c===q.a?'right':(rev?'dim':'')):''},h('b',{text:'ABCD'[i]}),h('span',{text:c}))));
+    const box=$('answerBox'); box.hidden=!(rev||peek); box.classList.toggle('peek',peek);
+    $('answerLabel').textContent=peek?'Answer · only you can see this until you reveal':'Answer';
+    $('atext').textContent=q.a; $('wtext').textContent=q.w;
+  }
+  if(!AUD) $('actions').replaceChildren(...actionList().map(a=>h('button',{type:'button',class:a.cls,onclick:a.fn},a.label)));
+}
+function actionList(){
+  if(AUD||S.screen!=='play') return [];
+  const T=S.teams, A=[], p=pts();
+  switch(S.phase){
+    case 'ask':
+      A.push({label:'Reveal answer',cls:'primary',fn:reveal,next:1});
+      if(T.length>1&&S.steals&&S.curMod!=='open') A.push({label:'✗ Wrong, open a steal',cls:'btn-bad',fn:openSteal,prev:1,key:'n'});
+      break;
+    case 'steal':
+      A.push({label:'Reveal answer',cls:'primary',fn:reveal,next:1});
+      break;
+    case 'revealed':
+      if(!T.length){
+        const sa=spinAction(); A.push({label:sa.label==='Spin the wheel'?'Spin again':sa.label,cls:'primary',fn:sa.fn,next:1});
+      } else if(S.curMod==='open'||S.stealFrom!=null){
+        const stl=S.stealFrom!=null, elig=T.map((_,i)=>i).filter(i=>!stl||i!==S.stealFrom);
+        elig.forEach(i=>A.push({label:'✓ '+T[i].name+(stl?' stole it':' got it')+', +'+p,cls:'btn-good',fn:()=>award(i,stl?'stolen':'open'),key:String(i+1),next:elig.length===1}));
+        A.push({label:'✗ No one got it',cls:'btn-bad',fn:()=>award(null,stl?'wrong':'nobody'),prev:1,key:'n'});
+      } else {
+        A.push({label:'✓ Correct, +'+p+' '+T[S.turn].name,cls:'btn-good',fn:()=>award(S.turn,'correct'),next:1,key:'y'});
+        A.push({label:'✗ Not this time',cls:'btn-bad',fn:()=>award(null,'wrong'),prev:1,key:'n'});
+      }
+      break;
+    case 'roundDone':
+      A.push({label:'Next round',cls:'primary',fn:nextRound,next:1});
+      A.push({label:'Finish and see results',cls:'ghost',fn:finish});
+      break;
+    case 'done':
+      A.push({label:'See results',cls:'primary',fn:finish,next:1});
+      A.push({label:'Pick another topic',cls:'ghost',fn:changeTopic});
+      break;
+  }
+  return A;
 }
 
 // ---------- wheel ----------
-const cv=$('wheel'); const cx=cv.getContext('2d');
-function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+const cv=$('wheel'), cx=cv.getContext('2d');
+const cssVar=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function drawWheel(){
+  if(S.screen!=='play') return;
   const box=cv.parentElement.getBoundingClientRect(); const size=Math.max(100,Math.floor(box.width)); const dpr=window.devicePixelRatio||1;
   if(cv.width!==size*dpr){ cv.width=size*dpr; cv.height=size*dpr; }
   cx.setTransform(dpr,0,0,dpr,0,0); cx.clearRect(0,0,size,size);
-  const r=size/2, step=Math.PI*2/SEG, cols=[cssVar('--wheel-a'),cssVar('--wheel-b'),cssVar('--wheel-c'),cssVar('--wheel-d')];
-  const u=topic&&age?usedList():[];
-  for(let i=0;i<SEG;i++){
-    const a0=rot+i*step, a1=a0+step, isUsed=u.includes(i);
-    cx.beginPath(); cx.moveTo(r,r); cx.arc(r,r,r-2,a0,a1); cx.closePath();
-    cx.fillStyle=isUsed?cssVar('--wheel-used'):cols[i%4]; cx.fill();
-    cx.strokeStyle=cssVar('--surface'); cx.lineWidth=3; cx.stroke();
-    cx.save(); cx.translate(r,r); cx.rotate(a0+step/2); cx.textAlign='right'; cx.textBaseline='middle';
-    cx.fillStyle=isUsed?cssVar('--wheel-used-text'):cssVar('--wheel-text');
-    cx.font='700 '+Math.round(size*.12)+'px '+cssVar('--display');
-    cx.fillText(String(i+1),r*.82,0); cx.restore();
+  const slots=S.round.length?S.round:Array.from({length:MAX_SEG},()=>({used:true}));
+  const n=slots.length, r=size/2, step=Math.PI*2/n;
+  const cols=['a','b','c','d'].map(k=>[cssVar('--wheel-'+k),cssVar('--wheel-'+k+'-ink')]);
+  const usedC=cssVar('--wheel-used'), usedInk=cssVar('--wheel-used-text'), font=cssVar('--display');
+  for(let i=0;i<n;i++){
+    const a0=S.rot+i*step, s=slots[i];
+    // avoid two neighbours sharing a colour where the wheel wraps round
+    const ci=(n%4===1&&i===n-1&&n>1)?2:i%4;
+    const [fill,ink]=s.used?[usedC,usedInk]:cols[ci];
+    cx.beginPath(); cx.moveTo(r,r); cx.arc(r,r,r-2,a0,a0+step); cx.closePath();
+    cx.fillStyle=fill; cx.fill(); cx.strokeStyle=cssVar('--surface'); cx.lineWidth=3; cx.stroke();
+    cx.save(); cx.translate(r,r); cx.rotate(a0+step/2); cx.textAlign='right'; cx.textBaseline='middle'; cx.fillStyle=ink;
+    cx.font='700 '+Math.round(size*(n>6?.11:.12))+'px '+font;
+    cx.fillText(String(i+1),r*.84,0);
+    if(s.mod&&!s.used){ cx.font='700 '+Math.round(size*.06)+'px '+font; cx.fillText(MODS[s.mod].short,r*.58,0); }
+    cx.restore();
   }
   cx.beginPath(); cx.arc(r,r,r-2,0,Math.PI*2); cx.strokeStyle=cssVar('--fg'); cx.lineWidth=4; cx.stroke();
+  $('hub').textContent=S.phase==='spinning'?'…':(S.cur!=null&&inQuestion()?String(S.cur+1):'?');
+  const u=S.round.filter(s=>s.used).length;
+  cv.setAttribute('aria-label','Question wheel with '+plural(n,'segment')+', '+u+' used');
 }
-function spin(){
-  if(spinning) return; const u=usedList(); const avail=[]; for(let i=0;i<SEG;i++) if(!u.includes(i)) avail.push(i);
-  if(!avail.length) return;
-  ac(); // unlock audio on tap
-  const target=avail[Math.floor(Math.random()*avail.length)];
-  const step=Math.PI*2/SEG; const jitter=(Math.random()-.5)*step*.6;
-  // segment `target` centre must sit at the pointer (top, -π/2)
-  const desired=(-Math.PI/2-(target+.5)*step+jitter);
-  const norm=a=>((a%(Math.PI*2))+Math.PI*2)%(Math.PI*2);
-  const delta=norm(desired-rot); const turns=5+Math.floor(Math.random()*3);
-  const startRot=rot, total=turns*Math.PI*2+delta, dur=3600+Math.random()*600, t0=performance.now();
-  spinning=true; resetCard(); $('spinBtn').disabled=true; $('hub').textContent='…'; $('placeholder').textContent='Spinning…';
-  let lastSeg=Math.floor(norm(rot)/step);
-  function frame(now){
-    const p=Math.min(1,(now-t0)/dur); const e=1-Math.pow(1-p,3);
-    rot=startRot+total*e; drawWheel();
-    const seg=Math.floor(norm(rot)/step); if(seg!==lastSeg){ sfx.tick(); lastSeg=seg; }
-    if(p<1) requestAnimationFrame(frame); else land(target);
-  }
-  requestAnimationFrame(frame);
-}
-function land(i){
-  spinning=false; sfx.land();
-  used[poolKey()]=[...usedList(),i]; saveUsed(); drawWheel();
-  current=i; revealed=false; $('hub').textContent=String(i+1);
-  showQuestion(i); updateLeft();
-}
-function showQuestion(i){
-  const q=pool()[i];
-  $('placeholder').hidden=true; $('qbody').hidden=false; $('answerBox').hidden=true;
-  $('qnum').textContent='Question '+(i+1); $('qtext').textContent=q.q; $('atext').textContent=q.a; $('wtext').textContent=q.w;
-  const card=$('qcard'); card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
-  const acts=$('actions'); acts.innerHTML='';
-  const rb=document.createElement('button'); rb.type='button'; rb.className='primary'; rb.textContent='Reveal answer'; rb.onclick=reveal; acts.appendChild(rb);
-  startTimer();
-}
-function reveal(){
-  if(revealed) return; revealed=true; stopTimer(); sfx.reveal();
-  $('answerBox').hidden=false; const acts=$('actions'); acts.innerHTML='';
-  if(teams.length){
-    const g=document.createElement('button'); g.type='button'; g.className='btn-good'; g.textContent='✓ Correct, +1 '+teams[turn].name; g.onclick=()=>{teams[turn].score++; sfx.good(); nextTurn();};
-    const b=document.createElement('button'); b.type='button'; b.className='btn-bad'; b.textContent='✗ Not this time'; b.onclick=()=>{sfx.bad(); nextTurn();};
-    acts.appendChild(g); acts.appendChild(b);
-  } else {
-    if(remaining()){
-      const n=document.createElement('button'); n.type='button'; n.className='primary'; n.textContent='Spin again'; n.onclick=()=>{resetCard(); updateLeft(); spin();}; acts.appendChild(n);
-    } else {
-      const c=document.createElement('button'); c.type='button'; c.className='primary'; c.textContent='Pick another topic'; c.onclick=()=>$('changeBtn').click();
-      const s=document.createElement('button'); s.type='button'; s.className='ghost'; s.textContent='New session'; s.onclick=newSession;
-      acts.appendChild(c); acts.appendChild(s);
-    }
-  }
-}
-function nextTurn(){ turn=(turn+1)%teams.length; renderScores(); resetCard(); updateLeft(); }
 
 // ---------- timer ----------
-function startTimer(){
-  stopTimer(); const bar=$('timerBar'), clock=$('tclock'), fill=$('timerFill');
-  if(!timerS){ bar.hidden=true; clock.textContent=''; return; }
-  bar.hidden=false; timeLeft=timerS; fill.style.width='100%'; fill.classList.remove('low'); clock.textContent=timeLeft+' s';
-  const t0=performance.now();
+function startTimer(secs){
+  stopTimer(); secs=secs==null?S.timerS:secs;
+  if(!secs){ S.timer=null; return; }
+  const t0=performance.now(); S.timer={left:secs,total:secs};
   timerId=setInterval(()=>{
-    const el=(performance.now()-t0)/1000; timeLeft=Math.max(0,timerS-el);
-    fill.style.width=(timeLeft/timerS*100)+'%'; clock.textContent=Math.ceil(timeLeft)+' s';
-    if(timeLeft<=5) fill.classList.add('low');
-    if(timeLeft<=0){ stopTimer(); clock.textContent='Time!'; sfx.buzz(); }
+    const left=Math.max(0,secs-(performance.now()-t0)/1000);
+    S.timer={left,total:secs}; renderTimer(); post({type:'timer',timer:S.timer});
+    if(left<=0){ stopTimer(); sfx.buzz(); }
   },200);
 }
-function stopTimer(){ if(timerId){clearInterval(timerId); timerId=null;} }
+function stopTimer(){ if(timerId){ clearInterval(timerId); timerId=null; } }
+function renderTimer(){
+  const t=S.timer, bar=$('timerBar'), clock=$('tclock'), fill=$('timerFill');
+  if(!t||!inQuestion()){ bar.hidden=true; clock.textContent=''; return; }
+  bar.hidden=false; fill.style.width=(t.left/t.total*100)+'%'; fill.classList.toggle('low',t.left<=5);
+  clock.textContent=t.left<=0?'Time!':Math.ceil(t.left)+' s';
+}
+
+// ---------- results ----------
+function resultText(l){
+  const T=S.teams, nm=i=>(T[i]&&T[i].name)||'Team';
+  switch(l.res){
+    case 'correct': return ['good','✓ '+nm(l.team)+' +'+l.pts];
+    case 'wrong': return ['bad','✗ '+nm(l.team)];
+    case 'stolen': return ['good',nm(l.team)+' missed · '+nm(l.by)+' stole it +'+l.pts];
+    case 'open': return ['good',nm(l.by)+' got it +'+l.pts];
+    case 'nobody': return ['bad','No one got it'];
+    default: return null;
+  }
+}
+function ranked(){
+  const s=S.teams.map(t=>Object.assign({},t)).sort((a,b)=>b.score-a.score);
+  s.forEach((t,i)=>t.rank=i&&t.score===s[i-1].score?s[i-1].rank:i+1);
+  return s;
+}
+function renderEnd(){
+  const T=S.teams, R=ranked();
+  if(T.length){
+    const top=R.filter(t=>t.rank===1);
+    $('endTitle').textContent=R[0].score===0?'Final scores':top.length>1?'It\'s a tie! '+top.map(t=>t.name).join(' & '):top[0].name+' wins!';
+  } else $('endTitle').textContent='Session recap';
+  $('endEyebrow').textContent=T.length?'Results':'Well done, everyone';
+  const max=Math.max(1,...T.map(t=>t.score));
+  $('podium').hidden=!T.length;
+  $('podium').replaceChildren(...R.map(t=>h('div',{class:'prow'+(t.rank===1&&t.score>0?' first':'')},
+    h('span',{class:'medal',text:['🥇','🥈','🥉'][t.rank-1]||String(t.rank)}),
+    h('span',{class:'nm'},h('span',{text:t.name}),h('span',{class:'bar',style:'width:'+Math.max(4,t.score/max*100)+'%'})),
+    h('span',{class:'pts',text:t.score}))));
+  $('recapHead').textContent=S.log.length?plural(S.log.length,'question')+' played':'No questions played yet';
+  $('recap').replaceChildren(...S.log.map(l=>{ const r=resultText(l); return h('li',{},
+    h('div',{class:'rq'},(l.tIcon?l.tIcon+' ':'')+l.q),
+    h('div',{class:'ra'},'Answer: ',h('strong',{text:l.a})),
+    r?h('div',{class:'rr '+r[0],text:r[1]}):null); }));
+}
+function recapText(){
+  const lines=['Sabi Spin · '+S.selLabel+' · '+S.ageLabel,''];
+  if(S.teams.length){ lines.push('Final scores: '+ranked().map(t=>t.name+' '+t.score).join(', '),''); }
+  S.log.forEach((l,i)=>{ const r=resultText(l); lines.push((i+1)+'. '+l.q,'   Answer: '+l.a+(r?'  ('+r[1]+')':'')); });
+  return lines.join('\n');
+}
+function copyRecap(){
+  const t=recapText(), done=()=>{ $('copyBtn').textContent='Copied ✓'; setTimeout(()=>$('copyBtn').textContent='Copy recap',1500); };
+  if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(t).then(done,()=>fallback());
+  else fallback();
+  function fallback(){ const ta=h('textarea',{style:'position:fixed;opacity:0'}); ta.value=t; document.body.append(ta); ta.select(); try{ document.execCommand('copy'); done(); }catch(e){} ta.remove(); }
+}
+function confetti(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const c=h('canvas',{id:'confetti'}); document.body.append(c);
+  const W=c.width=innerWidth, H=c.height=innerHeight, g=c.getContext('2d');
+  const cols=['--wheel-a','--wheel-b','--wheel-c','--wheel-d'].map(cssVar);
+  const P=Array.from({length:150},()=>({x:Math.random()*W,y:-20-Math.random()*H*.5,vx:(Math.random()-.5)*3,vy:2+Math.random()*3,s:6+Math.random()*6,r:Math.random()*6,vr:(Math.random()-.5)*.3,c:cols[Math.floor(Math.random()*4)]}));
+  const t0=performance.now();
+  (function f(now){
+    g.clearRect(0,0,W,H);
+    P.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=.03; p.r+=p.vr; g.save(); g.translate(p.x,p.y); g.rotate(p.r); g.fillStyle=p.c; g.fillRect(-p.s/2,-p.s/4,p.s,p.s/2); g.restore(); });
+    if(now-t0<4000) requestAnimationFrame(f); else c.remove();
+  })(t0);
+}
+
+// ---------- teacher's own questions ----------
+const TEMPLATE='﻿topic,age,question,answer,why,wrong1,wrong2,wrong3,icon\n'+
+  'Our Community,all,What is the name of the river closest to our school?,(your answer),(one line that teaches something),,,,🏘️\n'+
+  'Times Tables,j,What is 6 × 7?,42,Six groups of seven make forty-two.,36,48,49,✖️\n'+
+  'Times Tables,m,What is 12 × 12?,144,A dozen dozens is called a gross.,124,132,156,✖️\n';
+function parseDelimited(text){
+  text=text.replace(/^﻿/,'');
+  const first=text.split(/\r?\n/)[0]||'', cnt=ch=>first.split(ch).length;
+  const d=cnt('\t')>cnt(',')?'\t':(cnt(';')>cnt(',')?';':',');
+  const rows=[]; let row=[], f='', q=false;
+  for(let i=0;i<text.length;i++){ const c=text[i];
+    if(q){ if(c==='"'){ if(text[i+1]==='"'){ f+='"'; i++; } else q=false; } else f+=c; }
+    else if(c==='"'&&f==='') q=true;
+    else if(c===d){ row.push(f); f=''; }
+    else if(c==='\n'||c==='\r'){ if(c==='\r'&&text[i+1]==='\n') i++; row.push(f); rows.push(row); row=[]; f=''; }
+    else f+=c;
+  }
+  if(f!==''||row.length){ row.push(f); rows.push(row); }
+  return rows.filter(r=>r.some(c=>c.trim()!==''));
+}
+const lowerKeys=o=>Object.fromEntries(Object.entries(o||{}).map(([k,v])=>[String(k).toLowerCase().trim(),typeof v==='string'?v.trim():v]));
+const AGE_ALIAS={j:'j',junior:'j',juniors:'j','6-9':'j',m:'m',middle:'m','10-13':'m',s:'s',senior:'s',seniors:'s','14-17':'s'};
+function addItem(meta,age,item){
+  let t=custom.topics.find(x=>x.name.toLowerCase()===meta.name.toLowerCase());
+  if(!t){ t={key:'c_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),group:meta.group||'My questions',name:meta.name,icon:meta.icon||'⭐'}; custom.topics.push(t); custom.bank[t.key]={j:[],m:[],s:[]}; }
+  const arr=custom.bank[t.key][age], k=tx(item.q).trim().toLowerCase();
+  if(arr.some(x=>tx(x.q).trim().toLowerCase()===k)) return false;
+  arr.push(item); return true;
+}
+function importRows(objs){
+  let n=0,bad=0;
+  objs.map(lowerKeys).forEach(o=>{
+    const pick=(...ks)=>{ for(const k of ks) if(o[k]) return o[k]; return ''; };
+    const L={q:{},a:{},w:{}}, F={question:'q',q:'q',answer:'a',a:'a',why:'w',w:'w',explanation:'w'};
+    for(const k in o){ const m=k.match(/^(question|q|answer|a|why|w|explanation)[_ -]([a-z]{2,3})$/); if(m&&o[k]) L[F[m[1]]][m[2]]=o[k]; }
+    const val=(f,base)=>Object.keys(L[f]).length?Object.assign(base&&typeof base==='string'?{en:base}:(base||{}),L[f]):base;
+    const q=val('q',pick('question','q')), a=val('a',pick('answer','a')), w=val('w',pick('why','w','explanation'));
+    if(!tx(q)||!tx(a)){ bad++; return; }
+    let c=pick('choices','wrong'); c=Array.isArray(c)?c:(typeof c==='string'&&c?c.split('|').map(x=>x.trim()).filter(Boolean):[pick('wrong1'),pick('wrong2'),pick('wrong3')].filter(Boolean));
+    const raw=String(pick('age')||'all').toLowerCase().replace(/ages?|\s/g,'').replace(/[–—]/g,'-');
+    const ages=AGE_ALIAS[raw]?[AGE_ALIAS[raw]]:['j','m','s'];
+    const item={q,a,w:w||''}; if(c.length) item.c=c.slice(0,3);
+    const meta={name:String(pick('topic')||'My questions'),icon:pick('icon'),group:pick('group')};
+    ages.forEach(ag=>{ if(addItem(meta,ag,clone(item))) n++; });
+  });
+  return {n,bad};
+}
+function importText(text){
+  text=(text||'').trim(); const msg=(t,b)=>{ $('mineMsg').textContent=t; $('mineMsg').classList.toggle('bad',!!b); };
+  if(!text){ msg('Nothing to import yet. Paste some rows or choose a file.',1); return false; }
+  let r={n:0,bad:0};
+  try{
+    if(text[0]==='{'||text[0]==='['){
+      const j=JSON.parse(text);
+      if(Array.isArray(j)) r=importRows(j);
+      else if(j&&j.bank&&Array.isArray(j.topics)){
+        j.topics.forEach(t=>{ const b=j.bank[t.key]||{}; ['j','m','s'].forEach(ag=>(b[ag]||[]).forEach(it=>{
+          if(it&&tx(it.q)&&tx(it.a)){ if(addItem({name:t.name||'My questions',icon:t.icon,group:t.group},ag,{q:it.q,a:it.a,w:it.w||'',c:it.c})) r.n++; } else r.bad++; })); });
+      } else throw new Error('shape');
+    } else {
+      const rows=parseDelimited(text);
+      if(rows.length<2){ msg('Put a header row first (topic, age, question, answer, why), then one question per row.',1); return false; }
+      const head=rows[0].map(x=>x.trim().toLowerCase());
+      if(!head.some(x=>x==='question'||x==='q'||x.slice(0,9)==='question_')){ msg('The header row needs a "question" column. Download the template to see the layout.',1); return false; }
+      r=importRows(rows.slice(1).map(row=>Object.fromEntries(head.map((k,i)=>[k,(row[i]||'').trim()]))));
+    }
+  }catch(e){ msg('That could not be read. Use a CSV, tab-separated or JSON file laid out like the template.',1); return false; }
+  saveCustom();
+  msg(r.n?'Added '+plural(r.n,'question')+'.'+(r.bad?' Skipped '+r.bad+' row(s) with no question or answer.':''):'No new questions added'+(r.bad?' ('+r.bad+' row(s) had no question or answer).':' (they were already there).'),!r.n);
+  return r.n>0;
+}
+function saveCustom(){ store.set('sabi-custom',custom); rebuildBank(); buildTopics(); commit(); }
+function removeTopic(key){
+  const t=custom.topics.find(x=>x.key===key); if(!t||!confirm('Remove "'+t.name+'" and all its questions from this device?')) return;
+  custom.topics=custom.topics.filter(x=>x.key!==key); delete custom.bank[key];
+  AGES.forEach(a=>delete used[key+':'+a.key]); store.set('sabi-used',used);
+  if(S.sel===key) S.sel=null;
+  saveCustom();
+}
+function exportCustom(){
+  if(!custom.topics.length){ $('mineMsg').textContent='You have no questions of your own yet.'; return; }
+  const L=langs().filter(l=>l!=='en');
+  const head=['topic','icon','age','question','answer','why','wrong1','wrong2','wrong3'].concat(...L.map(l=>['question_'+l,'answer_'+l,'why_'+l]));
+  const base=v=>typeof v==='string'?v:((v&&(v.en||Object.values(v)[0]))||''), inL=(v,l)=>v&&typeof v==='object'?(v[l]||''):'';
+  const cell=v=>{ v=String(v==null?'':v); return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; };
+  const rows=[head];
+  custom.topics.forEach(t=>['j','m','s'].forEach(ag=>(custom.bank[t.key][ag]||[]).forEach(it=>{
+    const c=Array.isArray(it.c)?it.c:((it.c&&(it.c.en||Object.values(it.c)[0]))||[]);
+    rows.push([t.name,t.icon,ag,base(it.q),base(it.a),base(it.w),c[0],c[1],c[2]].concat(...L.map(l=>[inL(it.q,l),inL(it.a,l),inL(it.w,l)])));
+  })));
+  download('sabi-spin-my-questions.csv','﻿'+rows.map(r=>r.map(cell).join(',')).join('\n')+'\n');
+}
+function download(name,text){
+  const url=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'}));
+  const a=h('a',{href:url,download:name}); document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+// ---------- keyboard, fullscreen, wake lock, help ----------
+function onKey(e){
+  if(e.metaKey||e.ctrlKey||e.altKey) return;
+  const tg=e.target, tag=tg&&tg.tagName;
+  if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(tg&&tg.isContentEditable)) return;
+  const k=e.key, kl=k.length===1?k.toLowerCase():k;
+  if(kl==='f'){ e.preventDefault(); toggleFs(); return; }
+  if(AUD||$('help').open) return;
+  if(k==='?'||kl==='h'){ e.preventDefault(); openHelp(); return; }
+  if(S.screen!=='play') return;
+  if((k===' '||k==='Enter')&&tag==='BUTTON') return; // a keyboard user pressing the focused button
+  if(kl==='r'){ readQ(); return; }
+  if(kl==='u'){ undo(); return; }
+  if(kl==='m'){ toggleMute(); return; }
+  const A=actionList(); let act=null;
+  if(NEXT.includes(k)){ act=A.find(a=>a.next); if(!act){ const sa=spinAction(); if(sa.enabled&&!inQuestion()||canSpin()) act=sa; } }
+  else if(PREV.includes(k)) act=A.find(a=>a.prev);
+  else if(kl==='y'||kl==='n'||/^[1-4]$/.test(k)) act=A.find(a=>a.key===kl);
+  if(act){ e.preventDefault(); act.fn(); }
+}
+function toggleFs(){ const el=document.documentElement; try{ if(document.fullscreenElement) document.exitFullscreen(); else if(el.requestFullscreen) el.requestFullscreen().catch(()=>{}); }catch(e){} }
+function openHelp(){ const d=$('help'); if(d.showModal) d.showModal(); else d.setAttribute('open',''); }
+let lock=null;
+function wake(){
+  if(!('wakeLock' in navigator)||document.visibilityState!=='visible'||(S.screen==='setup'&&!AUD)||(lock&&!lock.released)) return;
+  navigator.wakeLock.request('screen').then(l=>lock=l).catch(()=>{});
+}
 
 build();
 })();
-if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));}
+if('serviceWorker' in navigator){ window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
 </script>
 </body>
 </html>
