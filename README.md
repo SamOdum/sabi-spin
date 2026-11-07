@@ -2,8 +2,8 @@
 
 A live classroom quiz game. The facilitator runs it on a phone (passed around) or on a laptop with a projector. Players pick an age group and a topic, spin the wheel, answer out loud, then tap to reveal the answer and a one-line explanation.
 
-- 3 age groups (6–9, 10–13, 14–17) × 8 topics × 16 questions = 384 questions, plus any you add yourself
-- Topics: Living Things, Earth & Space, Matter & Energy, Human Body, Geography of Africa, African History, African Scientists & Inventors, African Nature & Wildlife
+- 3 age groups (6–9, 10–13, 14–17) × 10 topics × 24 questions = 720 questions, plus any you add yourself
+- Topics: Living Things, Earth & Space, Matter & Energy, Human Body, Geography of Africa, African History, African Scientists & Inventors, African Nature & Wildlife, Government & Civics, African Cultures & Languages
 - Mix modes: All Science, All Africa, or Everything, so the wheel picks the topic too
 - Each wheel holds up to 8 questions. When it's finished, spin up the next round. Used questions stay out until you reset them
 - Optional 2–4 teams with scoring, **steals** (a wrong answer opens the question to the other teams) and **wheel specials** (×2 Double points, ↻ Bonus spin, ALL Anyone can answer)

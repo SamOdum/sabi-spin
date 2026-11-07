@@ -14,7 +14,9 @@ topics:[
  {"key":"geo","group":"Africa","name":"Geography of Africa","icon":"🗺️"},
  {"key":"hist","group":"Africa","name":"African History","icon":"🏛️"},
  {"key":"people","group":"Africa","name":"African Scientists & Inventors","icon":"🔬"},
- {"key":"wild","group":"Africa","name":"African Nature & Wildlife","icon":"🦁"}
+ {"key":"wild","group":"Africa","name":"African Nature & Wildlife","icon":"🦁"},
+ {"key":"gov","group":"Africa","name":"Government & Civics","icon":"⚖️"},
+ {"key":"culture","group":"Africa","name":"African Cultures & Languages","icon":"🥁"}
 ],
 bank:{
 bio:{
@@ -34,7 +36,15 @@ j:[
  {"q":"Which animal has a long trunk?","a":"The elephant","w":"An elephant uses its trunk to smell, breathe, drink and pick up food.","c":["The giraffe","The hippo","The rhino"]},
  {"q":"What can you plant in the soil and water so that it grows into a new plant?","a":"A seed","w":"A small mango seed can grow into a big mango tree.","c":["A stone","A shell","A feather"]},
  {"q":"Which part of a plant grows into a fruit with seeds inside?","a":"The flower","w":"After a flower is pollinated it grows into a fruit, such as an orange or a pawpaw.","c":["The roots","The stem","The leaves"]},
- {"q":"What is the hard covering that protects a snail's soft body?","a":"Its shell","w":"A tortoise has a shell too, but a tortoise has a backbone and a snail does not.","c":["Its fur","Its feathers","Its scales"]}
+ {"q":"What is the hard covering that protects a snail's soft body?","a":"Its shell","w":"A tortoise has a shell too, but a tortoise has a backbone and a snail does not.","c":["Its fur","Its feathers","Its scales"]},
+ {"q":"How many legs does an insect have?","a":"Six","w":"Ants, bees and grasshoppers all have six legs and three body parts.","c":["Four","Eight","Ten"]},
+ {"q":"What do baby mammals drink from their mothers?","a":"Milk","w":"Goats, cows, dogs and people all feed their babies milk.","c":["Water","Juice","Nectar"]},
+ {"q":"What do birds have that no other animal has?","a":"Feathers","w":"Feathers keep birds warm and help them fly. Bats have wings too, but no feathers.","c":["Wings","Tails","Claws"]},
+ {"q":"Which of these lays eggs: a hen, a goat or a dog?","a":"A hen","w":"Birds, most reptiles, fish and insects lay eggs.","c":["A goat","A dog"]},
+ {"q":"Where does a chick grow before it hatches?","a":"Inside an egg","w":"The yolk is food for the chick while it grows inside the shell.","c":["In a nest","Inside its mother's tummy","Under the ground"]},
+ {"q":"Which animal can change the colour of its skin?","a":"The chameleon","w":"Chameleons change colour to show their mood, warm up or cool down.","c":["The tortoise","The frog","The snake"]},
+ {"q":"What do we call an animal that eats both plants and meat?","a":"An omnivore","w":"People, pigs and chimpanzees are omnivores.","c":["A herbivore","A carnivore","A scavenger"]},
+ {"q":"What is the thick main stem of a tree called?","a":"The trunk","w":"The trunk is covered in bark, which protects the tree like skin.","c":["A branch","A root","A twig"]}
 ],
 m:[
  {"q":"What is the name of the process plants use to make food from sunlight?","a":"Photosynthesis","w":"Chlorophyll in the leaves captures light and turns carbon dioxide and water into glucose.","c":["Respiration","Digestion","Germination"]},
@@ -52,7 +62,15 @@ m:[
  {"q":"What kind of tiny living thing causes tuberculosis?","a":"Bacteria","w":"Not all bacteria are harmful. Some living in your gut help you digest food.","c":["Viruses","Fungi","Worms"]},
  {"q":"Which insect spreads malaria?","a":"The mosquito (female Anopheles)","w":"Malaria is caused by a tiny parasite called Plasmodium, which the mosquito passes on when it bites.","c":["The housefly","The tsetse fly","The cockroach"]},
  {"q":"What do we call it when a seed starts to grow?","a":"Germination","w":"A seed needs water, warmth and air to germinate.","c":["Pollination","Photosynthesis","Fertilisation"]},
- {"q":"Which stiff outer layer do plant cells have that animal cells do not?","a":"The cell wall","w":"It is made of cellulose and helps plants stand upright.","c":["The cell membrane","The nucleus","The cytoplasm"]}
+ {"q":"Which stiff outer layer do plant cells have that animal cells do not?","a":"The cell wall","w":"It is made of cellulose and helps plants stand upright.","c":["The cell membrane","The nucleus","The cytoplasm"]},
+ {"q":"In a food chain, what are green plants called because they make their own food?","a":"Producers","w":"Animals are consumers: they get their energy by eating plants or other animals.","c":["Consumers","Decomposers","Predators"]},
+ {"q":"What do we call living things, such as fungi and bacteria, that break down dead plants and animals?","a":"Decomposers","w":"They return nutrients to the soil so new plants can grow.","c":["Producers","Herbivores","Parasites"]},
+ {"q":"What do we call animals whose body temperature changes with their surroundings, like lizards?","a":"Cold-blooded (ectotherms)","w":"That is why lizards bask in the sun in the morning to warm up.","c":["Warm-blooded","Nocturnal","Hibernating"]},
+ {"q":"What do we call a living thing that lives on or inside another and harms it, like a tapeworm?","a":"A parasite","w":"The living thing it feeds on is called the host.","c":["A predator","A decomposer","A producer"]},
+ {"q":"Which part of a flower makes pollen?","a":"The anther (part of the stamen)","w":"Pollen must land on the stigma of a flower for seeds to form.","c":["The stigma","The petal","The sepal"]},
+ {"q":"Which group of animals do frogs and toads belong to?","a":"Amphibians","w":"Amphibians usually start life in water and later live on land. Most have moist skin.","c":["Reptiles","Fish","Mammals"]},
+ {"q":"What do we call the slow change of living things over many generations?","a":"Evolution","w":"Living things best suited to their surroundings survive and pass on their features.","c":["Metamorphosis","Migration","Germination"]},
+ {"q":"What are the tiny holes on the underside of leaves that let gases in and out called?","a":"Stomata","w":"Two guard cells around each hole open it in the day and close it to save water.","c":["Veins","Root hairs","Chloroplasts"]}
 ],
 s:[
  {"q":"Which molecule stores and carries energy inside cells? Give its three-letter name.","a":"ATP (adenosine triphosphate)","w":"Breaking a phosphate bond off ATP releases the energy a cell uses to work.","c":["DNA (deoxyribonucleic acid)","RNA (ribonucleic acid)","PVC (polyvinyl chloride)"]},
@@ -70,7 +88,15 @@ s:[
  {"q":"Give the word equation for aerobic respiration.","a":"Glucose + oxygen → carbon dioxide + water (+ energy)","w":"It is the reverse of photosynthesis, and most of it happens in the mitochondria.","c":["Carbon dioxide + water → glucose + oxygen","Glucose → lactic acid (+ energy)","Glucose → ethanol + carbon dioxide (+ energy)"]},
  {"q":"What is the loss of water vapour from a plant's leaves called?","a":"Transpiration","w":"Water escapes through tiny pores called stomata, pulling more water up from the roots.","c":["Respiration","Osmosis","Condensation"]},
  {"q":"Which kingdom do mushrooms belong to?","a":"Fungi","w":"Fungi cannot make their own food. Yeast, used to make bread rise, is also a fungus.","c":["Plants","Bacteria","Protists"]},
- {"q":"Which part of the cell makes proteins by reading messenger RNA?","a":"The ribosome","w":"Ribosomes read the code three bases at a time; each triplet, called a codon, stands for one amino acid.","c":["The Golgi apparatus","The lysosome","The vacuole"]}
+ {"q":"Which part of the cell makes proteins by reading messenger RNA?","a":"The ribosome","w":"Ribosomes read the code three bases at a time; each triplet, called a codon, stands for one amino acid.","c":["The Golgi apparatus","The lysosome","The vacuole"]},
+ {"q":"What are different versions of the same gene called?","a":"Alleles","w":"For example, the gene for haemoglobin has an A allele and a sickle cell S allele.","c":["Chromosomes","Codons","Genomes"]},
+ {"q":"What does a Punnett square show?","a":"The possible combinations of alleles offspring can inherit","w":"It is named after the British geneticist Reginald Punnett.","c":["The order of bases in DNA","How a cell divides","The number of chromosomes in a cell"]},
+ {"q":"Which sugar is the main product of photosynthesis?","a":"Glucose","w":"Plants turn much of it into starch for storage, and into cellulose for cell walls.","c":["Lactose","Sucrose","Maltose"]},
+ {"q":"What does anaerobic respiration in human muscles produce?","a":"Lactic acid","w":"It happens when muscles work hard and run short of oxygen, and it releases far less energy than aerobic respiration.","c":["Ethanol","Glucose","Oxygen"]},
+ {"q":"What do bacteria in the root nodules of beans and groundnuts do?","a":"Turn nitrogen from the air into compounds plants can use","w":"This is called nitrogen fixation, and it is why farmers plant legumes to enrich the soil.","c":["Make the plant's food by photosynthesis","Protect the roots from insects","Store water for the dry season"]},
+ {"q":"What is a group of organisms of the same species living in one area called?","a":"A population","w":"All the populations living together in an area make up a community.","c":["A community","An ecosystem","A biome"]},
+ {"q":"Who discovered penicillin, the first antibiotic, in 1928?","a":"Alexander Fleming","w":"He noticed that a mould had killed the bacteria growing on a dish he had left out.","c":["Louis Pasteur","Edward Jenner","Robert Koch"]},
+ {"q":"What is the scientific name of modern humans?","a":"Homo sapiens","w":"It means \"wise human\". Our species first appeared in Africa about 300,000 years ago.","c":["Homo erectus","Homo habilis","Pan troglodytes"]}
 ]
 },
 earth:{
@@ -90,7 +116,15 @@ j:[
  {"q":"What is the coloured arch you can see in the sky when the Sun shines during rain?","a":"A rainbow","w":"Raindrops split white sunlight into its colours, with red on the outside and violet on the inside.","c":["A cloud","A comet","A shadow"]},
  {"q":"Which planet is closest to the Sun?","a":"Mercury","w":"Mercury is the smallest planet, and a year there lasts only 88 Earth days.","c":["Venus","Earth","Mars"]},
  {"q":"What is the bright flash of light in the sky during a storm called?","a":"Lightning","w":"Thunder is the sound lightning makes. Light travels faster than sound, so you see the flash first.","c":["Thunder","A rainbow","A meteor"]},
- {"q":"What do we use to look at faraway stars and planets?","a":"A telescope","w":"A telescope collects much more light than our eyes, so we can see faint stars.","c":["A microscope","A stethoscope","A periscope"]}
+ {"q":"What do we use to look at faraway stars and planets?","a":"A telescope","w":"A telescope collects much more light than our eyes, so we can see faint stars.","c":["A microscope","A stethoscope","A periscope"]},
+ {"q":"What do we call little balls of ice that sometimes fall from storm clouds?","a":"Hail","w":"Hail can fall even in hot places, because it is very cold high up inside storm clouds.","c":["Snow","Rain","Fog"]},
+ {"q":"What shape is the Earth?","a":"Round, like a ball (a sphere)","w":"Photos taken from space show the Earth as a round blue ball.","c":["Flat","Square","Like a cone"]},
+ {"q":"What do we call the time when the Sun goes down in the evening?","a":"Sunset","w":"The Sun sets in the west, on the opposite side from where it rises.","c":["Sunrise","Noon","Midnight"]},
+ {"q":"What do we call a person who travels into space?","a":"An astronaut","w":"Astronauts live and work on the International Space Station, which goes around the Earth.","c":["A pilot","A diver","A miner"]},
+ {"q":"Is most of the Earth's surface covered by land or by water?","a":"Water","w":"About 71% of the Earth's surface is covered by water, most of it in the oceans.","c":["Land"]},
+ {"q":"What is the loud noise we hear after lightning flashes?","a":"Thunder","w":"Lightning heats the air so fast that the air bursts outwards with a bang.","c":["Wind","An echo","Rain"]},
+ {"q":"What do we call the Moon when only a thin curved slice of it is lit?","a":"A crescent moon","w":"The crescent is a symbol on the flags of several countries, such as Algeria and Tunisia.","c":["A full moon","A half moon","A blue moon"]},
+ {"q":"What do we call the line where the sky seems to meet the land or the sea?","a":"The horizon","w":"The Sun seems to rise up from the horizon in the morning.","c":["The Equator","A rainbow","The coast"]}
 ],
 m:[
  {"q":"What is the largest planet in our solar system?","a":"Jupiter","w":"More than 1,300 Earths could fit inside Jupiter.","c":["Saturn","Neptune","Uranus"]},
@@ -108,7 +142,15 @@ m:[
  {"q":"What is it called when water vapour cools and turns back into tiny drops, forming clouds?","a":"Condensation","w":"It is one stage of the water cycle, along with evaporation and precipitation.","c":["Evaporation","Precipitation","Transpiration"]},
  {"q":"What are the two main seasons in most of Nigeria?","a":"The rainy season and the dry season","w":"Near the Equator temperatures change little through the year, so rainfall marks the seasons. The dusty Harmattan blows in the dry season.","c":["Summer and winter","Spring and autumn","The hot season and the snowy season"]},
  {"q":"Which layer in the atmosphere protects us from most of the Sun's harmful ultraviolet rays?","a":"The ozone layer","w":"It lies in the stratosphere, roughly 15 to 35 kilometres above the ground.","c":["The ionosphere","The troposphere","The cloud layer"]},
- {"q":"What do we call a scientist who studies and forecasts the weather?","a":"A meteorologist","w":"Meteorologists use satellites, weather balloons and computers to predict rain and storms.","c":["An astronomer","A geologist","A biologist"]}
+ {"q":"What do we call a scientist who studies and forecasts the weather?","a":"A meteorologist","w":"Meteorologists use satellites, weather balloons and computers to predict rain and storms.","c":["An astronomer","A geologist","A biologist"]},
+ {"q":"What force keeps the planets moving around the Sun?","a":"Gravity","w":"The Sun's gravity pulls on the planets and keeps them in their orbits.","c":["Magnetism","Friction","Wind"]},
+ {"q":"What is the Sun mostly made of?","a":"Hydrogen and helium","w":"The Sun is a huge ball of hot gas, not a fire that burns fuel like wood.","c":["Fire and coal","Iron and nickel","Oxygen and nitrogen"]},
+ {"q":"How long does the Moon take to go once around the Earth?","a":"About 27 days (roughly a month)","w":"The word \"month\" comes from the word \"moon\".","c":["One day","One week","One year"]},
+ {"q":"On a map, which lines run east–west and show how far north or south a place is?","a":"Lines of latitude","w":"The Equator is latitude 0°. Lines of longitude run from pole to pole.","c":["Lines of longitude","Contour lines","Time zone lines"]},
+ {"q":"In the water cycle, what is it called when water falls from clouds as rain, hail or snow?","a":"Precipitation","w":"The water then runs into rivers and seas, evaporates, and the cycle begins again.","c":["Evaporation","Condensation","Transpiration"]},
+ {"q":"What is a huge spinning storm that forms over the warm Indian Ocean called?","a":"A tropical cyclone","w":"Cyclone Idai struck Mozambique, Malawi and Zimbabwe in 2019. Over the Atlantic these storms are called hurricanes.","c":["The Harmattan","A monsoon","A tsunami"]},
+ {"q":"What is a giant sea wave caused by an undersea earthquake called?","a":"A tsunami","w":"The 2004 Indian Ocean tsunami reached all the way to Somalia and Kenya.","c":["A tide","A cyclone","A current"]},
+ {"q":"Which planet is farthest from the Sun?","a":"Neptune","w":"Neptune takes about 165 Earth years to go once around the Sun.","c":["Uranus","Saturn","Pluto"]}
 ],
 s:[
  {"q":"What is the Earth's innermost layer, and what is it mainly made of?","a":"The inner core, made of solid iron and nickel","w":"It is about as hot as the surface of the Sun, but stays solid because of the enormous pressure.","c":["The outer core, made of liquid iron and nickel","The mantle, made of hot molten rock","The inner core, made of solid granite"]},
@@ -126,7 +168,15 @@ s:[
  {"q":"What is the lowest layer of the atmosphere, where almost all weather happens?","a":"The troposphere","w":"It is about 8 kilometres deep at the poles and up to about 18 kilometres at the Equator.","c":["The stratosphere","The mesosphere","The thermosphere"]},
  {"q":"What is the greenhouse effect?","a":"Gases such as carbon dioxide trapping heat in the atmosphere","w":"Without it the Earth's average temperature would be about −18 °C; adding more greenhouse gases makes the planet warmer.","c":["The ozone layer letting in ultraviolet light","Plants growing faster inside greenhouses","Heat rising from the Earth's core"]},
  {"q":"Which igneous rock forms when lava cools so fast that it becomes a black natural glass?","a":"Obsidian","w":"When magma cools slowly underground it forms large crystals instead, as in granite.","c":["Granite","Marble","Sandstone"]},
- {"q":"Which theory says the universe began expanding from an extremely hot, dense state about 13.8 billion years ago?","a":"The Big Bang theory","w":"One key piece of evidence is the cosmic microwave background, faint radiation left over from the early universe.","c":["The Steady State theory","Plate tectonics","The nebular hypothesis"]}
+ {"q":"Which theory says the universe began expanding from an extremely hot, dense state about 13.8 billion years ago?","a":"The Big Bang theory","w":"One key piece of evidence is the cosmic microwave background, faint radiation left over from the early universe.","c":["The Steady State theory","Plate tectonics","The nebular hypothesis"]},
+ {"q":"What is the point on the surface directly above where an earthquake starts called?","a":"The epicentre","w":"The point underground where the rocks first slip is called the focus, or hypocentre.","c":["The focus","The fault line","The core"]},
+ {"q":"What kind of plate boundary forms where one plate sinks beneath another?","a":"A convergent (destructive) boundary, with subduction","w":"Subduction zones create deep ocean trenches, volcanoes and big earthquakes.","c":["A divergent boundary","A transform boundary","A hotspot"]},
+ {"q":"What is the boundary around a black hole beyond which nothing, not even light, can escape?","a":"The event horizon","w":"In 2019 astronomers released the first image of the shadow of a black hole.","c":["The accretion disc","The corona","The photosphere"]},
+ {"q":"What was the supercontinent that began to break apart about 200 million years ago?","a":"Pangaea","w":"That is why the coasts of West Africa and Brazil look as if they would fit together.","c":["Gondwana","Laurasia","Rodinia"]},
+ {"q":"Which star is the closest to the Sun?","a":"Proxima Centauri","w":"It is about 4.2 light-years away. Its light takes over four years to reach us.","c":["Sirius","Betelgeuse","Polaris"]},
+ {"q":"Which instrument measures air pressure?","a":"A barometer","w":"Falling air pressure often warns that stormy weather is coming.","c":["A thermometer","A hygrometer","An anemometer"]},
+ {"q":"Which zone, where the north-east and south-west trade winds meet, brings the rainy season to West Africa as it moves north?","a":"The Intertropical Convergence Zone (ITCZ)","w":"When it moves back south in the dry season, the dusty Harmattan wind reaches Nigeria.","c":["The Gulf Stream","The ozone layer","The jet stream"]},
+ {"q":"Which fossil fuel formed from ancient plants buried in swamps?","a":"Coal","w":"Crude oil formed mostly from tiny sea creatures. Enugu is called the \"Coal City\".","c":["Crude oil","Natural gas","Uranium"]}
 ]
 },
 matter:{
@@ -146,7 +196,15 @@ j:[
  {"q":"What does a battery give a torch to make it shine?","a":"Electricity","w":"A battery stores chemical energy and turns it into electricity when the torch is switched on.","c":["Water","Air","Oil"]},
  {"q":"What makes things slow down when they rub against each other?","a":"Friction","w":"Friction is why a football rolling on grass slowly comes to a stop.","c":["Gravity","Magnetism","Electricity"]},
  {"q":"What material are windows usually made of, so that we can see through them?","a":"Glass","w":"Materials you can see clearly through are called transparent.","c":["Wood","Metal","Clay"]},
- {"q":"What do we call it when sound bounces back off a wall or a cliff?","a":"An echo","w":"Bats use echoes to find insects in the dark.","c":["A shadow","A reflection of light","A whisper"]}
+ {"q":"What do we call it when sound bounces back off a wall or a cliff?","a":"An echo","w":"Bats use echoes to find insects in the dark.","c":["A shadow","A reflection of light","A whisper"]},
+ {"q":"What do we call it when water turns into ice?","a":"Freezing","w":"Water freezes when it gets very cold, like in a freezer.","c":["Melting","Boiling","Raining"]},
+ {"q":"What do we use to measure how hot or cold something is?","a":"A thermometer","w":"A nurse uses a thermometer to check if you have a fever.","c":["A ruler","A clock","A weighing scale"]},
+ {"q":"Which of these is a solid: milk, a stone or air?","a":"A stone","w":"Solids keep their shape. Liquids like milk take the shape of their container.","c":["Milk","Air"]},
+ {"q":"What happens to a guitar string when you pluck it to make a sound?","a":"It vibrates (shakes very fast)","w":"All sounds are made by something vibrating, even your voice.","c":["It gets hot","It glows","It gets longer"]},
+ {"q":"Which travels faster: light or sound?","a":"Light","w":"That is why you see lightning before you hear the thunder.","c":["Sound"]},
+ {"q":"Which of these needs electricity to work: a candle, a fan or a broom?","a":"A fan","w":"Electricity makes the fan's motor spin the blades.","c":["A candle","A broom"]},
+ {"q":"A seesaw is which kind of simple machine?","a":"A lever","w":"A lever turns on a point called a fulcrum. Scissors and bottle openers are levers too.","c":["A wheel","A pulley","A ramp"]},
+ {"q":"Which of these will a magnet pull: an iron nail, a plastic cup or a sheet of paper?","a":"An iron nail","w":"Magnets attract iron and steel, but not plastic, paper, glass or wood.","c":["A plastic cup","A sheet of paper"]}
 ],
 m:[
  {"q":"What is the smallest piece of an element called?","a":"An atom","w":"Atoms are so small that a single drop of water has more than a billion trillion of them.","c":["A molecule","A cell","A compound"]},
@@ -164,7 +222,15 @@ m:[
  {"q":"Which metal is a liquid at room temperature?","a":"Mercury","w":"It was once used in thermometers, but it is poisonous, so most thermometers now use alcohol or electronics.","c":["Iron","Aluminium","Copper"]},
  {"q":"What kind of energy do solar panels turn sunlight into?","a":"Electrical energy (electricity)","w":"Solar panels bring power to many homes and clinics across Africa that are not connected to the grid.","c":["Sound energy","Nuclear energy","Kinetic energy"]},
  {"q":"What do we call a substance made of only one type of atom?","a":"An element","w":"There are 118 known elements. Oxygen, iron and gold are examples.","c":["A compound","A mixture","A solution"]},
- {"q":"What is the chemical symbol for gold?","a":"Au","w":"It comes from aurum, the Latin word for gold. Ghana was once called the Gold Coast.","c":["Go","Gd","Ag"]}
+ {"q":"What is the chemical symbol for gold?","a":"Au","w":"It comes from aurum, the Latin word for gold. Ghana was once called the Gold Coast.","c":["Go","Gd","Ag"]},
+ {"q":"At what temperature does pure water freeze?","a":"0 °C","w":"Adding salt lowers the freezing point, which is why salt is spread on icy roads in cold countries.","c":["10 °C","−10 °C","32 °C"]},
+ {"q":"What are the three main states of matter?","a":"Solid, liquid and gas","w":"In a solid the particles are packed tightly; in a gas they move about freely.","c":["Hard, soft and runny","Ice, water and steam only","Metal, plastic and wood"]},
+ {"q":"What do we call a material that does not let electricity flow through it, like rubber or plastic?","a":"An insulator","w":"Electric wires are copper (a conductor) covered in plastic (an insulator) to keep us safe.","c":["A conductor","A magnet","A battery"]},
+ {"q":"What is the chemical symbol for oxygen?","a":"O","w":"Oxygen gas is O₂: two oxygen atoms joined together.","c":["Ox","Og","Os"]},
+ {"q":"What kind of energy does a moving object have?","a":"Kinetic energy","w":"The faster something moves, the more kinetic energy it has.","c":["Potential energy","Chemical energy","Nuclear energy"]},
+ {"q":"Which method separates sand from water by pouring the mixture through paper?","a":"Filtration","w":"The water passes through the filter paper, and the sand stays behind.","c":["Distillation","Evaporation","Chromatography"]},
+ {"q":"What happens to most materials when they are heated?","a":"They expand (get bigger)","w":"That is why bridges and railway lines have small gaps to leave room for expansion.","c":["They shrink","They get heavier","They turn into a gas straight away"]},
+ {"q":"What is rust?","a":"Iron that has reacted with oxygen and water","w":"Its chemical name is iron oxide. Paint and oil stop rust by keeping air and water away.","c":["A kind of mould that grows on metal","Dust that sticks to metal","Iron that has melted"]}
 ],
 s:[
  {"q":"What is the atomic number of carbon?","a":"6","w":"Six protons in the nucleus. Carbon is the backbone of every living thing.","c":["12","8","4"]},
@@ -182,7 +248,15 @@ s:[
  {"q":"What are the products when an acid reacts with an alkali?","a":"A salt and water","w":"This is called neutralisation. Antacid tablets use it to ease indigestion.","c":["Hydrogen and oxygen","Carbon dioxide only","A metal and a gas"]},
  {"q":"What is the half-life of a radioactive substance?","a":"The time for half of its radioactive atoms to decay","w":"Carbon-14 has a half-life of about 5,730 years, which lets scientists date ancient remains.","c":["Half the time it takes to decay completely","The time for it to lose half its mass as heat","The age at which it stops being radioactive"]},
  {"q":"Which part of the electromagnetic spectrum has the longest wavelength?","a":"Radio waves","w":"Gamma rays have the shortest wavelength and carry the most energy.","c":["Gamma rays","X-rays","Visible light"]},
- {"q":"What name is given to the unreactive gases in the last column of the periodic table?","a":"The noble gases","w":"Helium, neon and argon have full outer electron shells, so they very rarely react.","c":["The halogens","The alkali metals","The transition metals"]}
+ {"q":"What name is given to the unreactive gases in the last column of the periodic table?","a":"The noble gases","w":"Helium, neon and argon have full outer electron shells, so they very rarely react.","c":["The halogens","The alkali metals","The transition metals"]},
+ {"q":"What is Avogadro's number, the number of particles in one mole, approximately?","a":"6.02 × 10²³","w":"One mole of carbon-12 atoms has a mass of exactly 12 grams.","c":["3.0 × 10⁸","6.67 × 10⁻¹¹","1.6 × 10⁻¹⁹"]},
+ {"q":"Which formula gives the kinetic energy of a moving object?","a":"½mv²","w":"Doubling the speed makes the kinetic energy four times bigger.","c":["mgh","mv","Fd"]},
+ {"q":"What is an isotope?","a":"An atom of an element with a different number of neutrons","w":"Carbon-12 and carbon-14 are isotopes. Carbon-14 is used to date ancient objects.","c":["An atom with a different number of protons","An atom that has gained or lost electrons","A compound of two elements"]},
+ {"q":"Which gas is given off when zinc reacts with dilute hydrochloric acid?","a":"Hydrogen","w":"The test for hydrogen: it burns with a squeaky pop when a lighted splint is held near it.","c":["Oxygen","Carbon dioxide","Chlorine"]},
+ {"q":"What process separates crude oil into parts such as petrol, kerosene and diesel?","a":"Fractional distillation","w":"Each fraction boils at a different temperature. Refineries such as Dangote in Lagos do this.","c":["Cracking","Filtration","Electrolysis"]},
+ {"q":"What is the SI unit of electric charge?","a":"The coulomb (C)","w":"A current of one ampere carries one coulomb of charge every second.","c":["The volt","The ampere","The ohm"]},
+ {"q":"What are sound waves too high-pitched for humans to hear called?","a":"Ultrasound","w":"Hospitals use ultrasound scans to see babies growing in the womb.","c":["Infrasound","Microwaves","Radio waves"]},
+ {"q":"What is the name for a substance that speeds up a chemical reaction without being used up?","a":"A catalyst","w":"Catalytic converters in cars use metals like platinum to clean exhaust gases.","c":["An inhibitor","A reactant","A solvent"]}
 ]
 },
 body:{
@@ -202,7 +276,15 @@ j:[
  {"q":"Which organ in your tummy mixes and breaks down the food you swallow?","a":"The stomach","w":"Your stomach makes an acid strong enough to kill many germs in food.","c":["The heart","The lungs","The bladder"]},
  {"q":"What should you do when you cough or sneeze?","a":"Cover your mouth and nose (with a tissue or your elbow)","w":"This stops germs flying through the air onto other people.","c":["Open your mouth wide","Look up at the sky","Cover your eyes"]},
  {"q":"Which bones make a cage that protects your heart and lungs?","a":"The ribs (the ribcage)","w":"Most people have 12 pairs of ribs.","c":["The skull","The spine","The hip bones"]},
- {"q":"Which part of your body do you use to taste food?","a":"The tongue","w":"Your tongue is covered in tiny bumps that hold thousands of taste buds.","c":["The ears","The teeth","The eyes"]}
+ {"q":"Which part of your body do you use to taste food?","a":"The tongue","w":"Your tongue is covered in tiny bumps that hold thousands of taste buds.","c":["The ears","The teeth","The eyes"]},
+ {"q":"How many senses do we usually say people have?","a":"Five","w":"Sight, hearing, smell, taste and touch.","c":["Three","Four","Seven"]},
+ {"q":"What is the black dot in the middle of your eye that lets light in?","a":"The pupil","w":"Your pupil gets smaller in bright light and bigger in the dark.","c":["The eyelash","The eyebrow","The tear"]},
+ {"q":"What do we call the places where bones meet and bend, like knees and elbows?","a":"Joints","w":"Your body has joints in your fingers, toes, hips and shoulders too.","c":["Muscles","Veins","Nails"]},
+ {"q":"Why should you brush your teeth twice a day?","a":"To stop tooth decay and gum disease","w":"Brushing removes the sticky germs, called plaque, that make holes in teeth.","c":["To make your teeth grow longer","To make your teeth whiter only","To keep your breath cold"]},
+ {"q":"What is the best drink to keep your body healthy when it is hot?","a":"Clean water","w":"Your body is more than half water, and you lose water when you sweat.","c":["Fizzy drinks","Coffee","Sugary juice"]},
+ {"q":"About how many hours of sleep does a child aged 6 to 9 need each night?","a":"About 9 to 12 hours","w":"Sleep helps your body grow and your brain remember what you learned.","c":["About 4 to 5 hours","About 6 to 7 hours","About 15 to 16 hours"]},
+ {"q":"What colour is blood?","a":"Red","w":"Veins can look blue through the skin, but blood is always red.","c":["Blue","Green","Yellow"]},
+ {"q":"Which tube carries air from your nose and mouth down to your lungs?","a":"The windpipe","w":"Its scientific name is the trachea. Food goes down a different tube, the food pipe.","c":["The food pipe","A blood vessel","The backbone"]}
 ],
 m:[
  {"q":"How many chambers does the human heart have?","a":"Four","w":"Two atria at the top receive blood, two ventricles at the bottom pump it out.","c":["Two","Three","Six"]},
@@ -220,7 +302,15 @@ m:[
  {"q":"Which mineral do your bones and teeth need to be strong?","a":"Calcium","w":"Milk, small fish eaten with their bones, and leafy green vegetables are good sources.","c":["Sodium","Potassium","Iodine"]},
  {"q":"What joins muscles to bones?","a":"Tendons","w":"Ligaments, on the other hand, join bone to bone.","c":["Ligaments","Cartilage","Nerves"]},
  {"q":"What is the voice box called?","a":"The larynx","w":"Air passing through it makes the vocal cords vibrate, and that produces sound.","c":["The pharynx","The trachea","The epiglottis"]},
- {"q":"Which disease does the BCG vaccine protect against?","a":"Tuberculosis (TB)","w":"In Nigeria and many other countries BCG is given to babies soon after birth.","c":["Measles","Polio","Malaria"]}
+ {"q":"Which disease does the BCG vaccine protect against?","a":"Tuberculosis (TB)","w":"In Nigeria and many other countries BCG is given to babies soon after birth.","c":["Measles","Polio","Malaria"]},
+ {"q":"What is the bundle of nerves that runs inside your backbone called?","a":"The spinal cord","w":"It carries messages between your brain and the rest of your body.","c":["The brainstem","The windpipe","The aorta"]},
+ {"q":"How many bones does an adult human skeleton have?","a":"206","w":"A newborn baby has about 300, but some fuse together as the baby grows.","c":["106","186","300"]},
+ {"q":"Which sheet of muscle below the lungs helps you breathe in?","a":"The diaphragm","w":"Hiccups happen when the diaphragm suddenly jerks.","c":["The biceps","The heart","The stomach muscles"]},
+ {"q":"What is the yellowish liquid part of blood called?","a":"Plasma","w":"Plasma carries blood cells, food, hormones and waste around the body.","c":["Platelets","Lymph","Bile"]},
+ {"q":"Which pair of organs cleans the blood and makes urine?","a":"The kidneys","w":"Your two kidneys filter all your blood many times a day.","c":["The lungs","The liver and the spleen","The ovaries"]},
+ {"q":"What is the clear front window of the eye called?","a":"The cornea","w":"The cornea and the lens bend light to focus it on the back of the eye.","c":["The iris","The pupil","The retina"]},
+ {"q":"Which disease, caused by a lack of vitamin C, makes gums bleed?","a":"Scurvy","w":"Oranges, guavas and pawpaw are rich in vitamin C.","c":["Rickets","Anaemia","Goitre"]},
+ {"q":"Which disease is caused by too little protein in a young child's diet?","a":"Kwashiorkor","w":"The name comes from the Ga language of Ghana. Beans, eggs and fish help prevent it.","c":["Malaria","Scurvy","Rickets"]}
 ],
 s:[
  {"q":"What pigment gives skin its colour?","a":"Melanin","w":"It also protects skin from UV light. Darker skin has more melanin, not more melanin cells.","c":["Keratin","Chlorophyll","Collagen"]},
@@ -238,7 +328,15 @@ s:[
  {"q":"Which hormone prepares the body for fight or flight?","a":"Adrenaline","w":"It is made by the adrenal glands on top of the kidneys and makes the heart beat faster.","c":["Insulin","Oestrogen","Melatonin"]},
  {"q":"What does a vaccine train the immune system to do?","a":"Recognise and fight a specific germ","w":"Vaccination wiped out smallpox worldwide; it was declared eradicated in 1980.","c":["Kill every bacterium in the body","Replace lost blood cells","Produce more insulin"]},
  {"q":"Which organ produces bile?","a":"The liver","w":"Bile is stored in the gall bladder and breaks fats into tiny droplets so enzymes can digest them.","c":["The gall bladder","The pancreas","The stomach"]},
- {"q":"Which part of the eye contains the light-sensitive rods and cones?","a":"The retina","w":"Cones detect colour and work in bright light; rods work in dim light.","c":["The cornea","The iris","The lens"]}
+ {"q":"Which part of the eye contains the light-sensitive rods and cones?","a":"The retina","w":"Cones detect colour and work in bright light; rods work in dim light.","c":["The cornea","The iris","The lens"]},
+ {"q":"Which part of the brain controls breathing and heart rate?","a":"The medulla oblongata (in the brainstem)","w":"These actions are automatic, so you do not have to think about them.","c":["The cerebrum","The hypothalamus","The cerebellum"]},
+ {"q":"Which blood type is the universal recipient?","a":"AB positive","w":"It has no anti-A or anti-B antibodies, so it can receive red cells from any blood type.","c":["O negative","A positive","B negative"]},
+ {"q":"What is the protein in red blood cells that carries oxygen?","a":"Haemoglobin","w":"It contains iron, which is why a lack of iron causes anaemia.","c":["Keratin","Collagen","Melanin"]},
+ {"q":"Which hormone made by the thyroid gland needs iodine?","a":"Thyroxine","w":"Too little iodine can cause a swollen thyroid called a goitre, which is why salt is iodised.","c":["Insulin","Oestrogen","Cortisol"]},
+ {"q":"If two parents both carry the sickle cell trait (AS), what is the chance that a child has sickle cell disease (SS)?","a":"1 in 4 (25%)","w":"Each parent passes on either A or S, so the children can be AA, AS or SS. That is why genotype testing before marriage is encouraged.","c":["1 in 2 (50%)","3 in 4 (75%)","No chance"]},
+ {"q":"What do the brain and spinal cord together make up?","a":"The central nervous system","w":"The nerves that branch out to the rest of the body form the peripheral nervous system.","c":["The peripheral nervous system","The endocrine system","The lymphatic system"]},
+ {"q":"What flap stops food from going down your windpipe when you swallow?","a":"The epiglottis","w":"If it does not close in time, you cough to clear the windpipe.","c":["The uvula","The larynx","The tonsils"]},
+ {"q":"Which organ makes insulin?","a":"The pancreas","w":"In type 1 diabetes, the pancreas makes little or no insulin.","c":["The liver","The kidney","The spleen"]}
 ]
 },
 geo:{
@@ -258,7 +356,15 @@ j:[
  {"q":"Which country is at the southern tip of Africa?","a":"South Africa","w":"At Cape Agulhas, its southernmost point, the Atlantic and Indian Oceans officially meet.","c":["Namibia","Mozambique","Madagascar"]},
  {"q":"Which is the only continent bigger than Africa?","a":"Asia","w":"Africa is the second-largest continent in both size and number of people.","c":["Europe","North America","South America"]},
  {"q":"What is the capital city of Ethiopia?","a":"Addis Ababa","w":"Its name means \"new flower\" in the Amharic language.","c":["Asmara","Mogadishu","Nairobi"]},
- {"q":"Dakar is the capital of which country?","a":"Senegal","w":"It is the most westerly city on mainland Africa.","c":["The Gambia","Mali","Guinea"]}
+ {"q":"Dakar is the capital of which country?","a":"Senegal","w":"It is the most westerly city on mainland Africa.","c":["The Gambia","Mali","Guinea"]},
+ {"q":"Which great river flows through Nigeria and gives the country its name?","a":"The River Niger","w":"It flows about 4,200 km, from the hills of Guinea to the Niger Delta.","c":["The Nile","The Congo","The Zambezi"]},
+ {"q":"What do we call a very big area of land, like Africa?","a":"A continent","w":"There are seven continents. Africa is the second biggest.","c":["A country","An island","A city"]},
+ {"q":"Which ocean is on the west side of Africa?","a":"The Atlantic Ocean","w":"Lagos, Accra and Dakar are all on the Atlantic coast.","c":["The Indian Ocean","The Pacific Ocean","The Arctic Ocean"]},
+ {"q":"Kampala is the capital of which country?","a":"Uganda","w":"Uganda is on the shores of Lake Victoria, Africa's biggest lake.","c":["Kenya","Tanzania","Rwanda"]},
+ {"q":"What is the pointed part of north-east Africa, where Somalia is, called?","a":"The Horn of Africa","w":"On a map it sticks out into the sea like the horn of an animal.","c":["The Cape of Good Hope","The Sahel","The Gold Coast"]},
+ {"q":"Which is the biggest city in Nigeria?","a":"Lagos","w":"Lagos is one of the biggest cities in Africa, and it is built around a lagoon.","c":["Kano","Ibadan","Abuja"]},
+ {"q":"The city of Marrakesh is in which country?","a":"Morocco","w":"Marrakesh is famous for its busy markets and red walls.","c":["Egypt","Tunisia","Libya"]},
+ {"q":"What do we call a thick forest of tall trees where it rains a lot?","a":"A rainforest","w":"Rainforests are home to more kinds of plants and animals than anywhere else on land.","c":["A desert","A savanna","A beach"]}
 ],
 m:[
  {"q":"What is the largest lake in Africa?","a":"Lake Victoria","w":"It is shared by Uganda, Kenya and Tanzania, and is the source of the White Nile.","c":["Lake Tanganyika","Lake Malawi","Lake Chad"]},
@@ -276,7 +382,15 @@ m:[
  {"q":"What is the second-longest river in Africa?","a":"The Congo","w":"It is the deepest river in the world, more than 220 metres deep in places.","c":["The Niger","The Zambezi","The Orange"]},
  {"q":"Which country is known as \"the land of a thousand hills\"?","a":"Rwanda","w":"Its capital, Kigali, is often called one of the cleanest cities in Africa.","c":["Burundi","Uganda","Malawi"]},
  {"q":"Lake Volta in Ghana is the world's largest of what kind of lake, by area?","a":"Man-made lakes (reservoirs)","w":"It formed behind the Akosombo Dam, which was finished in 1965.","c":["Salt lakes","Crater lakes","Frozen lakes"]},
- {"q":"What is the name of the flat-topped mountain overlooking Cape Town?","a":"Table Mountain","w":"When clouds spill over its top, people call it the \"tablecloth\".","c":["Lion's Head","Mount Kenya","The Drakensberg"]}
+ {"q":"What is the name of the flat-topped mountain overlooking Cape Town?","a":"Table Mountain","w":"When clouds spill over its top, people call it the \"tablecloth\".","c":["Lion's Head","Mount Kenya","The Drakensberg"]},
+ {"q":"What do we call a country with no coastline?","a":"Landlocked","w":"Africa has 16 landlocked countries, more than any other continent.","c":["An island","A peninsula","An archipelago"]},
+ {"q":"Which desert along the coast of Namibia is one of the oldest in the world?","a":"The Namib Desert","w":"It has some of the tallest sand dunes on Earth.","c":["The Kalahari","The Sahara","The Karoo"]},
+ {"q":"The islands of Zanzibar are part of which country?","a":"Tanzania","w":"Tanzania's name comes from joining Tanganyika and Zanzibar in 1964.","c":["Kenya","Mozambique","Madagascar"]},
+ {"q":"Which river forms much of the border between Zambia and Zimbabwe?","a":"The Zambezi","w":"The Kariba Dam on the Zambezi made one of the world's largest man-made lakes.","c":["The Limpopo","The Orange","The Okavango"]},
+ {"q":"Which island country in the Indian Ocean has the smallest population in Africa?","a":"Seychelles","w":"It is made up of about 115 islands.","c":["Comoros","Mauritius","Cabo Verde"]},
+ {"q":"What is the capital city of Morocco?","a":"Rabat","w":"Casablanca is Morocco's biggest city, but Rabat is the capital.","c":["Casablanca","Marrakesh","Fez"]},
+ {"q":"Which is the second-largest country in Africa by area?","a":"DR Congo","w":"It became second-largest when South Sudan split from Sudan in 2011.","c":["Sudan","Libya","Nigeria"]},
+ {"q":"Most of Nigeria's oil comes from which region?","a":"The Niger Delta","w":"It is one of the largest river deltas in the world, with many mangrove swamps.","c":["The Lake Chad Basin","The Jos Plateau","The Sokoto Basin"]}
 ],
 s:[
  {"q":"Which two rivers join at Khartoum to form the Nile?","a":"The White Nile and the Blue Nile","w":"The Blue Nile from Ethiopia carries most of the water during the flood season.","c":["The Niger and the Benue","The Congo and the Ubangi","The Atbara and the Blue Nile"]},
@@ -294,7 +408,15 @@ s:[
  {"q":"What is the lowest point on land in Africa?","a":"Lake Assal in Djibouti","w":"It lies about 155 metres below sea level and is one of the saltiest lakes on Earth.","c":["The Qattara Depression","Lake Chad","The Okavango Delta"]},
  {"q":"Which major African river crosses the Equator twice?","a":"The Congo","w":"Because it flows on both sides of the Equator, part of its basin always has a rainy season.","c":["The Nile","The Niger","The Zambezi"]},
  {"q":"Which island country off West Africa has Praia as its capital?","a":"Cabo Verde (Cape Verde)","w":"Its ten islands had no people until Portuguese sailors arrived in the 1400s.","c":["São Tomé and Príncipe","Equatorial Guinea","The Gambia"]},
- {"q":"Which lake is shared by Chad, Cameroon, Niger and Nigeria?","a":"Lake Chad","w":"It has shrunk by about 90% since the 1960s because of drought and water use.","c":["Lake Volta","Lake Kainji","Lake Turkana"]}
+ {"q":"Which lake is shared by Chad, Cameroon, Niger and Nigeria?","a":"Lake Chad","w":"It has shrunk by about 90% since the 1960s because of drought and water use.","c":["Lake Volta","Lake Kainji","Lake Turkana"]},
+ {"q":"Which Nigerian plateau is known for tin mining and a cool climate?","a":"The Jos Plateau","w":"Tin mining there began in the early 1900s, and the old mine pits have filled with water to make lakes.","c":["The Mambilla Plateau","The Obudu Plateau","The Udi Plateau"]},
+ {"q":"Which huge dam did Ethiopia build on the Blue Nile?","a":"The Grand Ethiopian Renaissance Dam (GERD)","w":"It is Africa's biggest hydroelectric project, and it caused disputes with Egypt and Sudan over the Nile's water.","c":["The Aswan High Dam","The Kariba Dam","The Kainji Dam"]},
+ {"q":"Which cold ocean current flows up the coast of Namibia and helps keep the Namib Desert dry?","a":"The Benguela Current","w":"Cold water cools the air above it, so few rain clouds form, but thick fogs roll inland.","c":["The Agulhas Current","The Canary Current","The Guinea Current"]},
+ {"q":"Which African capital city is the highest above sea level?","a":"Addis Ababa","w":"It is about 2,350 metres up, which keeps it cool even though it is close to the Equator.","c":["Nairobi","Asmara","Kigali"]},
+ {"q":"What is the highest mountain in West and Central Africa?","a":"Mount Cameroon","w":"It is an active volcano over 4,000 metres high, and one of the wettest places in the world.","c":["Chappal Waddi","Mount Nimba","Mount Bintumani"]},
+ {"q":"The Danakil Depression, one of the hottest places on Earth, is mostly in which country?","a":"Ethiopia","w":"It has bubbling yellow and green hot springs, salt flats and active volcanoes.","c":["Sudan","Somalia","Kenya"]},
+ {"q":"Which narrow strait joins the Red Sea to the Gulf of Aden?","a":"The Bab-el-Mandeb","w":"Its name means \"gate of tears\" in Arabic. Ships heading to the Suez Canal pass through it.","c":["The Strait of Hormuz","The Strait of Gibraltar","The Bosphorus"]},
+ {"q":"Kainji Lake, Nigeria's largest reservoir, was made by damming which river?","a":"The River Niger","w":"The Kainji Dam, finished in 1968, generates hydroelectric power.","c":["The Benue","The Kaduna","The Sokoto"]}
 ]
 },
 hist:{
@@ -314,7 +436,15 @@ j:[
  {"q":"Which boy king of Egypt had a tomb full of treasure that was found in 1922?","a":"Tutankhamun","w":"He became king at about nine years old, and his gold mask is world famous.","c":["Ramesses II","Akhenaten","Khufu"]},
  {"q":"Which animal, called the \"ship of the desert\", carried traders across the Sahara?","a":"The camel","w":"Long camel caravans carried salt and gold between North and West Africa.","c":["The horse","The donkey","The ostrich"]},
  {"q":"In West Africa, what do we call a storyteller who keeps history alive through songs and stories?","a":"A griot","w":"Griots remembered the history of families and kingdoms for hundreds of years.","c":["A king","A blacksmith","A trader"]},
- {"q":"Old rock paintings in the Sahara show giraffes and hippos. What does that tell us?","a":"That the Sahara was once green and wet","w":"Places like Tassili n'Ajjer in Algeria have thousands of these ancient paintings.","c":["That the Sahara has always been dry","That giraffes lived in caves","That people kept hippos as pets"]}
+ {"q":"Old rock paintings in the Sahara show giraffes and hippos. What does that tell us?","a":"That the Sahara was once green and wet","w":"Places like Tassili n'Ajjer in Algeria have thousands of these ancient paintings.","c":["That the Sahara has always been dry","That giraffes lived in caves","That people kept hippos as pets"]},
+ {"q":"Which Hausa queen of Zazzau (Zaria) was a famous warrior?","a":"Queen Amina","w":"She led her army on many campaigns, and walls she is said to have built are still called \"Amina's walls\".","c":["Cleopatra","Moremi","Yaa Asantewaa"]},
+ {"q":"Which brave woman of Ile-Ife is remembered for saving her town from raiders?","a":"Moremi","w":"A giant statue of her stands in Ile-Ife, and the Edi festival there remembers her bravery.","c":["Queen Amina","Queen Idia","Cleopatra"]},
+ {"q":"What were the kings of ancient Egypt called?","a":"Pharaohs","w":"A pharaoh was thought to be part god and part human.","c":["Emperors","Sultans","Obas"]},
+ {"q":"What is the traditional ruler of the Yoruba city of Ile-Ife called?","a":"The Ooni","w":"In Yoruba history Ile-Ife is seen as the place where the Yoruba people began.","c":["The Alaafin","The Emir","The Obi"]},
+ {"q":"Which ancient wonder of the world was a giant lighthouse in Alexandria, Egypt?","a":"The Pharos (Lighthouse) of Alexandria","w":"It was over 100 metres tall and guided ships for more than 1,000 years.","c":["The Great Wall","The Colosseum","The Hanging Gardens"]},
+ {"q":"Who was the first president of Ghana?","a":"Kwame Nkrumah","w":"He led Ghana to independence in 1957 and dreamed of a united Africa.","c":["Jomo Kenyatta","Nelson Mandela","Julius Nyerere"]},
+ {"q":"Long ago, many people in West Africa used which small shells as money?","a":"Cowrie shells","w":"Cowries came from the Indian Ocean and were used in markets for hundreds of years.","c":["Snail shells","Oyster shells","Coconut shells"]},
+ {"q":"What precious metal did West African empires like Ghana and Mali trade across the Sahara?","a":"Gold","w":"The old Ghana Empire was so rich in gold that Arab writers called it \"the land of gold\".","c":["Silver","Copper","Tin"]}
 ],
 m:[
  {"q":"Which ancient kingdom in today's Sudan built more pyramids than Egypt?","a":"The Kingdom of Kush (Nubia)","w":"Around 200 pyramids stand at Meroë. Its kings even ruled Egypt for a while.","c":["The Kingdom of Aksum","The Kingdom of Benin","The Songhai Empire"]},
@@ -332,7 +462,15 @@ m:[
  {"q":"On which island near Cape Town was Nelson Mandela imprisoned for 18 years?","a":"Robben Island","w":"The old prison is now a museum and a UNESCO World Heritage Site.","c":["Gorée Island","Lamu Island","Zanzibar"]},
  {"q":"Which ancient Ethiopian kingdom raised giant carved stone pillars called stelae?","a":"Aksum","w":"Aksum minted its own coins and became Christian in the 300s.","c":["Carthage","Great Zimbabwe","Kanem-Bornu"]},
  {"q":"Which island off Senegal is a memorial to the Atlantic slave trade?","a":"Gorée Island","w":"Its House of Slaves reminds visitors of the millions of Africans forced across the Atlantic.","c":["Robben Island","Zanzibar","Bioko"]},
- {"q":"Who was the first president of Kenya?","a":"Jomo Kenyatta","w":"Kenya won independence from Britain in 1963, and he became president in 1964.","c":["Daniel arap Moi","Julius Nyerere","Mwai Kibaki"]}
+ {"q":"Who was the first president of Kenya?","a":"Jomo Kenyatta","w":"Kenya won independence from Britain in 1963, and he became president in 1964.","c":["Daniel arap Moi","Julius Nyerere","Mwai Kibaki"]},
+ {"q":"Which Yoruba empire, with its capital at Oyo-Ile, was famous for its cavalry?","a":"The Oyo Empire","w":"It was ruled by the Alaafin and was at its strongest in the 1600s and 1700s.","c":["The Benin Empire","The Songhai Empire","The Kanem-Bornu Empire"]},
+ {"q":"Which kingdom around Lake Chad lasted for about 1,000 years?","a":"Kanem-Bornu","w":"Its rulers, called mais, traded across the Sahara with North Africa.","c":["The Oyo Empire","The Kingdom of Kush","The Mali Empire"]},
+ {"q":"Who led the jihad that created the Sokoto Caliphate in the early 1800s?","a":"Usman dan Fodio","w":"He was a scholar and writer as well as a leader. His daughter Nana Asma'u was a famous poet and teacher.","c":["Ahmadu Bello","Shehu Shagari","Mansa Musa"]},
+ {"q":"Which queen of Ndongo and Matamba, in today's Angola, fought the Portuguese in the 1600s?","a":"Queen Nzinga","w":"She was a clever diplomat as well as a war leader, and ruled for about 40 years.","c":["Queen Amina","Queen Idia","Yaa Asantewaa"]},
+ {"q":"What was Ghana called before independence?","a":"The Gold Coast","w":"Kwame Nkrumah chose the name Ghana after the old West African empire.","c":["The Slave Coast","The Ivory Coast","The Grain Coast"]},
+ {"q":"Who suggested the name \"Nigeria\" in 1897?","a":"Flora Shaw","w":"She was a British journalist who took the name from the River Niger. She later married Frederick Lugard.","c":["Mary Slessor","Queen Victoria","Mary Kingsley"]},
+ {"q":"What is the joining of Northern and Southern Nigeria into one country in 1914 called?","a":"The amalgamation","w":"It was carried out by the British governor Frederick Lugard.","c":["Independence","The partition","The Berlin Conference"]},
+ {"q":"Which first president of Tanzania was called \"Mwalimu\", meaning teacher?","a":"Julius Nyerere","w":"He promoted Swahili as a national language, which helped unite Tanzania's many peoples.","c":["Jomo Kenyatta","Kwame Nkrumah","Milton Obote"]}
 ],
 s:[
  {"q":"At which conference in 1884–85 did European powers agree rules for dividing up Africa?","a":"The Berlin Conference","w":"No African was invited, and it sped up the European \"Scramble for Africa\".","c":["The Treaty of Versailles","The Congress of Vienna","The Bandung Conference"]},
@@ -350,7 +488,15 @@ s:[
  {"q":"Which is Africa's newest country, independent since 2011?","a":"South Sudan","w":"Almost 99% of voters chose independence from Sudan in a referendum.","c":["Eritrea","Namibia","Western Sahara"]},
  {"q":"Which empire had its capital at Gao and took over from Mali in the 1400s?","a":"The Songhai Empire","w":"It fell after a Moroccan army defeated it at the Battle of Tondibi in 1591.","c":["The Ghana Empire","The Kanem-Bornu Empire","The Oyo Empire"]},
  {"q":"Which Nigerian woman led protests against unfair taxes on women in Abeokuta in the 1940s?","a":"Funmilayo Ransome-Kuti","w":"Her Abeokuta Women's Union pushed the Alake to step down for a time in 1949.","c":["Margaret Ekpo","Queen Amina","Gambo Sawaba"]},
- {"q":"What was the 1929 uprising of Igbo and Ibibio women against colonial taxes called?","a":"The Aba Women's War","w":"It was one of the first big challenges to British rule in West Africa.","c":["The Abeokuta Women's Revolt","The Egba Uprising","The Adubi War"]}
+ {"q":"What was the 1929 uprising of Igbo and Ibibio women against colonial taxes called?","a":"The Aba Women's War","w":"It was one of the first big challenges to British rule in West Africa.","c":["The Abeokuta Women's Revolt","The Egba Uprising","The Adubi War"]},
+ {"q":"Which metal-casting method was used to make the Igbo-Ukwu and Benin bronzes?","a":"The lost-wax method","w":"A wax model is covered in clay and heated; the wax melts out and molten metal is poured in its place.","c":["Sand casting","Hammering cold metal","Die casting"]},
+ {"q":"Which 1905–07 uprising in German East Africa was named after sacred water that fighters believed would protect them?","a":"The Maji Maji Rebellion","w":"\"Maji\" means water in Swahili. The Germans crushed it, and many thousands died.","c":["The Mau Mau Uprising","The Herero War","The Chimurenga"]},
+ {"q":"In which year did Zimbabwe gain independence?","a":"1980","w":"It followed a long liberation war against the white-minority government of Rhodesia.","c":["1965","1975","1990"]},
+ {"q":"Which leader of Burkina Faso (1983–87) renamed the country, which means \"land of upright people\"?","a":"Thomas Sankara","w":"He pushed for vaccination, tree planting and women's rights before he was killed in a coup.","c":["Blaise Compaoré","Jerry Rawlings","Modibo Keïta"]},
+ {"q":"At which 1879 battle did the Zulu army defeat a British force?","a":"The Battle of Isandlwana","w":"It was one of the worst defeats of the British army by an African force.","c":["The Battle of Adwa","The Battle of Omdurman","The Battle of Blood River"]},
+ {"q":"What was the \"Middle Passage\"?","a":"The voyage that carried enslaved Africans across the Atlantic","w":"Millions were packed into ships for weeks, and many died on the way.","c":["A trade route across the Sahara","A road from Cairo to Cape Town","A canal between two seas"]},
+ {"q":"Algeria won independence in 1962 after a long war against which colonial power?","a":"France","w":"The war lasted from 1954 to 1962, and hundreds of thousands of people were killed.","c":["Britain","Italy","Spain"]},
+ {"q":"Which freed slave became the first African Anglican bishop, in 1864, and translated the Bible into Yoruba?","a":"Samuel Ajayi Crowther","w":"He was captured as a boy, freed by the British Navy and educated in Sierra Leone.","c":["Herbert Macaulay","Olaudah Equiano","James Africanus Horton"]}
 ]
 },
 people:{
@@ -370,7 +516,15 @@ j:[
  {"q":"Kelvin Doe from Sierra Leone taught himself to build what from scrap, so his town could hear news and music?","a":"A radio station","w":"He also made his own batteries and a generator from things he found in rubbish bins.","c":["A robot","A car","A mobile phone"]},
  {"q":"Which game, played with seeds and holes on a board, is one of the oldest games in the world?","a":"Mancala (ayo, oware)","w":"In Nigeria it is called ayo, and in Ghana it is called oware.","c":["Chess","Ludo","Draughts"]},
  {"q":"Builders in ancient Africa made bricks by drying what in the sun?","a":"Mud (mixed with straw)","w":"The Great Mosque of Djenné in Mali is the largest mud-brick building in the world.","c":["Cement","Glass","Plastic"]},
- {"q":"Which African musical instrument is played by plucking metal keys with your thumbs?","a":"The mbira (thumb piano)","w":"It is especially important to the Shona people of Zimbabwe.","c":["The talking drum","The kora","The balafon"]}
+ {"q":"Which African musical instrument is played by plucking metal keys with your thumbs?","a":"The mbira (thumb piano)","w":"It is especially important to the Shona people of Zimbabwe.","c":["The talking drum","The kora","The balafon"]},
+ {"q":"What do we call a person who makes something new that nobody made before?","a":"An inventor","w":"Africa has many inventors, from ancient Egypt to young people building things from scrap today.","c":["An explorer","A farmer","A painter"]},
+ {"q":"Ancient Egyptian doctors put honey on wounds. Why?","a":"It helps wounds heal by fighting germs","w":"Honey is so good at stopping germs that it does not go bad for a very long time.","c":["To make them sweet","To stick bandages on","To make them shiny"]},
+ {"q":"Long ago, African smiths heated rocks in furnaces to make which strong metal for tools?","a":"Iron","w":"The Nok people of Nigeria were making iron over 2,000 years ago.","c":["Gold","Plastic","Rubber"]},
+ {"q":"What do we call a scientist who digs up fossils to learn about life long ago?","a":"A palaeontologist","w":"Fossil hunters in Kenya, Tanzania, Ethiopia and South Africa have found some of the oldest human fossils.","c":["An astronomer","A chemist","A dentist"]},
+ {"q":"Nigeria has sent satellites into space. What does a satellite do?","a":"It goes around the Earth, taking pictures or sending signals","w":"Nigeria's first satellite, NigeriaSat-1, went into space in 2003.","c":["It digs for oil","It flies people to the Moon","It makes rain"]},
+ {"q":"Nigerian teacher Mohammed Bah Abba made a \"pot-in-pot\" cooler from two clay pots and wet sand. What does it do?","a":"Keeps food fresh without electricity","w":"As water in the sand evaporates it takes heat away, so the inner pot stays cool.","c":["Cooks food faster","Washes clothes","Makes ice cream"]},
+ {"q":"The ancient Great Library, which held thousands of scrolls, was in which African city?","a":"Alexandria","w":"Scholars from many lands came to Alexandria in Egypt to study there.","c":["Cairo","Timbuktu","Tunis"]},
+ {"q":"Which animal did ancient Egyptians keep to protect their grain stores from mice?","a":"The cat","w":"Egyptians loved cats so much that they had a cat goddess called Bastet.","c":["The dog","The owl","The snake"]}
 ],
 m:[
  {"q":"Which Nigerian computer scientist won the Gordon Bell Prize in 1989 for supercomputer calculations?","a":"Philip Emeagwali","w":"He used 65,536 processors working together, an example of massively parallel computing.","c":["Ahmed Zewail","Thomas Mensah","Arthur Zang"]},
@@ -388,7 +542,15 @@ m:[
  {"q":"The Rhind Papyrus from ancient Egypt is one of the oldest books about what subject?","a":"Mathematics","w":"A scribe named Ahmes copied it around 1550 BCE, and it includes fractions and geometry.","c":["Medicine","Astronomy","Farming"]},
  {"q":"South African-born Max Theiler won the 1951 Nobel Prize for a vaccine against which disease?","a":"Yellow fever","w":"His vaccine, developed in the 1930s, is still used to protect people today.","c":["Malaria","Polio","Smallpox"]},
  {"q":"Egyptian-born geologist Farouk El-Baz helped NASA choose landing sites for which missions?","a":"The Apollo Moon landings","w":"He also trained the Apollo astronauts to describe the rocks they saw.","c":["The first Mars rovers","The Hubble Space Telescope","The International Space Station"]},
- {"q":"Malian scientist Cheick Modibo Diarra worked at NASA as what kind of navigator?","a":"An interplanetary navigator (guiding space probes)","w":"He helped guide missions such as Mars Pathfinder, and later served as Mali's prime minister.","c":["A ship's navigator","A fighter jet pilot","A desert guide"]}
+ {"q":"Malian scientist Cheick Modibo Diarra worked at NASA as what kind of navigator?","a":"An interplanetary navigator (guiding space probes)","w":"He helped guide missions such as Mars Pathfinder, and later served as Mali's prime minister.","c":["A ship's navigator","A fighter jet pilot","A desert guide"]},
+ {"q":"Grace Alele-Williams was the first Nigerian woman to earn a PhD in which subject?","a":"Mathematics","w":"In 1985 she also became the first woman to lead a Nigerian university, the University of Benin.","c":["Medicine","Chemistry","Law"]},
+ {"q":"Ethiopian scientist Gebisa Ejeta won the 2009 World Food Prize for breeding which crop to survive drought?","a":"Sorghum","w":"His sorghum resists drought and a weed called striga, helping millions of farmers.","c":["Maize","Rice","Cassava"]},
+ {"q":"Senegalese scholar Cheikh Anta Diop set up a laboratory in Dakar for which way of finding the age of objects?","a":"Radiocarbon (carbon-14) dating","w":"He was also a historian who wrote about ancient Egypt's links with the rest of Africa.","c":["Tree-ring dating","Counting rock layers","DNA testing"]},
+ {"q":"Sudanese-born engineer Mo Ibrahim built Celtel into one of Africa's first big networks of what?","a":"Mobile phones","w":"He later set up a prize for African leaders who govern well and hand over power peacefully.","c":["Railways","Banks","Television stations"]},
+ {"q":"Ugandan engineer Brian Gitta's team invented Matibabu. What does it test for, without needing blood?","a":"Malaria","w":"It shines a light through a finger to detect the malaria parasite.","c":["Diabetes","Tuberculosis","Sickle cell"]},
+ {"q":"Which Moroccan explorer travelled about 120,000 kilometres across Africa and Asia in the 1300s?","a":"Ibn Battuta","w":"He visited the Mali Empire and wrote about his journeys in a famous book, the Rihla.","c":["Ibn Khaldun","Leo Africanus","Mansa Musa"]},
+ {"q":"Nigerian physicist Francisca Okeke won a major L'Oréal-UNESCO award in 2013 for studying which part of the atmosphere?","a":"The ionosphere","w":"The ionosphere is a high layer of charged particles that affects radio and satellite signals.","c":["The ozone layer","The clouds","The ocean floor"]},
+ {"q":"Kenyan scientist Thomas Odhiambo founded a research centre in Nairobi in 1970. What does it study?","a":"Insects","w":"The centre, called icipe, finds ways to control pests and insect-borne diseases without harmful chemicals.","c":["Volcanoes","Stars","Fish"]}
 ],
 s:[
  {"q":"Who was Imhotep?","a":"An ancient Egyptian architect who designed the first pyramid","w":"He built the Step Pyramid for King Djoser around 2650 BCE and was later honoured as a god of medicine.","c":["A Nubian king who conquered Egypt","A Greek scholar who ran the Library of Alexandria","The pharaoh buried in the Great Pyramid"]},
@@ -406,7 +568,15 @@ s:[
  {"q":"Ethiopian-American scientist Sossina Haile made the first fuel cells using what kind of material?","a":"Solid acids","w":"Fuel cells turn chemical energy straight into electricity; her breakthrough was published in 2001.","c":["Liquid metals","Seawater","Living bacteria"]},
  {"q":"Which human relative was discovered in South Africa's Rising Star cave and named in 2015?","a":"Homo naledi","w":"\"Naledi\" means \"star\" in Sesotho, after the cave where its bones were found.","c":["Homo erectus","Australopithecus sediba","Paranthropus robustus"]},
  {"q":"Which 14th-century scholar born in Tunis is seen as a founder of sociology and modern history writing?","a":"Ibn Khaldun","w":"His book, the Muqaddimah, studied why societies and empires rise and fall.","c":["Ibn Battuta","Ibn Rushd (Averroes)","Ahmed Baba"]},
- {"q":"Which woman mathematician and astronomer taught in Alexandria, Egypt, around 400 CE?","a":"Hypatia","w":"She is the first female mathematician whose life is reasonably well recorded.","c":["Cleopatra","Nefertiti","Hatshepsut"]}
+ {"q":"Which woman mathematician and astronomer taught in Alexandria, Egypt, around 400 CE?","a":"Hypatia","w":"She is the first female mathematician whose life is reasonably well recorded.","c":["Cleopatra","Nefertiti","Hatshepsut"]},
+ {"q":"Which scientist, who grew up in Durban, won the 1982 Nobel Prize in Chemistry for developing crystallographic electron microscopy?","a":"Aaron Klug","w":"He used it to work out the structures of viruses and other complexes of proteins and nucleic acids.","c":["Sydney Brenner","Allan Cormack","Max Theiler"]},
+ {"q":"Ghanaian scientist Francis Allotey is known for the \"Allotey Formalism\" in which field?","a":"Soft X-ray spectroscopy","w":"He was one of Ghana's first mathematics professors and helped found the African Institute for Mathematical Sciences in Ghana.","c":["Quantum gravity","Number theory","Fluid dynamics"]},
+ {"q":"Egyptian-born chemist Mostafa El-Sayed researches using which tiny particles to fight cancer?","a":"Gold nanoparticles","w":"When light shines on them they heat up and can destroy cancer cells around them.","c":["Silver ions","Carbon nanotubes","Radioactive iodine"]},
+ {"q":"Which scientist, working in Cairo around 1000 CE, wrote the Book of Optics explaining that we see when light enters the eye?","a":"Ibn al-Haytham (Alhazen)","w":"He tested his ideas with careful experiments and is called a pioneer of the scientific method.","c":["Ibn Sina","Al-Khwarizmi","Ibn Khaldun"]},
+ {"q":"In which Tanzanian gorge did the Leakey family find fossils of Homo habilis?","a":"Olduvai Gorge","w":"Its layers of rock record about two million years of human prehistory.","c":["Sterkfontein","Koobi Fora","The Afar Triangle"]},
+ {"q":"Egyptian-born surgeon Magdi Yacoub is famous for what?","a":"Heart and heart-lung transplants","w":"He later founded a heart centre in Aswan that treats children for free.","c":["Kidney dialysis","Brain surgery","Eye surgery"]},
+ {"q":"Ethiopian-born computer scientist Timnit Gebru is best known for research on what?","a":"Bias and ethics in artificial intelligence","w":"She also co-founded Black in AI to bring more Black researchers into the field.","c":["Quantum computers","Mobile phone batteries","Computer viruses"]},
+ {"q":"Which biodiversity scientist served as president of Mauritius from 2015 to 2018?","a":"Ameenah Gurib-Fakim","w":"She studies the medicinal uses of plants from Mauritius and the Indian Ocean islands.","c":["Ellen Johnson Sirleaf","Joyce Banda","Sahle-Work Zewde"]}
 ]
 },
 wild:{
@@ -426,7 +596,15 @@ j:[
  {"q":"Which reptile with powerful jaws lives in the River Nile?","a":"The Nile crocodile","w":"It is Africa's largest reptile and can grow more than 5 metres long.","c":["The hippopotamus","The tortoise","The chameleon"]},
  {"q":"Which animal is called the \"king of the jungle\", even though it lives on the savanna?","a":"The lion","w":"A lion's roar can be heard up to 8 km away.","c":["The elephant","The gorilla","The leopard"]},
  {"q":"Which black-and-white bird lives on the coast of South Africa and swims but cannot fly?","a":"The African penguin","w":"Some live on Boulders Beach near Cape Town, right beside people.","c":["The ostrich","The pelican","The flamingo"]},
- {"q":"Which African animal's name means \"earth pig\", and it digs for ants and termites?","a":"The aardvark","w":"It uses its long sticky tongue to slurp up thousands of insects in one night.","c":["The warthog","The meerkat","The bushpig"]}
+ {"q":"Which African animal's name means \"earth pig\", and it digs for ants and termites?","a":"The aardvark","w":"It uses its long sticky tongue to slurp up thousands of insects in one night.","c":["The warthog","The meerkat","The bushpig"]},
+ {"q":"Which grey African bird with a red tail is famous for copying words?","a":"The African grey parrot","w":"It is one of the cleverest birds and can learn many words and even use them to ask for things.","c":["The ostrich","The hornbill","The weaver bird"]},
+ {"q":"Which small bird weaves a hanging nest out of grass?","a":"The weaver bird","w":"The male weaves the nest, and the female checks it before she moves in.","c":["The ostrich","The vulture","The parrot"]},
+ {"q":"What do elephants flap their big ears to do?","a":"To keep cool","w":"Blood flowing through their thin ears loses heat as they flap.","c":["To fly","To dig","To catch insects"]},
+ {"q":"What does a giraffe's long neck help it do?","a":"Reach leaves high up in trees","w":"Giraffes love the leaves of the thorny acacia tree.","c":["Swim","Dig for water","Catch fish"]},
+ {"q":"Who leads a herd of elephants?","a":"The oldest female","w":"She is called the matriarch, and she remembers where to find water.","c":["The biggest male","The youngest baby","Nobody"]},
+ {"q":"Which noisy monkey with a dog-like face lives in big troops on the savanna?","a":"The baboon","w":"Baboons sleep up in trees or on cliffs to stay safe from leopards.","c":["The gorilla","The lemur","The chimpanzee"]},
+ {"q":"Which big bird with a bald head eats dead animals?","a":"The vulture","w":"Vultures clean up the savanna, which helps stop diseases from spreading.","c":["The eagle","The ostrich","The flamingo"]},
+ {"q":"Which slow reptile carries a hard shell on its back?","a":"The tortoise","w":"Some tortoises can live for more than 100 years.","c":["The lizard","The snake","The crocodile"]}
 ],
 m:[
  {"q":"Which animals make up the \"Big Five\"?","a":"Lion, leopard, elephant, rhinoceros and buffalo","w":"Hunters chose them as the hardest to hunt on foot. Today they are a safari checklist.","c":["Lion, cheetah, elephant, giraffe and buffalo","Lion, leopard, hippo, rhinoceros and zebra","Cheetah, leopard, elephant, gorilla and buffalo"]},
@@ -444,7 +622,15 @@ m:[
  {"q":"Mountain gorillas live in the forests of which three countries?","a":"Rwanda, Uganda and DR Congo","w":"Careful protection has helped their numbers rise to over 1,000.","c":["Kenya, Ethiopia and Tanzania","Ghana, Togo and Benin","Zambia, Malawi and Mozambique"]},
  {"q":"What does the dung beetle roll into balls?","a":"Animal dung (poo)","w":"Scientists in South Africa found that some dung beetles use the Milky Way to steer at night.","c":["Leaves","Seeds","Sand"]},
  {"q":"Which is the largest antelope in the world?","a":"The eland (giant eland)","w":"Despite its huge size, it can jump about 2 metres high from a standing start.","c":["The kudu","The sable antelope","The wildebeest"]},
- {"q":"Which type of African snake can shoot venom into an attacker's eyes?","a":"A spitting cobra","w":"It can aim at the eyes from more than 2 metres away, so rangers often wear glasses.","c":["The puff adder","The green mamba","The boomslang"]}
+ {"q":"Which type of African snake can shoot venom into an attacker's eyes?","a":"A spitting cobra","w":"It can aim at the eyes from more than 2 metres away, so rangers often wear glasses.","c":["The puff adder","The green mamba","The boomslang"]},
+ {"q":"Which leaping antelope is South Africa's national animal?","a":"The springbok","w":"It jumps straight up with a stiff back, a move called pronking.","c":["The impala","The kudu","The gazelle"]},
+ {"q":"What do we call animals that eat dead animals, like vultures and hyenas?","a":"Scavengers","w":"Scavengers clean up carcasses that would otherwise rot and spread disease.","c":["Predators","Herbivores","Decomposers"]},
+ {"q":"Which huge collapsed volcano in Tanzania is home to tens of thousands of animals?","a":"The Ngorongoro Crater","w":"Its walls are about 600 metres high, and lions, elephants and rhinos live inside.","c":["Mount Kenya","Mount Kilimanjaro","Lake Natron"]},
+ {"q":"Which is the largest national park in Nigeria?","a":"Gashaka-Gumti National Park","w":"It lies on the border with Cameroon and is home to chimpanzees, elephants and hundreds of kinds of birds.","c":["Yankari","Kainji Lake","Old Oyo"]},
+ {"q":"Which famous natural feature in Yankari Game Reserve do visitors swim in?","a":"The Wikki Warm Spring","w":"The clear water stays at about 31 °C all year round.","c":["A waterfall","A volcano crater","A frozen lake"]},
+ {"q":"Which rare gorilla lives only in the forests on the Nigeria–Cameroon border?","a":"The Cross River gorilla","w":"There are only about 250 to 300 left, making it the rarest kind of gorilla.","c":["The mountain gorilla","The bonobo","The drill"]},
+ {"q":"Which long-legged bird of prey stamps on snakes and has feathers on its head like old quill pens?","a":"The secretary bird","w":"It is on the coat of arms of Sudan and of South Africa.","c":["The marabou stork","The crowned crane","The hornbill"]},
+ {"q":"What do we call a kind of animal whose numbers are so low it could die out?","a":"Endangered","w":"If every last one dies, the species is extinct, like the dodo of Mauritius.","c":["Extinct","Domesticated","Nocturnal"]}
 ],
 s:[
  {"q":"Which long, fast African snake is named after the inky colour inside its mouth?","a":"The black mamba","w":"It is Africa's longest venomous snake and can reach about 4 metres.","c":["The green mamba","The puff adder","The boomslang"]},
@@ -462,7 +648,175 @@ s:[
  {"q":"Which scaly mammal is thought to be the most trafficked mammal in the world?","a":"The pangolin","w":"When threatened it rolls into a tight ball, and all African species are now protected.","c":["The aardvark","The porcupine","The armadillo"]},
  {"q":"Lake Malawi has more fish species than any other lake. Which family of colourful fish makes up most of them?","a":"Cichlids","w":"Hundreds of species evolved from a few ancestors, a famous example of rapid evolution.","c":["Catfish","Carp","Salmon"]},
  {"q":"Which grass-eating monkey, found only in Ethiopia's highlands, has a bright red patch on its chest?","a":"The gelada","w":"It is the only primate that feeds mainly on grass.","c":["The mandrill","The vervet monkey","The colobus monkey"]},
- {"q":"What is the name of the shrubland of South Africa's Cape, one of the richest plant areas on Earth?","a":"Fynbos","w":"The Cape Floral Region is the smallest of the world's six floral kingdoms but has about 9,000 plant species.","c":["The savanna","The Sahel","The miombo woodland"]}
+ {"q":"What is the name of the shrubland of South Africa's Cape, one of the richest plant areas on Earth?","a":"Fynbos","w":"The Cape Floral Region is the smallest of the world's six floral kingdoms but has about 9,000 plant species.","c":["The savanna","The Sahel","The miombo woodland"]},
+ {"q":"What is it called when an animal goes dormant to survive a hot dry season?","a":"Aestivation","w":"It is the hot-weather version of hibernation. Some snails, frogs and lungfish do it.","c":["Hibernation","Migration","Metamorphosis"]},
+ {"q":"Which is Africa's most endangered carnivore, found only in the Ethiopian Highlands?","a":"The Ethiopian wolf","w":"Fewer than 500 remain, threatened by habitat loss and rabies caught from dogs.","c":["The African wild dog","The cheetah","The lion"]},
+ {"q":"The greater honeyguide bird leads people to bees' nests and eats the leftover wax. What is this kind of relationship called?","a":"Mutualism","w":"Honey hunters in Tanzania and Mozambique call the bird with special whistles and calls.","c":["Parasitism","Predation","Commensalism"]},
+ {"q":"Naked mole-rats of East Africa live in colonies with one breeding queen, like bees. What is this way of living called?","a":"Eusociality","w":"They are one of very few mammals to live this way, and they can live for over 30 years.","c":["Symbiosis","Altruism","Polygamy"]},
+ {"q":"Which endangered monkey with a black face lives in Cross River State, Cameroon and Bioko Island?","a":"The drill","w":"It is a close relative of the colourful mandrill and is one of Africa's most endangered primates.","c":["The mandrill","The olive baboon","The colobus"]},
+ {"q":"Which floating plant from South America has clogged parts of Lake Victoria?","a":"Water hyacinth","w":"It blocks boats and fishing nets and uses up the oxygen fish need.","c":["Papyrus","Duckweed","The water lily"]},
+ {"q":"Which large fish, brought into Lake Victoria in the 1950s, helped wipe out hundreds of native cichlid species?","a":"The Nile perch","w":"It is one of the best-known examples of the harm an introduced species can do.","c":["The tilapia","The catfish","The tigerfish"]},
+ {"q":"What does CITES control?","a":"International trade in endangered plants and animals","w":"It is a treaty signed by more than 180 countries, and it banned the international trade in ivory in 1989.","c":["Hunting inside national parks","Fishing in international waters","Climate change emissions"]}
+]
+},
+gov:{
+j:[
+ {"q":"What do we call the leader of a country like Nigeria who is chosen in an election?","a":"The president","w":"In Nigeria the president is elected by the people every four years.","c":["The king","The governor","The chief judge"]},
+ {"q":"What do people do on election day to choose their leaders?","a":"They vote","w":"Each voter marks the person they choose. The one with the most votes wins.","c":["They sing","They pay taxes","They write exams"]},
+ {"q":"How old must you be to vote in Nigeria?","a":"18","w":"At 18 you can register with INEC and get a voter's card.","c":["12","16","21"]},
+ {"q":"What are the colours of the Nigerian flag?","a":"Green and white","w":"Green stands for the land and white for peace. A student, Taiwo Akinkunmi, designed it in 1959.","c":["Red and white","Green and yellow","Black and green"]},
+ {"q":"What do we call a group of people who share ideas and put forward candidates in elections?","a":"A political party","w":"Parties write down their plans in a document called a manifesto.","c":["A club","A choir","A council of elders"]},
+ {"q":"What do we call the rules that everyone in a country must obey?","a":"Laws","w":"Laws help keep people safe and make sure everyone is treated fairly.","c":["Games","Songs","Stories"]},
+ {"q":"Who leads a state in Nigeria, such as Lagos or Kano?","a":"The governor","w":"Each state has a governor, chosen in an election just like the president.","c":["The president","The senator","The oba"]},
+ {"q":"How many states does Nigeria have?","a":"36","w":"There is also the Federal Capital Territory, which is where Abuja is.","c":["19","30","50"]},
+ {"q":"What is the main job of the police?","a":"To keep people safe and make sure laws are obeyed","w":"If you are ever lost or in danger, a police officer is someone you can ask for help.","c":["To make new laws","To teach in schools","To build roads"]},
+ {"q":"What do we call the special song a country sings to show love for it?","a":"The national anthem","w":"Nigeria brought back its first anthem, \"Nigeria, We Hail Thee\", in 2024.","c":["A lullaby","A folk song","A praise song"]},
+ {"q":"What do Nigerian pupils say together at assembly to promise to be faithful, loyal and honest?","a":"The National Pledge","w":"It begins: \"I pledge to Nigeria my country, to be faithful, loyal and honest.\"","c":["The national anthem","The constitution","The coat of arms"]},
+ {"q":"Which group brings together all the countries of Africa?","a":"The African Union","w":"It has 55 member states and works for peace and unity across Africa.","c":["The United Nations","ECOWAS","The Commonwealth"]},
+ {"q":"What do we call a person who belongs to a country and has rights there?","a":"A citizen","w":"Citizens have rights, like going to school, and duties, like obeying the law.","c":["A visitor","A tourist","A soldier"]},
+ {"q":"What money do people and companies pay to the government to build schools, roads and hospitals?","a":"Taxes","w":"Taxes help pay for things everyone shares, like roads, clinics and street lights.","c":["Fines","Rent","Gifts"]},
+ {"q":"On which date does Nigeria celebrate Independence Day?","a":"1 October","w":"Nigeria became independent from Britain on 1 October 1960.","c":["12 June","25 May","25 December"]},
+ {"q":"Which animals stand on either side of the shield on Nigeria's coat of arms?","a":"Two white horses","w":"The black shield has a white Y for the Niger and Benue rivers meeting, and a red eagle stands on top.","c":["Two lions","Two elephants","Two eagles"]},
+ {"q":"What do we call the people chosen to make laws for the whole country in Abuja?","a":"Lawmakers (senators and representatives)","w":"Each part of Nigeria elects lawmakers to speak for the people who live there.","c":["Judges","Soldiers","Head teachers"]},
+ {"q":"In a court, who decides whether someone has broken the law?","a":"A judge","w":"A judge listens to both sides before deciding. Some trials also have a magistrate.","c":["A doctor","A governor","A police officer"]},
+ {"q":"What is the motto on Nigeria's coat of arms?","a":"Unity and Faith, Peace and Progress","w":"A motto is a short saying that shows what a country believes in.","c":["Freedom and Justice","Strength and Honour","Work and Happiness"]},
+ {"q":"Where do voters put their ballot papers on election day?","a":"In a ballot box","w":"Ballot boxes are sealed so that nobody can add or take out votes.","c":["In a post box","In a toolbox","In a lunch box"]},
+ {"q":"On which date is Children's Day celebrated in Nigeria?","a":"27 May","w":"Schools are closed, and children take part in parades and fun events.","c":["1 October","12 June","25 May"]},
+ {"q":"Every child has the right to go to school. What is a right?","a":"Something every person should be allowed to have or do","w":"Children also have the right to be safe, healthy and to have a name.","c":["A punishment","A prize for winning","A rule only for grown-ups"]},
+ {"q":"What do we call helping your community without being paid?","a":"Volunteering","w":"Cleaning up a market or helping younger pupils read are kinds of volunteering.","c":["Trading","Taxing","Voting"]},
+ {"q":"Which service puts out fires and rescues people in danger?","a":"The fire service","w":"In an emergency in Nigeria you can call 112 for help.","c":["The post office","The weather service","The customs service"]}
+],
+m:[
+ {"q":"What are the three arms of government?","a":"The legislature, the executive and the judiciary","w":"The legislature makes laws, the executive carries them out, and the judiciary (the courts) explains and applies them.","c":["The army, the police and the courts","The president, the governors and the chiefs","The Senate, the ministers and the police"]},
+ {"q":"What is the lawmaking body of Nigeria called?","a":"The National Assembly","w":"It has two houses: the Senate and the House of Representatives.","c":["The Federal Executive Council","The Supreme Court","The Council of State"]},
+ {"q":"How many senators does each Nigerian state elect?","a":"Three","w":"Three for each of the 36 states plus one for the FCT makes 109 senators.","c":["One","Two","Five"]},
+ {"q":"What is the highest court in Nigeria?","a":"The Supreme Court","w":"It is led by the Chief Justice of Nigeria, and its decisions are final.","c":["The Court of Appeal","The Federal High Court","The Customary Court"]},
+ {"q":"How long is a Nigerian president's term, and how many terms can one person serve?","a":"Four years, and at most two terms","w":"Governors have the same limit: two terms of four years.","c":["Five years, and only one term","Six years, and only one term","Four years, with no limit"]},
+ {"q":"What is the highest law of a country, setting out how it is governed and what rights people have, called?","a":"The constitution","w":"Nigeria's present constitution came into force in 1999. No other law can go against it.","c":["The national anthem","The budget","A manifesto"]},
+ {"q":"What do we call a system in which people choose their leaders in free elections?","a":"Democracy","w":"The word comes from Greek and means \"rule by the people\".","c":["Monarchy","Dictatorship","Colonialism"]},
+ {"q":"Which body organises elections in Nigeria?","a":"INEC (the Independent National Electoral Commission)","w":"INEC registers voters, runs elections and announces the results.","c":["EFCC","NYSC","NAFDAC"]},
+ {"q":"Why does Nigeria celebrate Democracy Day on 12 June?","a":"To remember the 12 June 1993 election, widely believed to have been won by M. K. O. Abiola","w":"The military government cancelled the result. Since 2019, 12 June has replaced 29 May as Democracy Day.","c":["It is the day Nigeria became independent","It is the day Nigeria became a republic","It is the day Abuja became the capital"]},
+ {"q":"Which group of West African countries was set up in 1975 to boost trade and cooperation?","a":"ECOWAS (the Economic Community of West African States)","w":"It was founded by the Treaty of Lagos, and its headquarters are in Abuja.","c":["SADC","The East African Community","The Arab League"]},
+ {"q":"How many local government areas does Nigeria have?","a":"774","w":"Local governments look after things close to home, such as markets, primary schools and health centres.","c":["36","250","1,000"]},
+ {"q":"What is it called when power is shared between a central government and state governments, as in Nigeria?","a":"Federalism (a federal system)","w":"The federal government handles things like defence and money; states handle many local matters.","c":["A unitary system","An absolute monarchy","A one-party state"]},
+ {"q":"What is the one-year national service that young Nigerian graduates do called?","a":"NYSC (the National Youth Service Corps)","w":"It began in 1973, after the civil war, so young people could live and work in parts of Nigeria far from home.","c":["WAEC","JAMB","NECO"]},
+ {"q":"In which African country have women held more than half the seats in parliament since 2008?","a":"Rwanda","w":"Rwanda's lower house has had the highest share of women of any parliament in the world.","c":["Sweden","South Africa","Senegal"]},
+ {"q":"In countries like Ethiopia, who leads the government and is chosen by parliament?","a":"The prime minister","w":"In Nigeria, the president is both head of state and head of government.","c":["The governor","The speaker","The chief justice"]},
+ {"q":"Who leads the House of Representatives in Nigeria?","a":"The Speaker","w":"The Senate is led by the Senate President.","c":["The Vice President","The Chief Justice","The Attorney General"]},
+ {"q":"How many members does Nigeria's House of Representatives have?","a":"360","w":"Seats are shared out by population, so states with more people have more representatives.","c":["109","250","469"]},
+ {"q":"Who takes over if Nigeria's president dies or can no longer do the job?","a":"The Vice President","w":"This happened in 2010, when Goodluck Jonathan became president after Umaru Yar'Adua died.","c":["The Senate President","The Chief Justice","The Speaker"]},
+ {"q":"What is the lawmaking body of each Nigerian state called?","a":"The State House of Assembly","w":"It makes laws for the state, while the National Assembly makes laws for the whole country.","c":["The Senate","The State Executive Council","The Customary Court"]},
+ {"q":"What is a bill?","a":"A proposed law that has not yet been passed","w":"A bill is debated and voted on, then signed by the president to become an act, or law.","c":["A court ruling","A tax receipt","A list of election promises"]},
+ {"q":"What do we call the political parties that are not in government and question its decisions?","a":"The opposition","w":"A strong opposition helps hold the government to account.","c":["The cabinet","The judiciary","The civil service"]},
+ {"q":"Which organisation, with its headquarters in New York, has 193 member countries?","a":"The United Nations","w":"It was founded in 1945, after the Second World War, to keep peace between nations.","c":["The African Union","The Commonwealth","ECOWAS"]},
+ {"q":"Which Ghanaian diplomat led the United Nations from 1997 to 2006?","a":"Kofi Annan","w":"He shared the Nobel Peace Prize with the UN in 2001.","c":["Boutros Boutros-Ghali","Ban Ki-moon","Kwame Nkrumah"]},
+ {"q":"What is a manifesto?","a":"A party's written plan of what it will do if elected","w":"Voters can compare manifestos to decide which party to support.","c":["A law passed by parliament","A court's decision","A list of registered voters"]}
+],
+s:[
+ {"q":"Which Nigerian agency, set up in 2003, investigates financial crimes such as fraud and money laundering?","a":"The EFCC (Economic and Financial Crimes Commission)","w":"It works alongside the ICPC, which deals with corruption among public officials.","c":["INEC","The NDLEA","NAFDAC"]},
+ {"q":"What is the idea that each arm of government can limit the power of the others called?","a":"Checks and balances","w":"For example, Nigeria's courts can strike down laws that go against the constitution.","c":["Federal character","Collective responsibility","Delegated legislation"]},
+ {"q":"What does the \"federal character\" principle in Nigeria's constitution require?","a":"That government appointments reflect the country's diversity of states and peoples","w":"It aims to stop any one group from dominating federal jobs and institutions.","c":["That every law must be approved by all 36 states","That the presidency rotates between regions","That only federal workers may vote"]},
+ {"q":"If the president refuses to sign a bill, what majority of each house of the National Assembly can pass it anyway?","a":"Two-thirds","w":"Refusing to sign is called a veto. Overriding it is a key check on the executive.","c":["A simple majority","Three-quarters","Every member"]},
+ {"q":"To win Nigeria's presidential election outright, a candidate needs the most votes and at least what share of the votes in two-thirds of the states?","a":"A quarter (25%)","w":"The rule makes sure a president has support across the country, not just in one region.","c":["10%","A third","Half"]},
+ {"q":"What did South Africa set up in 1996 to uncover crimes of the apartheid era and offer amnesty to those who told the full truth?","a":"The Truth and Reconciliation Commission","w":"It was chaired by Archbishop Desmond Tutu, and victims and perpetrators testified in public.","c":["The Constitutional Court","The African National Congress","The Rivonia Trial"]},
+ {"q":"Which African country has held regular multiparty elections without a break since independence in 1966?","a":"Botswana","w":"In 2024 the ruling party lost for the first time in 58 years and handed over power peacefully.","c":["Nigeria","Ghana","Zimbabwe"]},
+ {"q":"What is a coup d'état?","a":"Taking power illegally, usually by the military","w":"Nigeria's first coup was in January 1966. Civilian rule returned for good in 1999.","c":["A peaceful change of government by election","A vote of no confidence in parliament","A national referendum"]},
+ {"q":"In which year did Nigeria return to civilian rule and begin its Fourth Republic?","a":"1999","w":"Olusegun Obasanjo was sworn in as president on 29 May 1999.","c":["1979","1993","2007"]},
+ {"q":"The African Charter on Human and Peoples' Rights is also named after the city where it was drafted. Which city?","a":"Banjul (The Gambia)","w":"The Banjul Charter came into force in 1986, and an African court in Arusha, Tanzania, now helps protect those rights.","c":["Addis Ababa","Accra","Dakar"]},
+ {"q":"What do we call a direct vote by citizens on a single question, like South Sudan's 2011 vote for independence?","a":"A referendum","w":"Ordinary elections choose people; a referendum decides an issue.","c":["A by-election","A census","A party primary"]},
+ {"q":"Which African country is an absolute monarchy, where the king holds real power?","a":"Eswatini","w":"Morocco and Lesotho also have kings, but their powers are limited by a constitution.","c":["Lesotho","Morocco","Ghana"]},
+ {"q":"What is the idea championed by Kwame Nkrumah that all African peoples should unite?","a":"Pan-Africanism","w":"Nkrumah's motto was \"Africa must unite\", and the idea helped create the OAU in 1963.","c":["Négritude","Apartheid","Non-alignment"]},
+ {"q":"What does \"the rule of law\" mean?","a":"Everyone, including leaders, must obey the same laws","w":"It also means laws must be public, applied fairly, and judged by independent courts.","c":["Whatever the ruler says becomes law","The army enforces every law","Only judges make laws"]},
+ {"q":"What is the AfCFTA, which began trading in 2021?","a":"The African Continental Free Trade Area","w":"It aims to create a single market across Africa. Its secretariat is in Accra, Ghana.","c":["An African Union army","A single African currency","A pan-African development bank"]},
+ {"q":"Which currency is shared by eight West African countries, including Senegal and Côte d'Ivoire?","a":"The West African CFA franc","w":"ECOWAS has long planned a shared currency for the whole region, called the Eco.","c":["The naira","The cedi","The rand"]},
+ {"q":"Which chapter of Nigeria's 1999 Constitution sets out the fundamental human rights of citizens?","a":"Chapter IV","w":"These rights, such as freedom of expression and the right to a fair hearing, can be enforced in court.","c":["Chapter I","Chapter II","Chapter VII"]},
+ {"q":"What is impeachment?","a":"The process by which a legislature removes an official, such as a governor, for gross misconduct","w":"In Nigeria it needs a two-thirds vote of the legislature after an investigation.","c":["A court sentence for a crime","A vote by citizens to recall a leader","The suspension of a political party"]},
+ {"q":"Where are disputes over the result of a governorship election in Nigeria first heard?","a":"At an election petition tribunal","w":"Appeals can then go to the Court of Appeal and finally the Supreme Court.","c":["At the Supreme Court","At INEC headquarters","In the National Assembly"]},
+ {"q":"How is South Africa's president chosen?","a":"By the National Assembly, after the general election","w":"Citizens vote for parties, and the members of parliament then elect the president.","c":["By a separate direct vote of citizens","By the Constitutional Court","By the king of the Zulu nation"]},
+ {"q":"What system of government did Nigeria use in its First Republic (1960–66)?","a":"A parliamentary system, modelled on Britain's","w":"The Second Republic in 1979 switched to a presidential system, modelled on the United States.","c":["A presidential system","Military rule","An absolute monarchy"]},
+ {"q":"Which French thinker argued in 1748 that the powers of government should be separated?","a":"Montesquieu","w":"His book \"The Spirit of the Laws\" shaped many constitutions around the world.","c":["John Locke","Jean-Jacques Rousseau","Thomas Hobbes"]},
+ {"q":"Which three countries left ECOWAS in January 2025 to form the Alliance of Sahel States?","a":"Mali, Burkina Faso and Niger","w":"All three were under military governments that had fallen out with ECOWAS.","c":["Senegal, Guinea and Togo","Chad, Sudan and Niger","Ghana, Benin and Togo"]},
+ {"q":"What is a vote of no confidence?","a":"A vote in parliament showing it no longer supports the government or a leader","w":"In parliamentary systems, losing one can force a prime minister to resign or call an election.","c":["A vote to approve the budget","A vote to amend the constitution","A vote by citizens on a single issue"]}
+]
+},
+culture:{
+j:[
+ {"q":"Which three languages are spoken by the most people in Nigeria?","a":"Hausa, Yoruba and Igbo","w":"Nigeria has over 500 languages. English is used in schools and offices so everyone can understand one another.","c":["Swahili, Zulu and Amharic","English, French and Arabic","Efik, Tiv and Ijaw"]},
+ {"q":"How do you say \"thank you\" in Yoruba?","a":"Ẹ ṣé","w":"In Igbo it is \"Daalụ\" and in Hausa it is \"Na gode\".","c":["Daalụ","Na gode","Asante"]},
+ {"q":"Which language is spoken by many people in Kenya and Tanzania?","a":"Swahili","w":"\"Jambo\" means hello and \"asante\" means thank you.","c":["Hausa","Zulu","Yoruba"]},
+ {"q":"What is jollof rice?","a":"A rice dish cooked in a spicy tomato sauce","w":"It is loved all over West Africa, and Nigerians and Ghanaians argue happily about whose is best.","c":["A Kenyan dance","A kind of drum","A fried yam snack"]},
+ {"q":"Which drum can \"talk\" by changing its sound when the player squeezes it?","a":"The talking drum","w":"In Yoruba it is called dùndún. Its notes can copy the tones of spoken words.","c":["The djembe","The bongo","The kettle drum"]},
+ {"q":"What is the brightly coloured cloth from Ghana, woven in narrow strips, called?","a":"Kente","w":"Each colour and pattern has a meaning. It was first worn by Asante kings.","c":["Adire","Ankara","Lace"]},
+ {"q":"What is the blue tie-dyed cloth made by Yoruba women called?","a":"Adire","w":"It is dyed with indigo from plants. Abeokuta is famous for it.","c":["Kente","Aso-oke","Ankara"]},
+ {"q":"What is the soft dough made by pounding cassava or yam and eaten with soup?","a":"Fufu","w":"You pinch off a small ball with your fingers and dip it in soup like egusi or okra.","c":["Chin chin","Puff-puff","Suya"]},
+ {"q":"Which festival do Igbo communities hold to celebrate the yam harvest?","a":"The New Yam Festival (Iri Ji)","w":"The first yams are offered with thanks before everyone eats the new harvest.","c":["The Durbar","The Eyo Festival","The Argungu Festival"]},
+ {"q":"Which Nigerian festival is famous for a huge fishing competition in a river?","a":"The Argungu Fishing Festival","w":"It takes place in Kebbi State. Thousands of fishers jump in at once to catch the biggest fish.","c":["The Osun-Osogbo Festival","The Eyo Festival","The Calabar Carnival"]},
+ {"q":"In stories from Ghana, what is the name of the clever trickster spider?","a":"Anansi","w":"His stories travelled with Africans to the Caribbean, where people still tell them today.","c":["Ìjàpá","Simba","Mbe"]},
+ {"q":"In Yoruba folk tales, which animal is the famous clever trickster?","a":"The tortoise (Ìjàpá)","w":"Ìjàpá is clever but often greedy, and the stories teach a lesson at the end.","c":["The lion","The elephant","The spider"]},
+ {"q":"What is suya?","a":"Spicy grilled meat on sticks","w":"It is a favourite in northern Nigeria, made with a peanut spice mix called yaji.","c":["A stew","A drink","A bread"]},
+ {"q":"What is a gele?","a":"A head-tie worn by women","w":"Geles are tied into tall, beautiful shapes for weddings and parties.","c":["A shoe","A bead necklace","A long robe"]},
+ {"q":"In Yoruba culture, how do boys traditionally greet elders?","a":"By lying down flat on the ground (dọ̀bálẹ̀)","w":"Girls traditionally kneel (kúnlẹ̀). Both are ways of showing respect.","c":["By waving","By shaking hands","By clapping twice"]},
+ {"q":"What is a kora?","a":"A West African harp with 21 strings","w":"It is made from a big calabash covered with cow skin. Griots play it while they sing.","c":["A drum","A flute","A trumpet"]},
+ {"q":"What is the long, wide robe worn by Yoruba men on special occasions?","a":"The agbada","w":"It is worn over a shirt (buba) and trousers (sokoto), often with a cap called a fila.","c":["The gele","The iro","The dashiki"]},
+ {"q":"What is the soft cap worn by many Yoruba men called?","a":"A fila","w":"How a man folds and tilts his fila can show his style.","c":["A gele","A turban","A crown"]},
+ {"q":"How do you say \"hello\" in Hausa?","a":"Sannu","w":"\"Sannu\" is used to greet people and also to say \"well done\" or \"sorry\".","c":["Ẹ káàbọ̀","Nnọọ","Jambo"]},
+ {"q":"What are the soft, round balls of sweet fried dough sold as snacks in Nigeria?","a":"Puff-puff","w":"They are made from flour, sugar, yeast and water, and fried until golden.","c":["Plantain chips","Suya","Chin chin"]},
+ {"q":"Which Nigerian dish is made from blended beans, steamed in leaves or tins?","a":"Moi moi","w":"It is often wrapped in special leaves while it steams, which gives it a lovely smell.","c":["Jollof rice","Pounded yam","Egusi soup"]},
+ {"q":"At many Nigerian weddings, what do guests \"spray\" on the dancing couple?","a":"Money","w":"Spraying money shows joy and helps the new couple start their life together.","c":["Water","Perfume","Flowers"]},
+ {"q":"What do we call a dancer in a mask and costume who stands for a spirit or ancestor?","a":"A masquerade","w":"Masquerades appear at festivals across Nigeria, such as Egungun among the Yoruba.","c":["A griot","A drummer","A chief"]},
+ {"q":"In Ethiopia, guests are often welcomed with a special ceremony for making which drink?","a":"Coffee","w":"The beans are roasted, ground and brewed in front of the guests in a pot called a jebena.","c":["Tea","Hibiscus juice","Palm wine"]}
+],
+m:[
+ {"q":"What does the Southern African idea of \"Ubuntu\" mean?","a":"\"I am because we are\": we are human through other people","w":"Desmond Tutu said a person with Ubuntu is open, generous and caring towards others.","c":["Freedom for all","Respect for the king","Hard work brings wealth"]},
+ {"q":"Which ancient script is still used to write Amharic in Ethiopia?","a":"The Ge'ez (Ethiopic) script","w":"Each symbol stands for a consonant plus a vowel. It has been used for around 2,000 years.","c":["The Arabic script","The Latin alphabet","Tifinagh"]},
+ {"q":"What is Nollywood?","a":"Nigeria's film industry","w":"It makes more films each year than almost anywhere else in the world.","c":["South Africa's TV industry","A Lagos football club","A Nigerian music award"]},
+ {"q":"Which style of music did Fela Kuti create?","a":"Afrobeat","w":"Afrobeat mixes highlife, jazz and funk. Today's Afrobeats, by stars like Burna Boy, grew partly from it.","c":["Highlife","Jùjú","Fuji"]},
+ {"q":"Which Lagos festival features masquerades dressed all in white with wide-brimmed hats?","a":"The Eyo Festival","w":"Eyo masquerades carry a staff and are a symbol of Lagos.","c":["The Durbar","The Ofala Festival","The Argungu Festival"]},
+ {"q":"What is a Durbar in northern Nigeria?","a":"A royal parade of horsemen held during Sallah","w":"Riders in colourful robes gallop up to salute the emir. Kano and Katsina are famous for them.","c":["A wrestling match","A boat race","A harvest market"]},
+ {"q":"Which festival takes place in a sacred forest in Osun State that is a UNESCO World Heritage Site?","a":"The Osun-Osogbo Festival","w":"The grove is full of shrines and sculptures, many made by the artist Susanne Wenger and local artists.","c":["The Eyo Festival","The Ojude Oba Festival","The Calabar Carnival"]},
+ {"q":"About how many languages are spoken in Nigeria?","a":"More than 500","w":"Africa as a whole has around 2,000 languages, nearly a third of all the world's languages.","c":["About 50","About 100","About 3,000"]},
+ {"q":"Which South African language uses click sounds and was Nelson Mandela's mother tongue?","a":"isiXhosa","w":"The \"X\" in Xhosa is itself a click sound.","c":["isiZulu","Afrikaans","Sesotho"]},
+ {"q":"Which African language is an official language of the African Union, alongside Arabic, English, French, Portuguese and Spanish?","a":"Swahili","w":"Swahili grew on the East African coast and borrows many words from Arabic.","c":["Hausa","Yoruba","Amharic"]},
+ {"q":"What does the Igbo word \"Nnọọ\" mean?","a":"Welcome","w":"Igbo is a tonal language: changing the pitch of a word can change its meaning.","c":["Goodbye","Thank you","Sorry"]},
+ {"q":"Who wrote the 1958 novel \"Things Fall Apart\"?","a":"Chinua Achebe","w":"It is the most widely read African novel, translated into more than 50 languages.","c":["Wole Soyinka","Ngũgĩ wa Thiong'o","Chimamanda Ngozi Adichie"]},
+ {"q":"Who was the first Black African to win the Nobel Prize in Literature, in 1986?","a":"Wole Soyinka","w":"He is a Nigerian playwright and poet. One of his best-known plays is \"Death and the King's Horseman\".","c":["Chinua Achebe","Ben Okri","Naguib Mahfouz"]},
+ {"q":"What hand-woven cloth do Yoruba people often wear for weddings and special occasions?","a":"Aso-oke","w":"Families often choose matching aso-oke for a celebration, a custom called aso ebi.","c":["Kente","Adire","Ankara"]},
+ {"q":"Which people of Kenya and Tanzania are known for red cloth wraps and their high jumping dance?","a":"The Maasai","w":"Many Maasai are cattle herders, and cattle are a sign of wealth.","c":["The Zulu","The Fulani","The Tuareg"]},
+ {"q":"Which desert people of the Sahara are sometimes called the \"blue people\" because of their indigo veils?","a":"The Tuareg","w":"Tuareg men, not women, traditionally cover their faces.","c":["The Maasai","The San","The Himba"]},
+ {"q":"What is the deep red drink made from dried hibiscus flowers, popular in Nigeria?","a":"Zobo","w":"It is often flavoured with ginger, pineapple or cloves. In Ghana it is called sobolo.","c":["Kunu","Palm wine","Fura"]},
+ {"q":"Which guitar-and-horn dance music from Ghana was hugely popular across West Africa from the 1950s?","a":"Highlife","w":"E. T. Mensah of Ghana and Victor Olaiya of Nigeria were famous highlife bandleaders.","c":["Afrobeat","Fuji","Makossa"]},
+ {"q":"Which Cameroonian saxophonist had a worldwide hit with \"Soul Makossa\" in 1972?","a":"Manu Dibango","w":"Makossa is a popular dance music from Douala, Cameroon.","c":["Fela Kuti","Youssou N'Dour","Hugh Masekela"]},
+ {"q":"Which South African singer was known around the world as \"Mama Africa\"?","a":"Miriam Makeba","w":"She was banned from South Africa for 30 years for speaking out against apartheid.","c":["Brenda Fassie","Angélique Kidjo","Yvonne Chaka Chaka"]},
+ {"q":"In which yearly festival does the Obi of Onitsha come out in royal dress to bless his people?","a":"The Ofala Festival","w":"Many Igbo kings hold Ofala each year, with drumming, dancing and gun salutes.","c":["The Eyo Festival","The Durbar","The New Yam Festival"]},
+ {"q":"Which Nigerian city holds a famous carnival every December, with huge costumed street parades?","a":"Calabar","w":"Bands with thousands of dancers compete along a long route through the city.","c":["Kano","Ibadan","Maiduguri"]},
+ {"q":"What is the West African wooden xylophone with gourds hanging under its keys called?","a":"The balafon","w":"The gourds make the sound of each wooden key louder.","c":["The kora","The mbira","The djembe"]},
+ {"q":"What is the Yoruba language's tone system used for?","a":"Changing the meaning of words by changing pitch","w":"For example, ọkọ, ọkọ́ and ọkọ̀ mean husband, hoe and vehicle.","c":["Showing whether a word is plural","Marking the end of a sentence","Showing politeness only"]}
+],
+s:[
+ {"q":"Which Kenyan writer stopped writing novels in English and switched to Gikuyu, explaining why in \"Decolonising the Mind\"?","a":"Ngũgĩ wa Thiong'o","w":"He argued that language carries a people's culture, so African writers should write in African languages.","c":["Wole Soyinka","Chinua Achebe","Binyavanga Wainaina"]},
+ {"q":"What is Nsibidi?","a":"A system of written symbols from south-eastern Nigeria","w":"It was used by the Ekpe society and others among the Efik, Ejagham and Igbo, and is centuries old.","c":["A Yoruba drum rhythm","A form of Hausa poetry","A set of Akan gold weights"]},
+ {"q":"Adinkra symbols, printed on cloth and buildings, come from which people?","a":"The Akan of Ghana","w":"Each symbol stands for a saying or idea. Sankofa means \"go back and fetch it\": learn from the past.","c":["The Yoruba","The Igbo","The Zulu"]},
+ {"q":"Which writing system was invented in Liberia in the 1830s by Momolu Duwalu Bukele?","a":"The Vai script","w":"It is one of the few writing systems in the world created in modern times by one known person.","c":["N'Ko","Ge'ez","Tifinagh"]},
+ {"q":"Which Yoruba system of divination and poetry is on UNESCO's list of Intangible Cultural Heritage?","a":"Ifá","w":"Ifá priests learn thousands of verses called odù, which hold history, medicine and moral teaching.","c":["Oríkì","Egúngún","Eyo"]},
+ {"q":"Which Senegalese poet, who became his country's first president, helped found the Négritude movement?","a":"Léopold Sédar Senghor","w":"Négritude celebrated Black identity and culture in reply to colonial racism.","c":["Cheikh Anta Diop","Abdoulaye Wade","Mariama Bâ"]},
+ {"q":"What is a lingua franca, like Hausa in northern Nigeria or Swahili in East Africa?","a":"A shared language used between people with different mother tongues","w":"Nigerian Pidgin plays this role for millions of people across southern Nigeria.","c":["A language that is dying out","A language used only in religion","A language that is only written, never spoken"]},
+ {"q":"Which Senegalese filmmaker and writer, director of \"Black Girl\" (1966), is called the father of African cinema?","a":"Ousmane Sembène","w":"He turned to film so his stories could reach people who could not read.","c":["Djibril Diop Mambéty","Souleymane Cissé","Haile Gerima"]},
+ {"q":"In which city is FESPACO, Africa's largest film festival, held?","a":"Ouagadougou, Burkina Faso","w":"It is held every two years, and the top prize is the Golden Stallion of Yennenga.","c":["Lagos","Dakar","Cairo"]},
+ {"q":"Which novel by Chimamanda Ngozi Adichie is set during the Nigerian Civil War?","a":"Half of a Yellow Sun","w":"The title comes from the half sun on the Biafran flag.","c":["Purple Hibiscus","Americanah","Things Fall Apart"]},
+ {"q":"Which Egyptian novelist won the Nobel Prize in Literature in 1988?","a":"Naguib Mahfouz","w":"His Cairo Trilogy follows one family through Egypt's history in the early 1900s.","c":["Nawal El Saadawi","Taha Hussein","Alaa Al Aswany"]},
+ {"q":"Yoruba, Igbo, Zulu and Swahili all belong to which language family?","a":"Niger-Congo","w":"It is the largest language family in the world by number of languages, with about 1,500.","c":["Afro-Asiatic","Nilo-Saharan","Khoisan"]},
+ {"q":"Hausa belongs to which language family?","a":"Afro-Asiatic","w":"That makes Hausa a distant relative of Arabic, Amharic and Somali.","c":["Niger-Congo","Nilo-Saharan","Indo-European"]},
+ {"q":"From which region did Bantu-speaking peoples first spread across central, eastern and southern Africa?","a":"Around today's Nigeria–Cameroon border","w":"Over about 3,000 years they carried farming, ironworking and their languages across half the continent.","c":["The Ethiopian Highlands","The Nile Valley","The Kalahari"]},
+ {"q":"Afrikaans, spoken in South Africa and Namibia, grew mainly out of which European language?","a":"Dutch","w":"It also took words from Malay, Portuguese, Khoekhoe and Bantu languages.","c":["German","English","French"]},
+ {"q":"Which Yoruba masquerade honours the power of mothers and is on UNESCO's heritage list?","a":"Gẹ̀lẹ̀dẹ́","w":"Dancers wear carved wooden masks, and it is performed in Nigeria, Benin and Togo.","c":["Egúngún","Eyo","Ekpe"]},
+ {"q":"The N'Ko script, created in 1949 by Solomana Kanté of Guinea, was designed to write which languages?","a":"The Manding (Mande) languages","w":"He created it to prove that African languages could be written in their own script.","c":["The Bantu languages","The Berber languages","The Akan languages"]},
+ {"q":"The Tifinagh script is used to write which languages?","a":"The Berber (Amazigh) languages","w":"Its letters appear on road signs in Morocco, where Amazigh is an official language.","c":["Amharic","Somali","Coptic"]},
+ {"q":"Which Ugandan poet wrote \"Song of Lawino\" (1966), first composed in the Acholi language?","a":"Okot p'Bitek","w":"In it, Lawino criticises her husband for rejecting Acholi ways in favour of Western ones.","c":["Ngũgĩ wa Thiong'o","Wole Soyinka","Dambudzo Marechera"]},
+ {"q":"Ben Enwonwu's 1974 portrait of an Ife princess, rediscovered in 2017, is known by what name?","a":"Tutu","w":"It sold for £1.2 million in 2018, and is sometimes called the \"African Mona Lisa\".","c":["Anyanwu","Mami Wata","Queen Idia"]},
+ {"q":"What is oríkì in Yoruba culture?","a":"Praise poetry recited for people, families or towns","w":"A person's oríkì celebrates their family history and qualities, and is chanted at ceremonies.","c":["A system of divination","A type of masquerade","A woven cloth"]},
+ {"q":"Which late form of the ancient Egyptian language, written mostly in Greek letters, survives in church services today?","a":"Coptic","w":"Knowledge of Coptic helped Jean-François Champollion decode hieroglyphs in the 1820s.","c":["Demotic","Aramaic","Ge'ez"]},
+ {"q":"Which South African music style, with deep log-drum basslines, spread around the world in the 2020s?","a":"Amapiano","w":"It began in townships around Johannesburg and Pretoria in the mid-2010s.","c":["Kwaito","Gqom","Mbaqanga"]},
+ {"q":"What did Fela Kuti call his Lagos home and commune, which he declared independent from Nigeria?","a":"The Kalakuta Republic","w":"Soldiers burned it down in 1977, and Fela answered with angry songs such as \"Unknown Soldier\".","c":["The Afrika Shrine","Freedom Park","The Black President"]}
 ]
 }
 }
