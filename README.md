@@ -28,8 +28,8 @@ Open the printed URL. (Opening `index.html` directly from Finder works for basic
 ## Using a projector
 
 1. Open Sabi Spin on the laptop and start a game.
-2. Press 🖥️ in the top bar. A second "audience" window opens. Drag it onto the projector and press `F` (or double-click) for fullscreen.
-3. The class sees the wheel, the question and the scores. Your window also shows the answer early, marked "only you can see this", so you can judge answers without revealing them. The 🖥️ button turns green while the audience screen is connected.
+2. Press the screen button (🖥) in the top bar. A second "audience" window opens. Drag it onto the projector and press `F` (or double-click) for fullscreen.
+3. The class sees the wheel, the question and the scores. Your window also shows the answer early, marked "only you can see this", so you can judge answers without revealing them. That button turns green while the audience screen is connected.
 
 If you only have one screen, just use the main window. The answer stays hidden until you press Reveal.
 
