@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0F1A14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Sabi Spin">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Sabi Spin</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0}
+[hidden]{display:none!important}
+html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* Layout: one-screen classroom app. Setup card first, then a play screen with the wheel as the hero and the question card below it; on wide screens (projector) wheel and card sit side by side. */
+:root{
+  --bg:#F2F5EF;
+  --surface:#FFFFFF;
+  --surface-2:#E6ECE3;
+  --fg:#15241B;
+  --muted:#5E6F63;
+  --line:#CBD6C9;
+  --accent:#E8642B;      /* sunset orange: spin + primary actions */
+  --accent-ink:#FFFFFF;
+  --green:#1E6B4A;       /* deep green: science, correct */
+  --gold:#F2B134;        /* savanna gold: Africa, highlights */
+  --ink-on-gold:#2B1D05;
+  --wheel-a:#E8642B; --wheel-b:#F2B134; --wheel-c:#1E6B4A; --wheel-d:#2C6FB2;
+  --wheel-used:#C9D1C7; --wheel-text:#FFFFFF; --wheel-used-text:#7A857B;
+  --danger:#C73B2E;
+  --display:'Fredoka','Nunito','Segoe UI',system-ui,sans-serif;
+  --body:'Nunito','Segoe UI',system-ui,sans-serif;
+  --shadow:0 10px 30px rgba(21,36,27,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1A14; --surface:#18261E; --surface-2:#22332A; --fg:#EEF3EC; --muted:#A7B5AA; --line:#33463B;
+    --accent:#F2793F; --accent-ink:#1A0D05; --green:#4FB386; --gold:#F5BE4A; --ink-on-gold:#2B1D05;
+    --wheel-a:#F2793F; --wheel-b:#F5BE4A; --wheel-c:#3E9A70; --wheel-d:#5B8FD6;
+    --wheel-used:#2E3D34; --wheel-text:#0F1A14; --wheel-used-text:#6E7F74; --danger:#E25C4F;
+    --shadow:0 10px 30px rgba(0,0,0,.4); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1A14; --surface:#18261E; --surface-2:#22332A; --fg:#EEF3EC; --muted:#A7B5AA; --line:#33463B;
+  --accent:#F2793F; --accent-ink:#1A0D05; --green:#4FB386; --gold:#F5BE4A; --ink-on-gold:#2B1D05;
+  --wheel-a:#F2793F; --wheel-b:#F5BE4A; --wheel-c:#3E9A70; --wheel-d:#5B8FD6;
+  --wheel-used:#2E3D34; --wheel-text:#0F1A14; --wheel-used-text:#6E7F74; --danger:#E25C4F;
+  --shadow:0 10px 30px rgba(0,0,0,.4); color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:12px;box-sizing:border-box}
+*{box-sizing:border-box}
+button{font:inherit;cursor:pointer;border:0;border-radius:14px;color:inherit;background:none}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance}
+.eyebrow{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:800}
+#app{max-width:1100px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+
+/* ---------- Setup ---------- */
+#setup{display:flex;flex-direction:column;gap:22px;padding-block:8px 24px}
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand h1{font-size:2.4rem;color:var(--accent)}
+.brand p{margin:0;color:var(--muted)}
+.field{display:flex;flex-direction:column;gap:10px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:14px 14px;text-align:left;display:flex;flex-direction:column;gap:2px;transition:transform .12s}
+.card:hover{transform:translateY(-2px)}
+.card .big{font-family:var(--display);font-size:1.3rem;font-weight:600}
+.card .sub{color:var(--muted);font-size:.9rem}
+.card[aria-pressed="true"]{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 22%,var(--surface))}
+.chip[data-group="Science"][aria-pressed="true"]{border-color:var(--green);background:color-mix(in srgb,var(--green) 16%,var(--surface))}
+.chip .count{color:var(--muted);font-weight:700;font-size:.85em}
+.group-label{font-family:var(--display);font-weight:600;font-size:1.05rem;margin-top:4px}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:12px;padding:4px;gap:4px;flex-wrap:wrap}
+.seg button{padding:7px 14px;border-radius:9px;font-weight:800}
+.seg button[aria-pressed="true"]{background:var(--surface);box-shadow:var(--shadow)}
+.row{display:flex;flex-wrap:wrap;gap:18px 28px;align-items:flex-start}
+.teamnames{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.teamnames input{font:inherit;font-weight:700;padding:9px 12px;border-radius:10px;border:2px solid var(--line);background:var(--surface);color:var(--fg);width:100%}
+.primary{background:var(--accent);color:var(--accent-ink);font-family:var(--display);font-weight:600;font-size:1.35rem;padding:16px 28px;border-radius:18px;box-shadow:var(--shadow)}
+.primary:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.ghost{border:2px solid var(--line);padding:9px 14px;font-weight:800;background:var(--surface)}
+.footer-note{color:var(--muted);font-size:.9rem}
+
+/* ---------- Play ---------- */
+#play{display:flex;flex-direction:column;gap:14px;flex:1;min-height:0}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.topbar .where{display:flex;flex-direction:column;gap:2px;min-width:0}
+.topbar .where strong{font-family:var(--display);font-size:1.3rem;font-weight:600}
+.topbar .tools{display:flex;gap:8px}
+.icon{width:42px;height:42px;border-radius:12px;background:var(--surface);border:2px solid var(--line);display:grid;place-items:center;font-size:1.1rem}
+.scores{display:flex;gap:8px;flex-wrap:wrap}
+.score{display:flex;align-items:center;gap:10px;background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:6px 12px;font-weight:800}
+.score .n{font-family:var(--display);font-size:1.5rem;font-weight:700;font-variant-numeric:tabular-nums;min-width:1.2em;text-align:right}
+.score.active{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 22%,var(--surface))}
+.stage{display:grid;gap:18px;flex:1;min-height:0;align-content:start}
+@media (min-width:860px){.stage{grid-template-columns:minmax(300px,440px) 1fr;align-items:center}}
+.wheelwrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.wheelbox{position:relative;width:min(82vw,360px);aspect-ratio:1;max-width:100%}
+@media (min-width:860px){.wheelbox{width:min(100%,440px)}}
+.wheelbox canvas{width:100%;height:100%;display:block;border-radius:50%;box-shadow:var(--shadow)}
+.pointer{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:16px solid transparent;border-right:16px solid transparent;border-top:34px solid var(--fg);filter:drop-shadow(0 3px 2px rgba(0,0,0,.25));z-index:2}
+.hub{position:absolute;inset:0;margin:auto;width:22%;height:22%;border-radius:50%;background:var(--surface);border:4px solid var(--fg);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:clamp(1rem,4vw,1.5rem);z-index:2}
+.left{color:var(--muted);font-weight:700;font-size:.95rem}
+.qcard{background:var(--surface);border-radius:22px;padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-width:0;min-height:220px;border:2px solid var(--line)}
+#qbody{display:flex;flex-direction:column;gap:18px}
+#qbody[hidden]{display:none}
+.qcard .num{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.qtext{margin:4px 0 0}
+.qcard .num .badge{background:var(--gold);color:var(--ink-on-gold);font-family:var(--display);font-weight:700;padding:4px 12px;border-radius:999px}
+.qtext{font-family:var(--display);font-weight:600;font-size:clamp(1.35rem,2.6vw,2rem);line-height:1.25}
+.timer{height:10px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.timer i{display:block;height:100%;width:100%;background:var(--green);border-radius:999px;transition:width .25s linear,background .3s}
+.timer i.low{background:var(--danger)}
+.tclock{font-variant-numeric:tabular-nums;font-weight:800;color:var(--muted)}
+.answer{border-top:2px dashed var(--line);padding-top:18px;display:flex;flex-direction:column;gap:8px}
+.answer .a{font-family:var(--display);font-weight:600;font-size:clamp(1.25rem,2.4vw,1.8rem);color:var(--green)}
+.answer .w{color:var(--muted);margin-top:2px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.actions .primary{font-size:1.15rem;padding:13px 22px}
+.btn-good{background:var(--green);color:#fff;font-weight:800;padding:13px 20px;font-size:1.1rem}
+.btn-bad{background:var(--surface-2);color:var(--fg);font-weight:800;padding:13px 20px;font-size:1.1rem;border:2px solid var(--line)}
+.placeholder{color:var(--muted);font-family:var(--display);font-weight:500;font-size:1.3rem;margin:auto 0;text-align:center}
+.done{background:color-mix(in srgb,var(--gold) 20%,var(--surface));border:2px solid var(--gold);border-radius:16px;padding:14px 16px}
+@keyframes pop{0%{transform:scale(.96);opacity:0}100%{transform:scale(1);opacity:1}}
+.qcard.pop{animation:pop .25s ease-out}
+@media (prefers-reduced-motion:reduce){.qcard.pop{animation:none}.card:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<div id="app">
+  <section id="setup">
+    <div class="brand">
+      <h1>Sabi Spin</h1>
+      <p>Pick a group and a topic, spin the wheel, answer out loud.</p>
+    </div>
+
+    <div class="field">
+      <span class="eyebrow">Who is playing?</span>
+      <div class="cards" id="ageCards"></div>
+    </div>
+
+    <div class="field">
+      <span class="eyebrow">Topic</span>
+      <div class="group-label">Science</div>
+      <div class="chips" id="sciChips"></div>
+      <div class="group-label">Africa</div>
+      <div class="chips" id="afrChips"></div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <span class="eyebrow">Teams</span>
+        <div class="seg" id="teamSeg">
+          <button type="button" data-n="0" aria-pressed="true">No scoring</button>
+          <button type="button" data-n="2">2</button>
+          <button type="button" data-n="3">3</button>
+          <button type="button" data-n="4">4</button>
+        </div>
+        <div class="teamnames" id="teamNames" hidden></div>
+      </div>
+      <div class="field">
+        <span class="eyebrow">Answer timer</span>
+        <div class="seg" id="timerSeg">
+          <button type="button" data-s="0">Off</button>
+          <button type="button" data-s="20">20 s</button>
+          <button type="button" data-s="30" aria-pressed="true">30 s</button>
+          <button type="button" data-s="45">45 s</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="align-items:center">
+      <button type="button" class="primary" id="startBtn" disabled>Start playing</button>
+      <button type="button" class="ghost" id="resetBtn">Reset used questions</button>
+      <button type="button" class="ghost" id="newBtn">New session</button>
+    </div>
+    <p class="footer-note" id="bankNote"></p>
+  </section>
+
+  <section id="play" hidden>
+    <div class="topbar">
+      <div class="where">
+        <span class="eyebrow" id="ageLabel"></span>
+        <strong id="topicLabel"></strong>
+      </div>
+      <div class="tools">
+        <button type="button" class="icon" id="muteBtn" title="Sound on or off" aria-label="Toggle sound">🔊</button>
+        <button type="button" class="icon" id="fsBtn" title="Fullscreen for the projector" aria-label="Fullscreen">⛶</button>
+        <button type="button" class="ghost" id="changeBtn">Change topic</button>
+      </div>
+    </div>
+    <div class="scores" id="scores" hidden></div>
+
+    <div class="stage">
+      <div class="wheelwrap">
+        <div class="wheelbox">
+          <div class="pointer"></div>
+          <canvas id="wheel"></canvas>
+          <div class="hub" id="hub">?</div>
+        </div>
+        <button type="button" class="primary" id="spinBtn">Spin the wheel</button>
+        <span class="left" id="leftNote"></span>
+      </div>
+
+      <div class="qcard" id="qcard">
+        <p class="placeholder" id="placeholder">Spin the wheel to get your first question.</p>
+        <div id="qbody" hidden>
+          <div class="num">
+            <span class="badge" id="qnum">Question 1</span>
+            <span class="tclock" id="tclock"></span>
+          </div>
+          <div class="timer" id="timerBar" hidden><i id="timerFill"></i></div>
+          <p class="qtext" id="qtext"></p>
+          <div class="answer" id="answerBox" hidden>
+            <span class="eyebrow">Answer</span>
+            <div class="a" id="atext"></div>
+            <div class="w" id="wtext"></div>
+          </div>
+          <div class="actions" id="actions"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+const AGES=[
+  {key:'j',name:'Juniors',sub:'ages 6–9'},
+  {key:'m',name:'Middle',sub:'ages 10–13'},
+  {key:'s',name:'Seniors',sub:'ages 14–17'}
+];
+const TOPICS=[
+  {key:'bio',group:'Science',name:'Living Things',icon:'🌱'},
+  {key:'earth',group:'Science',name:'Earth & Space',icon:'🪐'},
+  {key:'matter',group:'Science',name:'Matter & Energy',icon:'⚡'},
+  {key:'body',group:'Science',name:'Human Body',icon:'🫀'},
+  {key:'geo',group:'Africa',name:'Geography of Africa',icon:'🗺️'},
+  {key:'hist',group:'Africa',name:'African History',icon:'🏛️'},
+  {key:'people',group:'Africa',name:'African Scientists & Inventors',icon:'🔬'},
+  {key:'wild',group:'Africa',name:'African Nature & Wildlife',icon:'🦁'}
+];
+
+// q = question, a = answer, w = one line that teaches
+const BANK={
+bio:{
+j:[
+ {q:'What do plants need from the sun to make their food?',a:'Sunlight',w:'Plants mix sunlight, water and air to make sugar. That is called photosynthesis.'},
+ {q:'Is a spider an insect?',a:'No',w:'Insects have 6 legs. Spiders have 8 legs and belong to a group called arachnids.'},
+ {q:'Which animal starts life as a tadpole?',a:'A frog',w:'Frogs change shape as they grow. That change is called metamorphosis.'},
+ {q:'What do we call animals that only eat plants?',a:'Herbivores',w:'Elephants, giraffes and cows are herbivores. Meat-eaters are carnivores.'},
+ {q:'Which part of a plant drinks water from the soil?',a:'The roots',w:'Roots also hold the plant firmly in the ground.'},
+ {q:'Do fish breathe with lungs or with gills?',a:'Gills',w:'Gills take oxygen out of the water as it flows past them.'},
+ {q:'What is a baby butterfly called?',a:'A caterpillar',w:'It hatches from an egg, eats leaves, wraps itself in a chrysalis and comes out as a butterfly.'},
+ {q:'Which one is a mammal: a shark, a dolphin or a crocodile?',a:'A dolphin',w:'Mammals breathe air and feed their babies milk. Dolphins do both.'}
+],
+m:[
+ {q:'What is the name of the process plants use to make food from sunlight?',a:'Photosynthesis',w:'Chlorophyll in the leaves captures light and turns carbon dioxide and water into glucose.'},
+ {q:'Which gas do plants release during photosynthesis?',a:'Oxygen',w:'Almost all the oxygen we breathe was made by plants and algae.'},
+ {q:'What is the basic building block of all living things?',a:'The cell',w:'Some living things are a single cell. A human has around 30 trillion.'},
+ {q:'What do we call an animal with no backbone?',a:'An invertebrate',w:'Insects, worms, snails and octopuses are invertebrates. They are over 95% of all animal species.'},
+ {q:'Which part of the cell is called its "powerhouse"?',a:'The mitochondria',w:'They release energy from food in a process called respiration.'},
+ {q:'True or false: bats are blind.',a:'False',w:'Bats can see. They also find insects in the dark using echoes, called echolocation.'},
+ {q:'What word describes animals that are active at night?',a:'Nocturnal',w:'Owls, bats and bush babies are nocturnal.'},
+ {q:'What molecule inside cells carries the instructions a living thing inherits?',a:'DNA',w:'DNA is a code copied into every new cell. Sections of it are called genes.'}
+],
+s:[
+ {q:'Which molecule stores and carries energy inside cells? Give its three-letter name.',a:'ATP (adenosine triphosphate)',w:'Breaking a phosphate bond off ATP releases the energy a cell uses to work.'},
+ {q:'In which part of a plant cell does photosynthesis happen?',a:'The chloroplast',w:'Chloroplasts contain chlorophyll, the green pigment that absorbs light.'},
+ {q:'What is a sudden change in the DNA sequence called?',a:'A mutation',w:'Most mutations do nothing, some are harmful, and a few give an advantage. They are the raw material of evolution.'},
+ {q:'Who published the theory of evolution by natural selection in 1859?',a:'Charles Darwin',w:'Alfred Russel Wallace reached the same idea independently and they announced it together in 1858.'},
+ {q:'Name the four bases in DNA.',a:'Adenine, thymine, guanine and cytosine',w:'A always pairs with T and G with C. That pairing is how DNA copies itself.'},
+ {q:'What is the process in which one cell divides into two identical cells?',a:'Mitosis',w:'Mitosis is for growth and repair. Meiosis makes sex cells with half the chromosomes.'},
+ {q:'Are bacteria prokaryotes or eukaryotes?',a:'Prokaryotes',w:'Prokaryotic cells have no nucleus. Their DNA floats freely inside the cell.'},
+ {q:'What are enzymes?',a:'Proteins that speed up chemical reactions',w:'Amylase in your saliva starts breaking down starch before you even swallow.'}
+]},
+earth:{
+j:[
+ {q:'What is the closest star to Earth?',a:'The Sun',w:'The Sun is a star like the ones you see at night, just much closer to us.'},
+ {q:'How many planets are in our solar system?',a:'Eight',w:'Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune.'},
+ {q:'What is the big rock that goes around the Earth and shines at night?',a:'The Moon',w:'The Moon makes no light of its own. It reflects sunlight.'},
+ {q:'What causes day and night?',a:'The Earth spinning',w:'The Earth turns all the way round once every 24 hours.'},
+ {q:'Which planet is called the Red Planet?',a:'Mars',w:'Mars looks red because its dust is full of rusty iron.'},
+ {q:'What is the biggest ocean in the world?',a:'The Pacific Ocean',w:'It is bigger than all the land on Earth put together.'},
+ {q:'What do we call a mountain that can blow out hot melted rock?',a:'A volcano',w:'Melted rock that comes out of a volcano is called lava.'},
+ {q:'What falls from a cloud when the tiny water drops get too heavy?',a:'Rain',w:'Clouds are made of millions of tiny water drops floating in the air.'}
+],
+m:[
+ {q:'What is the largest planet in our solar system?',a:'Jupiter',w:'More than 1,300 Earths could fit inside Jupiter.'},
+ {q:'What is the blanket of gases around the Earth called?',a:'The atmosphere',w:'It gives us air to breathe and protects us from most meteors and harmful rays.'},
+ {q:'How long does the Earth take to go once around the Sun?',a:'One year (about 365¼ days)',w:'That extra quarter day is why we add a leap day every four years.'},
+ {q:'What are the three main types of rock?',a:'Igneous, sedimentary and metamorphic',w:'Igneous rock cools from lava, sedimentary rock forms in layers, metamorphic rock is changed by heat and pressure.'},
+ {q:'What is hot melted rock called while it is still underground?',a:'Magma',w:'Once it reaches the surface it is called lava.'},
+ {q:'What causes the tides in the sea?',a:'The pull of the Moon\'s gravity',w:'The Sun helps too, which is why tides are strongest at full moon and new moon.'},
+ {q:'Which planet is famous for its bright rings?',a:'Saturn',w:'The rings are made mostly of ice chunks, some as small as dust and some as big as houses.'},
+ {q:'What is the imaginary line around the middle of the Earth called?',a:'The Equator',w:'It crosses Africa through Gabon, Congo, DR Congo, Uganda, Kenya and Somalia.'}
+],
+s:[
+ {q:'What is the Earth\'s innermost layer, and what is it mainly made of?',a:'The inner core, made of solid iron and nickel',w:'It is about as hot as the surface of the Sun, but stays solid because of the enormous pressure.'},
+ {q:'What theory explains how the continents slowly move?',a:'Plate tectonics',w:'The East African Rift is a plate boundary. Africa is slowly splitting apart there.'},
+ {q:'About how long does light from the Sun take to reach Earth?',a:'About 8 minutes',w:'So if the Sun went out, we would not know for 8 minutes.'},
+ {q:'Which gas makes up about 78% of the air?',a:'Nitrogen',w:'Oxygen is only about 21%. Carbon dioxide is less than 0.05%.'},
+ {q:'What is the name of the galaxy we live in?',a:'The Milky Way',w:'It holds a few hundred billion stars. The Sun is one of them.'},
+ {q:'What causes the seasons?',a:'The tilt of the Earth\'s axis (about 23.5°)',w:'It is not the distance from the Sun. Earth is actually closest to the Sun in January.'},
+ {q:'Which former planet was reclassified as a dwarf planet in 2006?',a:'Pluto',w:'It was demoted because it has not cleared other objects from its orbit.'},
+ {q:'What does the Richter scale measure?',a:'The magnitude of an earthquake',w:'Each step up the scale is about 32 times more energy released. Scientists now mostly use the moment magnitude scale.'}
+]},
+matter:{
+j:[
+ {q:'What are the three forms water can take?',a:'Ice, liquid water and steam (water vapour)',w:'Solid, liquid and gas. Cold turns it to ice, heat turns it to steam.'},
+ {q:'What happens to ice when it gets warm?',a:'It melts into water',w:'Melting happens at 0 °C.'},
+ {q:'Which is heavier: a kilogram of stones or a kilogram of feathers?',a:'They weigh the same',w:'A kilogram is a kilogram. The feathers just take up more space.'},
+ {q:'What do we call a push or a pull?',a:'A force',w:'Kicking a ball is a push. Opening a drawer is a pull.'},
+ {q:'What force pulls things down to the ground?',a:'Gravity',w:'Gravity is also what keeps the Moon going round the Earth.'},
+ {q:'Does a magnet stick to wood?',a:'No',w:'Magnets attract iron, steel and nickel, not wood, plastic or paper.'},
+ {q:'What do we call it when heat turns a liquid into a gas?',a:'Evaporation (or boiling)',w:'Puddles disappear on a sunny day because the water evaporates.'},
+ {q:'Name something besides the Moon that gives us light at night.',a:'Stars, a lamp, a torch, a fire, fireflies...',w:'Anything that gives off its own light is called a light source.'}
+],
+m:[
+ {q:'What is the smallest piece of an element called?',a:'An atom',w:'Atoms are so small that a single drop of water has more than a billion trillion of them.'},
+ {q:'At what temperature does water boil at sea level?',a:'100 °C',w:'On a high mountain water boils at a lower temperature because the air pressure is lower.'},
+ {q:'What is the chemical formula for water?',a:'H₂O',w:'Each water molecule has two hydrogen atoms and one oxygen atom.'},
+ {q:'Which gas does a fire need to keep burning?',a:'Oxygen',w:'That is why you can put out a small fire by covering it.'},
+ {q:'What is the unit used to measure force?',a:'The newton (N)',w:'Named after Isaac Newton. An apple weighs about one newton.'},
+ {q:'Does sound travel faster in air or in water?',a:'In water',w:'About four times faster. Whales can hear each other across huge distances.'},
+ {q:'What kind of energy is stored in a stretched rubber band?',a:'Elastic potential energy',w:'Let go and it turns into movement, which is kinetic energy.'},
+ {q:'What do we call a material that lets electricity flow through it easily?',a:'A conductor',w:'Copper is a good conductor. Rubber and plastic are insulators.'}
+],
+s:[
+ {q:'What is the atomic number of carbon?',a:'6',w:'Six protons in the nucleus. Carbon is the backbone of every living thing.'},
+ {q:'State Newton\'s third law of motion.',a:'For every action there is an equal and opposite reaction',w:'A rocket goes up because it pushes hot gas down.'},
+ {q:'What is the approximate speed of light?',a:'About 300,000 kilometres per second',w:'Nothing with mass can reach it. Light from the nearest star after the Sun takes over 4 years to arrive.'},
+ {q:'What is the pH of pure water?',a:'7 (neutral)',w:'Below 7 is acidic, like lemon juice. Above 7 is alkaline, like soap.'},
+ {q:'What do we call a chemical reaction that releases heat?',a:'Exothermic',w:'Burning is exothermic. A reaction that absorbs heat is endothermic.'},
+ {q:'Which particle in an atom has no electric charge?',a:'The neutron',w:'Protons are positive, electrons are negative, neutrons are neutral.'},
+ {q:'What formula links voltage, current and resistance?',a:'V = I × R (Ohm\'s law)',w:'Double the voltage across a wire and the current doubles too.'},
+ {q:'What is the most abundant element in the universe?',a:'Hydrogen',w:'About three quarters of all ordinary matter. Stars burn hydrogen into helium.'}
+]},
+body:{
+j:[
+ {q:'Does a baby have more bones or fewer bones than an adult?',a:'More',w:'Babies have about 300. Some join together as you grow, leaving 206.'},
+ {q:'What pumps blood around your body?',a:'The heart',w:'It beats about 100,000 times every day.'},
+ {q:'Which organs do we use to breathe?',a:'The lungs',w:'Air goes in, oxygen passes into your blood, and you breathe out carbon dioxide.'},
+ {q:'How many teeth does an adult usually have?',a:'32',w:'Children have 20 milk teeth that fall out to make room.'},
+ {q:'Which part of your body does your thinking?',a:'The brain',w:'Your brain is protected by a hard bone called the skull.'},
+ {q:'What is the biggest organ of your body?',a:'The skin',w:'An adult\'s skin would cover about two square metres if laid flat.'},
+ {q:'What does the skull protect?',a:'The brain',w:'The skull is made of several bones joined tightly together.'},
+ {q:'Why should you wash your hands before eating?',a:'To remove germs',w:'Germs are too small to see, but soap and water wash them away.'}
+],
+m:[
+ {q:'How many chambers does the human heart have?',a:'Four',w:'Two atria at the top receive blood, two ventricles at the bottom pump it out.'},
+ {q:'What is the longest bone in the human body?',a:'The femur (thigh bone)',w:'It is about a quarter of your height.'},
+ {q:'What carries oxygen around in your blood?',a:'Red blood cells',w:'They contain haemoglobin, an iron-rich protein that grabs oxygen in the lungs.'},
+ {q:'In which organ is most food absorbed into the blood?',a:'The small intestine',w:'It is about 6 metres long, folded up inside you.'},
+ {q:'What is a normal human body temperature?',a:'About 37 °C',w:'A fever is the body heating up to fight infection.'},
+ {q:'Which organ breaks down toxins and poisons in the blood?',a:'The liver',w:'The kidneys then filter waste out into urine.'},
+ {q:'What are the tiniest blood vessels called?',a:'Capillaries',w:'They are so thin that red blood cells pass through in single file.'},
+ {q:'Which vitamin does your skin make when sunlight hits it?',a:'Vitamin D',w:'You need it for strong bones. It is also found in fish and eggs.'}
+],
+s:[
+ {q:'What pigment gives skin its colour?',a:'Melanin',w:'It also protects skin from UV light. Darker skin has more melanin, not more melanin cells.'},
+ {q:'Which part of the brain controls balance and coordination?',a:'The cerebellum',w:'It sits at the back, under the large cerebrum.'},
+ {q:'Which blood type is the universal donor?',a:'O negative',w:'It has no A, B or Rh markers, so almost anyone can receive it.'},
+ {q:'Which hormone lowers blood sugar?',a:'Insulin',w:'It is made in the pancreas. Diabetes is when the body makes too little or cannot use it.'},
+ {q:'How many pairs of chromosomes do humans have?',a:'23 pairs (46 in total)',w:'One of each pair comes from each parent.'},
+ {q:'What is the job of white blood cells?',a:'To fight infection',w:'Some engulf germs, others make antibodies that mark germs for destruction.'},
+ {q:'What is the tube that carries food from the mouth to the stomach?',a:'The oesophagus',w:'Muscles squeeze food along it in waves, so you can swallow even upside down.'},
+ {q:'What is the tiny filtering unit inside the kidney called?',a:'The nephron',w:'Each kidney has about a million of them, filtering your blood around 40 times a day.'}
+]},
+geo:{
+j:[
+ {q:'How many countries are there in Africa?',a:'54',w:'That is more countries than any other continent.'},
+ {q:'What is the longest river in Africa?',a:'The Nile',w:'It flows north for about 6,650 km and empties into the Mediterranean Sea in Egypt.'},
+ {q:'What is the biggest desert in Africa?',a:'The Sahara',w:'It is almost as big as the whole of Europe, and it used to be green with lakes.'},
+ {q:'Which is the largest country in Africa by land?',a:'Algeria',w:'Most of Algeria is covered by the Sahara desert.'},
+ {q:'Which African country has the most people?',a:'Nigeria',w:'More than 220 million people, with over 500 languages spoken.'},
+ {q:'What is the tallest mountain in Africa?',a:'Mount Kilimanjaro',w:'It is in Tanzania, near the Equator, yet it has snow on top.'},
+ {q:'Which ocean is on the east side of Africa?',a:'The Indian Ocean',w:'The Atlantic Ocean is on the west side.'},
+ {q:'Nairobi is the capital of which country?',a:'Kenya',w:'Nairobi has a national park with lions right next to the city.'}
+],
+m:[
+ {q:'What is the largest lake in Africa?',a:'Lake Victoria',w:'It is shared by Uganda, Kenya and Tanzania, and is the source of the White Nile.'},
+ {q:'Which island country off the east coast of Africa is famous for lemurs?',a:'Madagascar',w:'Most of its animals and plants live nowhere else on Earth.'},
+ {q:'Which waterfall on the Zambezi River is called "the smoke that thunders"?',a:'Victoria Falls (Mosi-oa-Tunya)',w:'Its spray can be seen from 50 km away. It sits between Zambia and Zimbabwe.'},
+ {q:'Which country is completely surrounded by South Africa?',a:'Lesotho',w:'It is also the only country entirely above 1,000 metres in height.'},
+ {q:'What is the capital city of Nigeria?',a:'Abuja',w:'Lagos was the capital until 1991, when it moved to Abuja in the centre of the country.'},
+ {q:'Which narrow strait separates Africa from Europe?',a:'The Strait of Gibraltar',w:'At its narrowest, Morocco and Spain are only 14 km apart.'},
+ {q:'Which is the most populated city in Africa?',a:'Lagos (with Cairo very close)',w:'Both have well over 20 million people in their wider areas.'},
+ {q:'Which country shares its name with a great West African river, but is not Nigeria?',a:'Niger',w:'The Niger River flows through Guinea, Mali, Niger, Benin and Nigeria.'}
+],
+s:[
+ {q:'Which two rivers join at Khartoum to form the Nile?',a:'The White Nile and the Blue Nile',w:'The Blue Nile from Ethiopia carries most of the water during the flood season.'},
+ {q:'What is the name of the giant crack splitting East Africa?',a:'The East African Rift (Great Rift Valley)',w:'In a few million years the Horn of Africa may become a separate island.'},
+ {q:'Which is the only African country with both a Mediterranean and an Atlantic coast?',a:'Morocco',w:'Its port of Tangier sits right where the two meet.'},
+ {q:'What is the smallest country on mainland Africa?',a:'The Gambia',w:'It is a thin strip along the Gambia River, surrounded by Senegal.'},
+ {q:'Which canal connects the Mediterranean Sea to the Red Sea?',a:'The Suez Canal',w:'Opened in Egypt in 1869, it saves ships a trip around the whole of Africa.'},
+ {q:'Which African country has three capital cities?',a:'South Africa',w:'Pretoria (government), Cape Town (parliament) and Bloemfontein (courts).'},
+ {q:'Which is the deepest lake in Africa?',a:'Lake Tanganyika',w:'About 1,470 m deep, the second deepest in the world after Lake Baikal.'},
+ {q:'What is the band of dry grassland just south of the Sahara called?',a:'The Sahel',w:'It stretches from Senegal to Sudan and is where the desert meets the savanna.'}
+]},
+hist:{
+j:[
+ {q:'In which African country were the great pyramids built?',a:'Egypt',w:'The Great Pyramid of Giza was the tallest building in the world for almost 4,000 years.'},
+ {q:'What is the picture-writing of ancient Egypt called?',a:'Hieroglyphs',w:'It used over 700 pictures. Each could stand for a sound, a word or an idea.'},
+ {q:'Which South African leader spent 27 years in prison and then became president?',a:'Nelson Mandela',w:'He became president in 1994 in the first election where everyone could vote.'},
+ {q:'Which West African empire had the famous city of Timbuktu, full of books?',a:'The Mali Empire',w:'Scholars came from far away to study there over 600 years ago.'},
+ {q:'On which continent did the very first humans live?',a:'Africa',w:'Everyone on Earth has ancestors who walked out of Africa.'},
+ {q:'Who was the famous queen of Egypt who ruled around 2,000 years ago?',a:'Cleopatra',w:'She spoke many languages and was the last ruler of ancient Egypt.'},
+ {q:'Which country has ancient churches carved straight into the rock at Lalibela?',a:'Ethiopia',w:'Eleven churches were cut downwards into solid rock about 800 years ago.'},
+ {q:'What were the walls of Great Zimbabwe built from?',a:'Stone',w:'The stones were fitted so carefully that no mortar was needed. The country is named after it.'}
+],
+m:[
+ {q:'Which ancient kingdom in today\'s Sudan built more pyramids than Egypt?',a:'The Kingdom of Kush (Nubia)',w:'Around 200 pyramids stand at Meroë. Its kings even ruled Egypt for a while.'},
+ {q:'Which emperor of Mali is called the richest person in history?',a:'Mansa Musa',w:'On his 1324 pilgrimage to Mecca he gave away so much gold that prices in Cairo fell.'},
+ {q:'Which African country was never colonised by a European power?',a:'Ethiopia',w:'Liberia also stayed independent. Ethiopia defeated an Italian invasion in 1896.'},
+ {q:'Which was the first country in sub-Saharan Africa to win independence, in 1957?',a:'Ghana',w:'Its first leader was Kwame Nkrumah.'},
+ {q:'Which year is called the "Year of Africa", when 17 countries became independent?',a:'1960',w:'Nigeria became independent on 1 October 1960.'},
+ {q:'What are the famous metal artworks from the Kingdom of Benin, in today\'s Nigeria, called?',a:'The Benin Bronzes',w:'Thousands were taken by British soldiers in 1897. Many are now being returned.'},
+ {q:'Which king built the Zulu nation into a powerful army in the early 1800s?',a:'Shaka Zulu',w:'He invented new fighting tactics and a short stabbing spear.'},
+ {q:'Which queen of the Ashanti led a war against the British in 1900?',a:'Yaa Asantewaa',w:'She led the fight to protect the Golden Stool, the symbol of the Ashanti nation.'}
+],
+s:[
+ {q:'At which conference in 1884–85 did European powers carve up Africa?',a:'The Berlin Conference',w:'No African was invited. Many of today\'s borders were drawn there.'},
+ {q:'Who was the first Prime Minister of independent Nigeria?',a:'Abubakar Tafawa Balewa',w:'He led from 1960 until 1966.'},
+ {q:'Which general from Carthage crossed the Alps with elephants to attack Rome?',a:'Hannibal',w:'Carthage was in today\'s Tunisia and was Rome\'s greatest rival.'},
+ {q:'Which university in Fez, Morocco, is considered the world\'s oldest still operating?',a:'Al-Qarawiyyin',w:'It was founded in 859 by a woman, Fatima al-Fihri.'},
+ {q:'What was the system of racial segregation in South Africa that ended in 1994?',a:'Apartheid',w:'The word is Afrikaans for "apartness". It lasted from 1948 to 1994.'},
+ {q:'Which 1896 battle kept Ethiopia independent?',a:'The Battle of Adwa',w:'Emperor Menelik II\'s army defeated Italy, a rare African victory over a colonial power.'},
+ {q:'Who was Nigeria\'s first President?',a:'Nnamdi Azikiwe',w:'He took office in 1963 when Nigeria became a republic.'},
+ {q:'Which organisation founded in Addis Ababa in 1963 became the African Union in 2002?',a:'The Organisation of African Unity (OAU)',w:'Its headquarters are still in Addis Ababa, Ethiopia.'}
+]},
+people:{
+j:[
+ {q:'Ancient Egyptians made paper from a plant. What was the plant called?',a:'Papyrus',w:'The English word "paper" comes from papyrus.'},
+ {q:'What did William Kamkwamba from Malawi build from scrap to make electricity for his village?',a:'A windmill',w:'He was 14 and learned how from a library book.'},
+ {q:'In which ancient African land was the 365-day calendar invented?',a:'Egypt',w:'They counted the days between floods of the Nile.'},
+ {q:'What did ancient Egyptians use to tell the time with the Sun?',a:'A sundial (shadow clock)',w:'The shadow moves as the Sun moves across the sky.'},
+ {q:'Wangari Maathai from Kenya won the Nobel Peace Prize for planting what?',a:'Trees',w:'Her movement planted over 30 million trees.'},
+ {q:'Which country has the "Cradle of Humankind", where very old human fossils are found?',a:'South Africa',w:'Famous fossils were also found in Ethiopia, Kenya and Tanzania.'},
+ {q:'What are the oldest tools ever found, made in Kenya over 3 million years ago?',a:'Stone tools',w:'They were used for cutting and crushing long before writing existed.'},
+ {q:'Richard Turere from Kenya invented "Lion Lights" at age 13. What did they do?',a:'Scared lions away from the cattle',w:'Flashing lights make lions think a person is walking around.'}
+],
+m:[
+ {q:'Which Nigerian computer scientist won the Gordon Bell Prize in 1989 for supercomputer calculations?',a:'Philip Emeagwali',w:'He used over 65,000 processors working together, an early form of today\'s cloud computing.'},
+ {q:'Which Kenyan woman won the Nobel Peace Prize in 2004 for her environmental work?',a:'Wangari Maathai',w:'She was the first African woman to win a Nobel Prize.'},
+ {q:'In 2014, Nigerian doctor Ameyo Adadevoh helped stop which disease from spreading in Lagos?',a:'Ebola',w:'She refused to release an infected patient. Nigeria was declared Ebola-free within months.'},
+ {q:'Which Ghanaian engineer is known for his work on fibre-optic cables?',a:'Thomas Mensah',w:'Fibre optics carry the internet as pulses of light through glass.'},
+ {q:'Dr Oviemo Ovadje from Nigeria invented a device used during surgery. What does it do?',a:'Collects and returns the patient\'s own blood',w:'It saves lives where donated blood is scarce.'},
+ {q:'Arthur Zang from Cameroon invented the Cardiopad. What does it do?',a:'Records heart tests (ECGs) and sends them to doctors far away',w:'It lets village clinics check hearts without a cardiologist on site.'},
+ {q:'What did William Kamkwamba\'s windmill in Malawi generate?',a:'Electricity',w:'He later built a second one to pump water for the farm.'},
+ {q:'What did the ancient Egyptians make from the papyrus plant?',a:'Paper',w:'Strips of the plant were pressed together and dried in the sun.'}
+],
+s:[
+ {q:'Who was Imhotep?',a:'An ancient Egyptian architect and physician who designed the first pyramid',w:'He built the Step Pyramid around 2650 BCE and is one of the earliest named engineers in history.'},
+ {q:'Which Egyptian chemist won the 1999 Nobel Prize in Chemistry?',a:'Ahmed Zewail',w:'He used ultra-fast lasers to watch chemical reactions happen in femtoseconds.'},
+ {q:'Which South African surgeon performed the first human heart transplant, in 1967?',a:'Christiaan Barnard',w:'It happened at Groote Schuur Hospital in Cape Town.'},
+ {q:'The Ishango bone from DR Congo is about 20,000 years old. What was it probably used for?',a:'Counting (mathematics)',w:'Its scratched tally marks are among the oldest known mathematical objects.'},
+ {q:'South African chemist Tebello Nyokong uses light-activated chemicals to treat what?',a:'Cancer',w:'This is called photodynamic therapy. The drug only works where light shines on it.'},
+ {q:'Who became the first African citizen to travel into space, in 2002?',a:'Mark Shuttleworth',w:'He flew to the International Space Station on a Russian Soyuz rocket.'},
+ {q:'Which Malian city was a medieval centre of astronomy and mathematics?',a:'Timbuktu',w:'Hundreds of thousands of manuscripts from its scholars still survive.'},
+ {q:'Kenyan teenager Richard Turere invented "Lion Lights" to protect cattle. What did they use?',a:'Flashing LED lights',w:'Lions avoid the moving lights. It cut lion killings and protected the lions too.'}
+]},
+wild:{
+j:[
+ {q:'What is the largest animal that lives on land?',a:'The African elephant',w:'A big male can weigh as much as four cars.'},
+ {q:'What is the tallest animal in the world?',a:'The giraffe',w:'It has the same number of neck bones as you: seven, just much longer.'},
+ {q:'What is the fastest animal on land?',a:'The cheetah',w:'It can run about 100 km per hour, but only for a few seconds.'},
+ {q:'Which big African bird cannot fly but runs very fast?',a:'The ostrich',w:'Its eggs are the biggest of any bird, about the size of 24 chicken eggs.'},
+ {q:'What is a group of lions called?',a:'A pride',w:'The lionesses do most of the hunting.'},
+ {q:'Which striped animal lives on the African grasslands?',a:'The zebra',w:'Every zebra has a different stripe pattern, like a fingerprint.'},
+ {q:'What is the wide open grassland of Africa with only a few trees called?',a:'The savanna',w:'The Serengeti and the Maasai Mara are savannas.'},
+ {q:'Which big river animal with huge teeth is one of the most dangerous in Africa?',a:'The hippopotamus',w:'Hippos kill more people each year than lions do.'}
+],
+m:[
+ {q:'Which animals make up the "Big Five"?',a:'Lion, leopard, elephant, rhinoceros and buffalo',w:'Hunters chose them as the hardest to hunt on foot. Today they are a safari checklist.'},
+ {q:'What is the largest ape in the world, found in Central Africa?',a:'The gorilla',w:'Gorillas are mostly vegetarian and live in family groups led by a silverback.'},
+ {q:'What is the huge yearly animal journey between Tanzania and Kenya called?',a:'The Great Migration',w:'Over a million wildebeest and zebras follow the rains between the Serengeti and the Maasai Mara.'},
+ {q:'Which African tree stores water in its fat trunk and is called the "tree of life"?',a:'The baobab',w:'Some are over 1,000 years old. The fruit is rich in vitamin C.'},
+ {q:'Which animal from Madagascar has a long black-and-white striped tail?',a:'The ring-tailed lemur',w:'Lemurs are found only on Madagascar.'},
+ {q:'Which African animals are the closest living relatives of humans?',a:'Chimpanzees and bonobos',w:'We share about 98–99% of our DNA with them.'},
+ {q:'What is the heaviest flying bird, found on African savannas?',a:'The kori bustard',w:'Males can weigh around 18 kg and still fly.'},
+ {q:'What is the name of Africa\'s largest rainforest?',a:'The Congo rainforest',w:'It is the second largest in the world after the Amazon and is home to forest elephants and okapis.'}
+],
+s:[
+ {q:'Which African snake is the fastest in the world?',a:'The black mamba',w:'It can move at around 20 km per hour and its venom can kill in hours.'},
+ {q:'Why do flamingos turn pink?',a:'Because of pigments in the algae and shrimp they eat',w:'Flamingos fed a different diet gradually turn pale.'},
+ {q:'Which endangered ape found only in DR Congo is known for peaceful, female-led groups?',a:'The bonobo',w:'Bonobos live south of the Congo River, chimpanzees north of it.'},
+ {q:'The Okavango River never reaches the sea. Where does its water go?',a:'It spreads into the Kalahari in Botswana and evaporates or soaks away',w:'This creates the Okavango Delta, an oasis full of wildlife in the middle of a desert.'},
+ {q:'What is the largest frog in the world, found in Cameroon and Equatorial Guinea?',a:'The goliath frog',w:'It can weigh over 3 kg and jump 3 metres.'},
+ {q:'Which rhino subspecies has only two known individuals left, both in Kenya?',a:'The northern white rhinoceros',w:'Both are female. Scientists are trying to save it using stored eggs and sperm.'},
+ {q:'Which African fish survives the dry season by burrowing into mud and breathing air?',a:'The lungfish',w:'It can stay in a cocoon of dried mud for months, even years.'},
+ {q:'What is the dry, dusty wind that blows from the Sahara over West Africa in winter?',a:'The Harmattan',w:'It can carry Saharan dust all the way across the Atlantic to the Amazon.'}
+]}
+};
+
+// ---------- state ----------
+const SEG=8;
+let age=null, topic=null, teamsN=0, timerS=30, teams=[], turn=0, muted=false;
+let used={}; // key "topic:age" -> array of used indexes
+let current=null, rot=0, spinning=false, revealed=false, timerId=null, timeLeft=0;
+
+try{ const u=JSON.parse(localStorage.getItem('sabi-used')||'{}'); if(u&&typeof u==='object') used=u; }catch(e){}
+try{ muted=localStorage.getItem('sabi-muted')==='1'; }catch(e){}
+function saveUsed(){ try{localStorage.setItem('sabi-used',JSON.stringify(used));}catch(e){} }
+const poolKey=()=>topic+':'+age;
+const pool=()=>BANK[topic][age];
+const usedList=()=>used[poolKey()]||[];
+const remaining=()=>pool().length-usedList().length;
+
+const $=id=>document.getElementById(id);
+
+// ---------- sound ----------
+let actx=null;
+function ac(){ if(muted) return null; try{ actx=actx||new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume(); return actx; }catch(e){return null;} }
+function tone(f,dur,type,vol,when){ const c=ac(); if(!c) return; const o=c.createOscillator(), g=c.createGain(); o.type=type||'sine'; o.frequency.value=f; g.gain.setValueAtTime(vol||.15,c.currentTime+(when||0)); g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+(when||0)+dur); o.connect(g).connect(c.destination); o.start(c.currentTime+(when||0)); o.stop(c.currentTime+(when||0)+dur+.02); }
+const sfx={
+  tick(){ tone(1400,.03,'square',.05); },
+  land(){ tone(520,.25,'triangle',.2); tone(780,.35,'triangle',.2,.12); },
+  reveal(){ tone(660,.15,'sine',.2); tone(880,.3,'sine',.2,.12); },
+  good(){ [523,659,784,1047].forEach((f,i)=>tone(f,.25,'triangle',.18,i*.09)); },
+  bad(){ tone(220,.3,'sawtooth',.12); tone(180,.4,'sawtooth',.12,.15); },
+  buzz(){ tone(140,.6,'sawtooth',.2); }
+};
+
+// ---------- setup screen ----------
+function build(){
+  const ac=$('ageCards');
+  AGES.forEach(a=>{ const b=document.createElement('button'); b.type='button'; b.className='card'; b.setAttribute('aria-pressed','false'); b.innerHTML='<span class="big">'+a.name+'</span><span class="sub">'+a.sub+'</span>'; b.onclick=()=>{age=a.key; refreshSetup();}; b.dataset.key=a.key; ac.appendChild(b); });
+  TOPICS.forEach(t=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.dataset.group=t.group; b.dataset.key=t.key; b.setAttribute('aria-pressed','false'); b.innerHTML='<span>'+t.icon+'</span><span>'+t.name+'</span><span class="count"></span>'; b.onclick=()=>{topic=t.key; refreshSetup();}; (t.group==='Science'?$('sciChips'):$('afrChips')).appendChild(b); });
+  $('teamSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{teamsN=+b.dataset.n; refreshSetup();});
+  $('timerSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{timerS=+b.dataset.s; refreshSetup();});
+  $('startBtn').onclick=start;
+  $('resetBtn').onclick=()=>{ used={}; saveUsed(); refreshSetup(); $('resetBtn').textContent='Questions reset ✓'; setTimeout(()=>$('resetBtn').textContent='Reset used questions',1500); };
+  $('newBtn').onclick=newSession;
+  $('changeBtn').onclick=()=>{ stopTimer(); $('play').hidden=true; $('setup').hidden=false; refreshSetup(); };
+  $('spinBtn').onclick=spin;
+  $('muteBtn').onclick=()=>{ muted=!muted; try{localStorage.setItem('sabi-muted',muted?'1':'0');}catch(e){} $('muteBtn').textContent=muted?'🔇':'🔊'; };
+  $('muteBtn').textContent=muted?'🔇':'🔊';
+  $('fsBtn').onclick=()=>{ const el=document.documentElement; try{ if(document.fullscreenElement){document.exitFullscreen();} else if(el.requestFullscreen){ el.requestFullscreen().catch(()=>{}); } }catch(e){} };
+  let total=0; TOPICS.forEach(t=>AGES.forEach(a=>total+=BANK[t.key][a.key].length));
+  $('bankNote').textContent=total+' questions in the bank: 8 per topic per age group. Used questions stay out until you reset them.';
+  refreshSetup();
+  window.addEventListener('resize',()=>drawWheel());
+}
+function refreshSetup(){
+  $('ageCards').querySelectorAll('.card').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.key===age)));
+  document.querySelectorAll('.chip').forEach(b=>{
+    b.setAttribute('aria-pressed',String(b.dataset.key===topic));
+    const c=b.querySelector('.count');
+    if(age){ const u=(used[b.dataset.key+':'+age]||[]).length; const n=BANK[b.dataset.key][age].length; c.textContent=(n-u)+'/'+n; } else c.textContent='';
+  });
+  $('teamSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.n===teamsN)));
+  $('timerSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.s===timerS)));
+  const tn=$('teamNames'); tn.hidden=teamsN===0;
+  if(teamsN){ const names=[...tn.querySelectorAll('input')].map(i=>i.value); tn.innerHTML=''; for(let i=0;i<teamsN;i++){ const inp=document.createElement('input'); inp.id='team'+i; inp.value=names[i]||'Team '+String.fromCharCode(65+i); inp.setAttribute('aria-label','Team '+(i+1)+' name'); tn.appendChild(inp);} }
+  $('startBtn').disabled=!(age&&topic);
+}
+
+// ---------- play ----------
+function start(){
+  const prevKey=teams.map(t=>t.name).join('|');
+  const names=[...$('teamNames').querySelectorAll('input')].map(i=>i.value.trim()||'Team');
+  if(names.join('|')!==prevKey){ teams=names.map(n=>({name:n,score:0})); turn=0; }
+  $('setup').hidden=true; $('play').hidden=false;
+  $('ageLabel').textContent=AGES.find(a=>a.key===age).name+' · '+AGES.find(a=>a.key===age).sub;
+  const t=TOPICS.find(t=>t.key===topic); $('topicLabel').textContent=t.icon+' '+t.name;
+  renderScores(); resetCard(); drawWheel(); updateLeft();
+  try{ if(navigator.wakeLock) navigator.wakeLock.request('screen').catch(()=>{}); }catch(e){}
+}
+function renderScores(){
+  const s=$('scores'); s.hidden=teams.length===0; s.innerHTML='';
+  teams.forEach((t,i)=>{ const d=document.createElement('div'); d.className='score'+(i===turn?' active':''); d.innerHTML='<span>'+esc(t.name)+'</span><span class="n">'+t.score+'</span>'; s.appendChild(d); });
+}
+function esc(s){ return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function updateLeft(){
+  const r=remaining();
+  $('leftNote').textContent=r===0?'All 8 questions used for this topic':r+' of '+pool().length+' questions left';
+  $('spinBtn').disabled=r===0||spinning;
+  if(r===0&&!current){
+    const ph=$('placeholder'); ph.innerHTML='';
+    const d=document.createElement('div'); d.className='done';
+    d.innerHTML='<p style="margin:0 0 12px">Every question in this topic has been answered.'+(teams.length?' Final score: '+teams.map(t=>esc(t.name)+' '+t.score).join(' · ')+'.':'')+'</p>';
+    const row=document.createElement('div'); row.className='actions'; row.style.marginTop='0';
+    const c=document.createElement('button'); c.type='button'; c.className='primary'; c.textContent='Pick another topic'; c.onclick=()=>$('changeBtn').click();
+    const n=document.createElement('button'); n.type='button'; n.className='ghost'; n.textContent='New session'; n.onclick=newSession;
+    row.appendChild(c); row.appendChild(n); d.appendChild(row); ph.appendChild(d);
+    ph.hidden=false; $('qbody').hidden=true;
+  }
+}
+function newSession(){
+  stopTimer(); used={}; saveUsed(); teams=[]; turn=0; current=null; age=null; topic=null; teamsN=0;
+  $('play').hidden=true; $('setup').hidden=false; refreshSetup();
+}
+function resetCard(){
+  current=null; revealed=false; stopTimer();
+  $('placeholder').textContent=teams.length?esc(teams[turn].name)+', spin the wheel!':'Spin the wheel to get your first question.';
+  $('placeholder').hidden=false; $('qbody').hidden=true; $('answerBox').hidden=true; $('actions').innerHTML=''; $('hub').textContent='?';
+}
+
+// ---------- wheel ----------
+const cv=$('wheel'); const cx=cv.getContext('2d');
+function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function drawWheel(){
+  const box=cv.parentElement.getBoundingClientRect(); const size=Math.max(100,Math.floor(box.width)); const dpr=window.devicePixelRatio||1;
+  if(cv.width!==size*dpr){ cv.width=size*dpr; cv.height=size*dpr; }
+  cx.setTransform(dpr,0,0,dpr,0,0); cx.clearRect(0,0,size,size);
+  const r=size/2, step=Math.PI*2/SEG, cols=[cssVar('--wheel-a'),cssVar('--wheel-b'),cssVar('--wheel-c'),cssVar('--wheel-d')];
+  const u=topic&&age?usedList():[];
+  for(let i=0;i<SEG;i++){
+    const a0=rot+i*step, a1=a0+step, isUsed=u.includes(i);
+    cx.beginPath(); cx.moveTo(r,r); cx.arc(r,r,r-2,a0,a1); cx.closePath();
+    cx.fillStyle=isUsed?cssVar('--wheel-used'):cols[i%4]; cx.fill();
+    cx.strokeStyle=cssVar('--surface'); cx.lineWidth=3; cx.stroke();
+    cx.save(); cx.translate(r,r); cx.rotate(a0+step/2); cx.textAlign='right'; cx.textBaseline='middle';
+    cx.fillStyle=isUsed?cssVar('--wheel-used-text'):cssVar('--wheel-text');
+    cx.font='700 '+Math.round(size*.12)+'px '+cssVar('--display');
+    cx.fillText(String(i+1),r*.82,0); cx.restore();
+  }
+  cx.beginPath(); cx.arc(r,r,r-2,0,Math.PI*2); cx.strokeStyle=cssVar('--fg'); cx.lineWidth=4; cx.stroke();
+}
+function spin(){
+  if(spinning) return; const u=usedList(); const avail=[]; for(let i=0;i<SEG;i++) if(!u.includes(i)) avail.push(i);
+  if(!avail.length) return;
+  ac(); // unlock audio on tap
+  const target=avail[Math.floor(Math.random()*avail.length)];
+  const step=Math.PI*2/SEG; const jitter=(Math.random()-.5)*step*.6;
+  // segment `target` centre must sit at the pointer (top, -π/2)
+  const desired=(-Math.PI/2-(target+.5)*step+jitter);
+  const norm=a=>((a%(Math.PI*2))+Math.PI*2)%(Math.PI*2);
+  const delta=norm(desired-rot); const turns=5+Math.floor(Math.random()*3);
+  const startRot=rot, total=turns*Math.PI*2+delta, dur=3600+Math.random()*600, t0=performance.now();
+  spinning=true; resetCard(); $('spinBtn').disabled=true; $('hub').textContent='…'; $('placeholder').textContent='Spinning…';
+  let lastSeg=Math.floor(norm(rot)/step);
+  function frame(now){
+    const p=Math.min(1,(now-t0)/dur); const e=1-Math.pow(1-p,3);
+    rot=startRot+total*e; drawWheel();
+    const seg=Math.floor(norm(rot)/step); if(seg!==lastSeg){ sfx.tick(); lastSeg=seg; }
+    if(p<1) requestAnimationFrame(frame); else land(target);
+  }
+  requestAnimationFrame(frame);
+}
+function land(i){
+  spinning=false; sfx.land();
+  used[poolKey()]=[...usedList(),i]; saveUsed(); drawWheel();
+  current=i; revealed=false; $('hub').textContent=String(i+1);
+  showQuestion(i); updateLeft();
+}
+function showQuestion(i){
+  const q=pool()[i];
+  $('placeholder').hidden=true; $('qbody').hidden=false; $('answerBox').hidden=true;
+  $('qnum').textContent='Question '+(i+1); $('qtext').textContent=q.q; $('atext').textContent=q.a; $('wtext').textContent=q.w;
+  const card=$('qcard'); card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+  const acts=$('actions'); acts.innerHTML='';
+  const rb=document.createElement('button'); rb.type='button'; rb.className='primary'; rb.textContent='Reveal answer'; rb.onclick=reveal; acts.appendChild(rb);
+  startTimer();
+}
+function reveal(){
+  if(revealed) return; revealed=true; stopTimer(); sfx.reveal();
+  $('answerBox').hidden=false; const acts=$('actions'); acts.innerHTML='';
+  if(teams.length){
+    const g=document.createElement('button'); g.type='button'; g.className='btn-good'; g.textContent='✓ Correct, +1 '+teams[turn].name; g.onclick=()=>{teams[turn].score++; sfx.good(); nextTurn();};
+    const b=document.createElement('button'); b.type='button'; b.className='btn-bad'; b.textContent='✗ Not this time'; b.onclick=()=>{sfx.bad(); nextTurn();};
+    acts.appendChild(g); acts.appendChild(b);
+  } else {
+    if(remaining()){
+      const n=document.createElement('button'); n.type='button'; n.className='primary'; n.textContent='Spin again'; n.onclick=()=>{resetCard(); updateLeft(); spin();}; acts.appendChild(n);
+    } else {
+      const c=document.createElement('button'); c.type='button'; c.className='primary'; c.textContent='Pick another topic'; c.onclick=()=>$('changeBtn').click();
+      const s=document.createElement('button'); s.type='button'; s.className='ghost'; s.textContent='New session'; s.onclick=newSession;
+      acts.appendChild(c); acts.appendChild(s);
+    }
+  }
+}
+function nextTurn(){ turn=(turn+1)%teams.length; renderScores(); resetCard(); updateLeft(); }
+
+// ---------- timer ----------
+function startTimer(){
+  stopTimer(); const bar=$('timerBar'), clock=$('tclock'), fill=$('timerFill');
+  if(!timerS){ bar.hidden=true; clock.textContent=''; return; }
+  bar.hidden=false; timeLeft=timerS; fill.style.width='100%'; fill.classList.remove('low'); clock.textContent=timeLeft+' s';
+  const t0=performance.now();
+  timerId=setInterval(()=>{
+    const el=(performance.now()-t0)/1000; timeLeft=Math.max(0,timerS-el);
+    fill.style.width=(timeLeft/timerS*100)+'%'; clock.textContent=Math.ceil(timeLeft)+' s';
+    if(timeLeft<=5) fill.classList.add('low');
+    if(timeLeft<=0){ stopTimer(); clock.textContent='Time!'; sfx.buzz(); }
+  },200);
+}
+function stopTimer(){ if(timerId){clearInterval(timerId); timerId=null;} }
+
+build();
+})();
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));}
+</script>
+</body>
+</html>
