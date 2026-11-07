@@ -1,5 +1,5 @@
 // Sabi Spin service worker: makes the game work offline once it has been opened online.
-const CACHE = 'sabi-spin-v6';
+const CACHE = 'sabi-spin-v7';
 const CORE = ['./', './index.html', './questions.js', './manifest.json', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', e => {
