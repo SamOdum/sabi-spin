@@ -82,3 +82,29 @@ They are stored on this device only. Export them to back them up.
 They live in `questions.js`. Each topic has three arrays (`j`, `m`, `s` for the three age groups) of `{ q, a, w, c }`: question, answer, the one-line explanation shown with the answer, and the wrong answers for answer-choice mode. Arrays can be any length. Any text can be `{ en: '…', yo: '…' }` to add translations.
 
 After changing files, bump `CACHE` in `sw.js` (e.g. `sabi-spin-v3`). Installed phones pick up changes in the background and show them on the next launch.
+
+## Feedback and analytics
+
+Both are set at the top of the script in `index.html` (search for `FEEDBACK` and `GOATCOUNTER`).
+
+**Feedback** goes to a Google Form. Teachers see a 👍 / 👎 prompt and a "Tell us more" button on the results screen, a "⚑ Report" button on each revealed question and in the recap, and a "Send feedback" link on the setup screen and in the shortcuts list. The form opens in a new tab with the details already filled in: what kind of feedback it is, the rating, the game settings (age group, topic, number of teams, timer and so on, never team names), and for a report, the question and the answer that was shown.
+
+- `url` is the form's public link (Send → link icon). Never use the `/edit` link: it lets anyone edit the form.
+- `fields` are the form's entry IDs. In the form, open ⋮ → Get pre-filled link, fill each question with any text, click Get link, and copy the `entry.123…` numbers. A field left blank is just not pre-filled.
+- Multiple-choice answers only pre-fill when the text matches an option exactly, so keep `kinds` and `ratings` the same as the form's options.
+- With no `url`, every feedback button is hidden.
+
+**Analytics** use [GoatCounter](https://www.goatcounter.com): free for non-commercial use, no cookies, so no consent banner. Sign up, then put your site code (the `sabispin` in `sabispin.goatcounter.com`) in `GOATCOUNTER`. It counts visits and these events. None of them carry names, question text, or teachers' own topic names:
+
+| Event | When |
+| --- | --- |
+| `start-<age>-<topic>` | A game starts or continues (teachers' own topics show as `own`) |
+| `setting-…` | Settings that are on at the start: teams, steals, specials, timer, choices, read aloud, language |
+| `next-round` | A fresh wheel is spun up |
+| `results-<n>` | The results screen, with how many questions were played (`0`, `1-4`, `5-8`, `9-16`, `17+`) |
+| `feedback-up` / `feedback-down` | The 👍 / 👎 on the results screen |
+| `feedback-form`, `report-question` | The form was opened |
+| `audience-screen`, `recap-copy`, `recap-print`, `own-questions-added` | Those features were used |
+| `installed`, `launch-installed` | Installed to the home screen, and opened from it |
+
+The audience window is never counted, and GoatCounter skips `localhost`, so testing at home does not count. With no internet, events are simply not sent.
