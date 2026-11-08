@@ -1,7 +1,8 @@
 {
   "name": "Sabi Spin",
   "short_name": "Sabi Spin",
-  "description": "Live classroom quiz: spin the wheel, answer out loud, reveal the answer.",
+  "description": "Spin the wheel, answer out loud, reveal the answer. A free quiz game on science and Africa for families and classrooms.",
+  "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -9,7 +10,43 @@
   "background_color": "#0F1A14",
   "theme_color": "#E8642B",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "education",
+    "games",
+    "kids"
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/phone.jpg",
+      "sizes": "780x1688",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "A question about African history, with the answer revealed"
+    },
+    {
+      "src": "screenshots/wide.jpg",
+      "sizes": "1600x1000",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "The wheel and a Geography of Africa question on a laptop"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "manifest.json"
+    }
   ]
 }

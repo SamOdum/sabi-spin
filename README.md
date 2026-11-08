@@ -13,7 +13,7 @@ A live classroom quiz game. The facilitator runs it on a phone (passed around) o
 - **Audience screen** for projectors (see below)
 - **Keyboard and presentation-clicker control** (press `?` in the game for the list)
 - The whole game is saved on the device, so an accidental refresh puts you back where you were
-- Installable as a home-screen app (PWA) and works offline after the first load
+- Installable as a home-screen app (PWA) and works offline after the first load. An **Install** banner on the start screen uses the browser's install prompt where there is one (Chrome, Edge, Samsung Internet) and shows step-by-step instructions on iPhone, iPad and Firefox. If the link was opened inside Instagram, WhatsApp, Facebook and similar apps, it first explains how to open it in Safari or Chrome. The × hides the banner until the next visit; ticking "Don't show this again" hides it for good. It never shows inside the installed app, nor in the browser on Android or desktop once the app is installed there
 
 ## Run it
 
