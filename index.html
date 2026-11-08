@@ -261,9 +261,15 @@ kbd{font-family:var(--body);font-weight:800;font-size:.8em;background:var(--rais
 .qcard.has-seg::after{content:'';position:absolute;top:-40%;right:-20%;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--seg) 16%,transparent),transparent);pointer-events:none}
 .qcard>*{position:relative;z-index:1}
 #qbody{display:flex;flex-direction:column;gap:18px}
-.num{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.numr{display:flex;gap:8px;align-items:center}
+.qcard{container-type:inline-size}
+/* Question header: [Question 1] [topic] [modifier] ... [clock] [report] [read aloud] on one row when it fits.
+   When that doesn't fit, fitHead() adds .stack and the topic and modifier tags drop to their own row under the badge, rather than wrapping wherever they happen to break. */
+.num{display:flex;align-items:center;gap:10px 8px;flex-wrap:wrap}
+.num .badge,.num .tag,.num .tclock,.num .ghost{white-space:nowrap}
+.tags{display:flex;gap:8px;align-items:center;flex:none}
+.num.stack .tags{order:3;flex:1 1 100%;flex-wrap:wrap;min-width:0}
+.tags:not(:has(>:not([hidden]))){display:none}
+.numr{display:flex;gap:8px;align-items:center;margin-left:auto}
 .badge{background:var(--seg);color:var(--seg-ink);font-family:var(--display);font-weight:700;padding:5px 14px;border-radius:999px;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.14)}
 .tag{background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-weight:800;font-size:.88rem}
 .tag.mod{background:color-mix(in srgb,var(--accent) 16%,var(--surface));color:var(--fg);border:1px solid color-mix(in srgb,var(--accent) 70%,transparent)}
@@ -296,8 +302,11 @@ kbd{font-family:var(--body);font-weight:800;font-size:.8em;background:var(--rais
   mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E") center/contain no-repeat}
 .answer .a{font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,2.6vw,2rem);color:var(--green);line-height:1.15}
 .answer .w{color:var(--muted);font-weight:600}
-.actions{display:flex;gap:10px;flex-wrap:wrap}
-.actions:empty{display:none}
+.actrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.actrow:has(>.actions:empty):has(>#repBtn[hidden]){display:none}
+/* .actions is display:contents so Report can share the last line with the buttons when they wrap on a phone */
+.actrow #repBtn{margin-left:auto;margin-right:-12px;white-space:nowrap}
+.actions{display:contents}
 .actions .primary{font-size:1.15rem;padding:13px 26px}
 .placeholder{color:var(--muted);font-family:var(--display);font-weight:500;font-size:1.4rem;margin:auto;max-width:30ch;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
 .placeholder::before{content:'';width:76px;height:76px;border-radius:50%;opacity:.85;
@@ -397,6 +406,21 @@ dialog .footer-note{margin-top:12px}
 .fb .ghost[aria-pressed="true"]{border-color:var(--green);background:color-mix(in srgb,var(--green) 16%,var(--surface))}
 .fb p{margin:0;color:var(--muted);font-weight:700;max-width:46ch}
 .recap .rep{align-self:flex-start;margin:2px 0 0 -12px;font-size:.8rem}
+.install{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line-2);border-radius:22px;padding:12px 12px 12px 14px;box-shadow:var(--shadow-sm)}
+.install img{width:46px;height:46px;border-radius:12px;flex:none}
+.install .tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.install .tx span{color:var(--muted);font-size:.9rem;font-weight:700}
+.install .primary{padding:10px 20px;font-size:1.05rem;flex:none}
+.install .x{flex:none;width:36px;height:36px;font-size:1.4rem;line-height:1;color:var(--muted)}
+.install .x:hover{color:var(--fg)}
+.install{flex-wrap:wrap}
+.install .nomore{flex-basis:100%;display:flex;align-items:center;gap:8px;padding-left:60px;color:var(--muted);font-size:.88rem;font-weight:700;cursor:pointer}
+.install .nomore input{width:18px;height:18px;margin:0;accent-color:var(--accent)}
+@media (max-width:480px){.install .tx{flex-basis:calc(100% - 110px)}.install .primary{flex:1}.install .nomore{padding-left:2px}}
+#installHelp ol{margin:0;padding-left:1.4em;display:grid;gap:10px;font-weight:700}
+#installHelp .shr{display:inline-block;vertical-align:-4px;width:20px;height:20px}
+#installHelp .url{display:flex;gap:8px;align-items:center;margin-top:14px;background:var(--sunken);border-radius:14px;padding:8px 8px 8px 14px;font-weight:800;word-break:break-all}
+#installHelp .url span{flex:1}
 .linkbtn{background:none;border:0;padding:0;font:inherit;font-weight:800;color:var(--accent-lo);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .linkbtn:hover{color:var(--accent)}
 @media print{
@@ -430,6 +454,14 @@ dialog .footer-note{margin-top:12px}
         <p>Pick a group and a topic, spin the wheel, answer out loud.</p>
       </div>
     </header>
+
+    <div class="install" id="installBar" hidden>
+      <img src="icons/icon-192.png" alt="">
+      <div class="tx"><strong>Install Sabi Spin</strong><span>Opens like an app and works offline.</span></div>
+      <button type="button" class="primary" id="installBtn">Install</button>
+      <button type="button" class="x" id="installX" aria-label="Close" title="Close">×</button>
+      <label class="nomore"><input type="checkbox" id="installNever"> Don't show this again</label>
+    </div>
 
     <div class="panel">
       <div class="step" id="step1"><span class="sn">1</span><h2>Who is playing?</h2></div>
@@ -507,6 +539,7 @@ dialog .footer-note{margin-top:12px}
     </div>
     <p class="footer-note" id="bankNote"></p>
     <p class="footer-note">Ideas, problems, a wrong answer? <button type="button" class="linkbtn" id="fbLink">Send feedback</button></p>
+    <p class="footer-note" id="installNote" hidden>Play it like an app, even offline: <button type="button" class="linkbtn" id="installLink">install Sabi Spin</button></p>
   </section>
 
   <section id="play" hidden>
@@ -544,14 +577,13 @@ dialog .footer-note{margin-top:12px}
         <div class="placeholder" id="placeholder"></div>
         <div id="qbody" hidden>
           <div class="num">
+            <span class="badge" id="qnum">Question 1</span>
             <div class="tags">
-              <span class="badge" id="qnum">Question 1</span>
               <span class="tag" id="qtopic" hidden></span>
               <span class="tag mod" id="qmod" hidden></span>
             </div>
             <div class="numr">
               <span class="tclock" id="tclock"></span>
-              <button type="button" class="ghost small quiet ctl" id="repBtn" title="Report a problem with this question" hidden>⚑ Report</button>
               <button type="button" class="icon ctl" id="sayBtn" title="Read aloud (R)" aria-label="Read the question aloud"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2.5 20.5c0-3.6 2.9-6.3 6.5-6.3s6.5 2.7 6.5 6.3"/><path d="M17 6a4 4 0 0 1 0 5.5M19.8 3.5a8 8 0 0 1 0 10.5"/></svg></button>
             </div>
           </div>
@@ -565,7 +597,10 @@ dialog .footer-note{margin-top:12px}
             <div class="w" id="wtext"></div>
           </div>
         </div>
-        <div class="actions ctl" id="actions"></div>
+        <div class="actrow ctl">
+          <div class="actions" id="actions"></div>
+          <button type="button" class="ghost small quiet" id="repBtn" title="Report a problem with this question" hidden>⚑ Report</button>
+        </div>
       </div>
     </div>
     <p class="kbdhint ctl">Keyboard or presentation clicker: <kbd>Space</kbd> / <kbd>→</kbd> next step, <kbd>←</kbd> wrong. Press <kbd>?</kbd> for all shortcuts.</p>
@@ -619,6 +654,12 @@ dialog .footer-note{margin-top:12px}
   <p class="footer-note">Presentation clickers send <kbd>PgDn</kbd>/<kbd>PgUp</kbd> or the arrow keys, so the forward button moves the game on and the back button marks an answer wrong.</p>
   <p class="footer-note">Projector tip: press the screen button in the top bar to open an audience screen, drag it onto the projector and make it fullscreen. The class sees the wheel and questions; only your window shows the answer before you reveal it.</p>
   <p class="footer-note">Ideas, problems, a wrong answer? <button type="button" class="linkbtn" id="fbLink2">Send feedback</button></p>
+  <form method="dialog" style="margin-top:18px"><button class="primary" style="font-size:1.1rem;padding:11px 28px">Got it</button></form>
+</dialog>
+
+<dialog id="installHelp">
+  <h2 id="ihTitle">Install Sabi Spin</h2>
+  <div id="ihBody"></div>
   <form method="dialog" style="margin-top:18px"><button class="primary" style="font-size:1.1rem;padding:11px 28px">Got it</button></form>
 </dialog>
 
@@ -781,7 +822,7 @@ const pts=()=>S.curMod==='double'?2:1;
 const inQuestion=()=>['ask','steal','revealed'].includes(S.phase);
 
 // ---------- feedback and analytics ----------
-const VERSION='v7'; // keep in step with CACHE in sw.js, so feedback can be matched to a release
+const VERSION='v8'; // keep in step with CACHE in sw.js, so feedback can be matched to a release
 // Google Form for feedback. `url` is the form's public link (Send → link icon), never the /edit link.
 // `fields` are the form's entry IDs, e.g. 'entry.123456789' (form menu ⋮ → Get pre-filled link). A blank one is simply not pre-filled.
 // Multiple-choice answers only pre-fill when the text matches an option exactly, so keep `kinds` and `ratings` in step with the form.
@@ -807,6 +848,90 @@ function selCode(sel){
   return BUILT_T.has(sel)?sel:'own';
 }
 const sizeBucket=n=>n===0?'0':n<5?'1-4':n<9?'5-8':n<17?'9-16':'17+';
+// Question header: keep badge, tags, clock and read-aloud on one line when they fit; otherwise move the tags to a row of their own.
+function fitHead(){
+  const n=document.querySelector('.qcard .num'); if(!n||!n.offsetParent) return;
+  n.classList.remove('stack');
+  const mid=e=>{ const r=e.getBoundingClientRect(); return r.top+r.height/2; };
+  const tags=n.querySelector('.tags'), y=mid($('qnum'));
+  const off=[tags,n.querySelector('.numr')].some(e=>e.offsetParent&&Math.abs(mid(e)-y)>3);
+  n.classList.toggle('stack',off);
+}
+if(window.ResizeObserver) new ResizeObserver(()=>fitHead()).observe(document.getElementById('qcard'));
+
+// ---------- install as an app ----------
+// Chrome, Edge and Samsung Internet hand us an install prompt. Safari (iPhone/iPad/Mac) and Firefox don't, so we show steps instead.
+// Links shared on social media often open in that app's own browser, which can't install anything, so say so first.
+const UA=navigator.userAgent;
+const isIOS=/iPad|iPhone|iPod/.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const isAndroid=/Android/i.test(UA), isMobile=isIOS||isAndroid||/Mobi/i.test(UA);
+const inApp=/FBAN|FBAV|FB_IAB|Instagram|WhatsApp|Line\/|Twitter|LinkedInApp|Snapchat|TikTok|musical_ly|Bytedance|GSA\/|; wv\)/i.test(UA);
+let installEvt=null;
+// Hidden for good when "Don't show this again" was ticked; otherwise × hides it until the next visit.
+const sessGet=k=>{ try{ return sessionStorage.getItem(k)==='1'; }catch(e){ return false; } };
+const sessSet=k=>{ try{ sessionStorage.setItem(k,'1'); }catch(e){} };
+function hideInstall(){
+  if($('installNever').checked){ store.set('sabi-install-hidden',true); track('install-never'); }
+  else { sessSet('sabi-install-closed'); track('install-close'); }
+  showInstall();
+}
+// Already installed? True inside the installed app, and also in the browser on the same device once we know
+// (Android and desktop share storage between the app and the browser; iPhone does not, so the × is the fallback there).
+const knownInstalled=()=>installed()||store.get('sabi-installed',false);
+function showInstall(){
+  if(AUD) return;
+  const can=!knownInstalled(), hid=store.get('sabi-install-hidden',false)||sessGet('sabi-install-closed');
+  $('installBar').hidden=!(can&&!hid&&(installEvt||isMobile));
+  $('installNote').hidden=!can;
+  $('installBtn').textContent=installEvt?'Install':'Show me how';
+}
+function doInstall(from){
+  track('install-'+from);
+  if(installEvt&&!inApp){
+    const e=installEvt; installEvt=null; e.prompt();
+    e.userChoice.then(r=>{ track('install-prompt-'+r.outcome); showInstall(); }).catch(()=>{});
+    return;
+  }
+  openInstallHelp();
+}
+function openInstallHelp(){
+  const url=location.origin+location.pathname.replace(/index\.html$/,'');
+  const share='<svg class="shr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Share"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M8 10H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-2"/></svg>';
+  const browser=isIOS?'Safari':'Chrome';
+  let title='Install Sabi Spin', steps;
+  if(inApp){
+    title='Open in '+browser+' first';
+    steps=['You are viewing this inside another app, which can\'t add it to your home screen.',
+      'Tap the <b>⋯</b> or <b>⋮</b> menu in this app and choose <b>Open in '+(isIOS?'Safari':'browser')+'</b>. Or copy the link below and paste it into '+browser+'.',
+      'Then follow the install steps on the Sabi Spin page.'];
+  } else if(isIOS){
+    steps=['Tap the <b>Share</b> button '+share+'. On newer iPhones it is inside the <b>⋯</b> menu at the bottom.',
+      'Scroll down and tap <b>Add to Home Screen</b>.',
+      'Tap <b>Add</b>. Sabi Spin now opens from your home screen like any other app.'];
+  } else if(isAndroid){
+    steps=['Open your browser menu <b>⋮</b> (top or bottom right).',
+      'Tap <b>Install app</b> or <b>Add to Home screen</b>.',
+      'Confirm. Sabi Spin now opens from your home screen like any other app.'];
+  } else {
+    title='Install Sabi Spin';
+    steps=['<b>On a phone:</b> open the link below on your phone and tap <b>Install</b>.',
+      '<b>Chrome or Edge:</b> click the install icon at the right end of the address bar.',
+      '<b>Safari on a Mac:</b> choose <b>File › Add to Dock</b>.'];
+  }
+  $('ihTitle').textContent=title;
+  const copy=h('button',{type:'button',class:'ghost small',onclick:()=>{ (navigator.clipboard?navigator.clipboard.writeText(url):Promise.reject()).then(()=>{ copy.textContent='Copied'; },()=>prompt('Copy this link:',url)); }},'Copy link');
+  const ol=document.createElement('ol'); ol.innerHTML=steps.map(s=>'<li>'+s+'</li>').join('');
+  $('ihBody').replaceChildren(ol, h('div',{class:'url'}, h('span',{text:url}), copy),
+    h('p',{class:'footer-note',text:'Once installed it works offline, so you can play anywhere.'}));
+  const d=$('installHelp'); if(d.showModal) d.showModal(); else d.setAttribute('open','');
+}
+if(!AUD){
+  // The browser only offers to install when the app isn't installed, so this also clears a stale flag after an uninstall.
+  addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); installEvt=e; store.set('sabi-installed',false); if(document.readyState!=='loading') showInstall(); });
+  addEventListener('appinstalled',()=>{ installEvt=null; store.set('sabi-installed',true); showInstall(); });
+  // Chrome on Android can also tell us directly (needs related_applications in manifest.json).
+  if(navigator.getInstalledRelatedApps) navigator.getInstalledRelatedApps().then(a=>{ if(a&&a.length){ store.set('sabi-installed',true); if(document.readyState!=='loading') showInstall(); } }).catch(()=>{});
+}
 const installed=()=>!!(navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches));
 if(!AUD){ if(installed()) track('launch-installed'); addEventListener('appinstalled',()=>track('installed')); }
 function fbContext(){ // shown in the form for the teacher to see before sending; no team names
@@ -863,6 +988,10 @@ function build(){
   $('muteBtn').onclick=toggleMute;
   $('fsBtn').onclick=toggleFs; $('audFs').onclick=toggleFs;
   $('helpBtn').onclick=openHelp;
+  $('installBtn').onclick=()=>doInstall('banner'); $('installLink').onclick=()=>doInstall('footer');
+  $('installX').onclick=hideInstall;
+  if(!AUD&&installed()) store.set('sabi-installed',true);
+  showInstall();
   $('sayBtn').onclick=readQ;
   $('audBtn').onclick=()=>{ track('audience-screen'); const w=window.open(location.pathname+'?view=audience','sabi-audience','popup,width=1280,height=800'); if(!w) alert('Your browser blocked the new window. Allow pop-ups for this page, or open '+location.pathname+'?view=audience yourself.'); };
   $('moreBtn').onclick=()=>{ S.screen='setup'; commit(); };
@@ -884,7 +1013,7 @@ function build(){
   document.addEventListener('keydown',onKey);
   document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='visible') wake(); });
   window.addEventListener('resize',()=>drawWheel());
-  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>drawWheel());
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{ drawWheel(); fitHead(); });
   render(); wake();
 }
 function buildTopics(){
@@ -1134,6 +1263,7 @@ function renderCard(){
     const mixed=(S.sel||'').slice(0,4)==='mix:';
     $('qtopic').hidden=!mixed; $('qtopic').textContent=q.tIcon+' '+q.tName;
     $('qmod').hidden=!S.curMod; $('qmod').textContent=S.curMod?MODS[S.curMod].long:'';
+    fitHead();
     let banner='';
     if(S.phase==='steal') banner='Steal! '+T[S.stealFrom].name+' missed it. Any other team can answer.';
     else if(S.phase==='revealed'&&S.stealFrom!=null) banner=T[S.stealFrom].name+' missed it. Did another team steal it?';
